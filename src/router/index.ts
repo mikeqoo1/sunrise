@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import 寶可夢View from "../views/PokemonView.vue";
-import LoveView from '../views/LoveView.vue';
+import HappyView from "../views/HappyView.vue";
+import LoveView from "../views/LoveView.vue";
+import TravelView from "../views/TravelView.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -19,14 +20,19 @@ const router = createRouter({
       component: () => import("../views/AboutView.vue"),
     },
     {
-      path: "/pokemon",
-      name: "pokemon",
-      component: 寶可夢View,
+      path: "/happy",
+      name: "happy",
+      component: HappyView,
     },
     {
-      path: '/love',
+      path: "/love",
       name: "love",
-      component: LoveView
+      component: LoveView,
+    },
+    {
+      path: "/travel",
+      name: "travel",
+      component: TravelView,
     },
   ],
 });
