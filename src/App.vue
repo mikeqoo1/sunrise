@@ -5,14 +5,14 @@ import HelloWorld from "./components/HelloWorld.vue";
 
 <template>
     <header>
-      <img alt="Home logo" class="logo" src="/public/恐龍愛吃漢堡包.png" width="125" height="125" />
+      <img alt="Homelogo" class="logo" src="/恐龍愛吃漢堡包.png" width="125" height="125" />
       <div class="wrapper">
         <HelloWorld msg="歡迎來到恐龍天地" />
         <nav>
-          <RouterLink to="/"><img src="/public/太空龍.png" alt="Home" class="nav-icon" />首頁</RouterLink>
-          <RouterLink to="/about"><img src="/public/頭套恐龍.png" alt="About" class="nav-icon" />關於我</RouterLink>
-          <RouterLink to="/happy"><img src="/public/可愛劍龍.png" alt="Happy" class="nav-icon" />恐龍戰隊</RouterLink>
-          <RouterLink to="/travel"><img src="/public/t-rex.png" alt="Travel" class="nav-icon" />旅遊計畫</RouterLink>
+          <RouterLink to="/"><img src="/太空龍.png" alt="Home" class="nav-icon" />首頁</RouterLink>
+          <RouterLink to="/about"><img src="/頭套恐龍.png" alt="About" class="nav-icon" />關於我</RouterLink>
+          <RouterLink to="/happy"><img src="/可愛劍龍.png" alt="Happy" class="nav-icon" />恐龍戰隊</RouterLink>
+          <RouterLink to="/travel"><img src="/t-rex.png" alt="Travel" class="nav-icon" />旅遊計畫</RouterLink>
         </nav>
       </div>
     </header>

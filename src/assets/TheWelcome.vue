@@ -2,16 +2,10 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter();
-
-// 動態引入圖片
-import cowIcon from '@/assets/牛牛.ico';
-import lionIcon from '@/assets/獅子.ico';
-
 const icons = ref([
-  { src: cowIcon, label: '牛牛' },
-  { src: lionIcon, label: '獅子' },
+  { src: '/牛牛.ico', label: '牛牛' },
+  { src: '/獅子.ico', label: '獅子' },
 ]);
-
 const isFighting = ref(true);
 const toggleFight = () => {
   isFighting.value = !isFighting.value;
@@ -21,8 +15,8 @@ const toggleFight = () => {
     }, 1000); // 1秒後跳轉
   } else {
     icons.value = [
-      { src: cowIcon, label: '牛牛' },
-      { src: lionIcon, label: '獅子' },
+      { src: '/牛牛.ico', label: '牛牛' },
+      { src: '/獅子.ico', label: '獅子' },
     ];
   }
 };
