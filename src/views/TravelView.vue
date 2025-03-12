@@ -31,6 +31,12 @@ const markdownContent = ref(`
 | 05/16(五) | 春日部車站![Shin](/tokyo/14121d78-202d-491c-b4a9-4022adf88ee9.png)/ AEON LakeTown🛍 | 
 | 05/17(六) | 搭飛機回台灣✈ | 
 
+[晴空塔的寄物櫃使用狀況](<https://www.akilocker.biz/mobile/area.html?locationId=SOLAMACHI&lang=4>)
+
+[車站的寄物櫃使用狀況](https://cloak.ecbo.io/zh-TW/jpn/city/tokyo/184)
+
+[快樂龍的地標](https://maps.app.goo.gl/wC7nH3pbngAqLYmV7)
+
 [出國前準備](/tokyo/#/travellist)
 
 **05/10 東京✈ / 神田祭**
@@ -40,13 +46,13 @@ const markdownContent = ref(`
 TR898 
 桃園國際機場(第一航廈)
 
-06:40➔日本成田國際機場(第一航廈)
+06:40➔日本成田國際機場(第一航廈)10:45 
 
-10:45 在機場搭Access特快(橘色車車)
+在機場搭Access特快(橘色車車)
 
 ![](/tokyo/0b02a06d-6a97-4398-9ad6-be66f920c4bf.png)
 
-看能不能先到民宿寄放行李或是放在晴空塔
+行李就是先寄放晴空塔
 
 吃午餐後再去秋葉原看神田祭
 
@@ -62,7 +68,7 @@ ___
 
 **05/11 橫濱 / 東京地下街**
 ==
-先去橫濱逛街
+先去橫濱逛街 中華料理 關公廟 媽祖廟
 
 ![](/tokyo/145859b4-60b4-4858-b6d7-355265671306.png)
 
@@ -75,7 +81,7 @@ ___
 
 從橫濱搭車去東京車站逛逛地下街
 
-* 東京車站一番街/拉麵街和大丸百貨/東京中城八重洲在八重洲口，
+* 東京車站一番街/拉麵街和大丸百貨/東京中城八重洲在八重洲口
 
 * 皇居，KITTE，新舊丸大樓，丸之內站舍在丸之內口
 
@@ -103,6 +109,7 @@ ___
 
 **05/14 澀谷 / 新宿**
 ==
+[快樂龍的地標](https://maps.app.goo.gl/wC7nH3pbngAqLYmV7)
 ___
 
 **05/15 淺草 /上野**
