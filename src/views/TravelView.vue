@@ -142,25 +142,51 @@ const htmlContent = computed(() => marked(markdownContent.value));
   <div class="markdown-content" v-html="htmlContent"></div>
 </template>
 
-<style scoped>
+<style>
 .markdown-content {
   padding: 20px;
 }
 
-/* 自訂表格樣式 */
 .markdown-content table {
   border-collapse: collapse;
   width: 100%;
+  margin: 20px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .markdown-content th,
 .markdown-content td {
-  border: 1px solid #ddd;
-  padding: 8px;
+  border: 2px solid #888;
+  padding: 12px;
   text-align: left;
+  font-size: 16px;
 }
 
 .markdown-content th {
-  background-color: #f2f2f2;
+  background-color: #e0e0e0;
+  font-weight: bold;
+  color: #ff2f00;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* 添加文字陰影 */
+}
+
+.markdown-content td {
+  color: #289393;
+}
+
+.markdown-content tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.markdown-content tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.3s ease;
+}
+
+@media (max-width: 600px) {
+  .markdown-content table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
 }
 </style>
