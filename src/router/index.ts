@@ -1,10 +1,10 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router"; // 改用 hash 模式
 import HomeView from "../views/HomeView.vue";
 import HappyView from "../views/HappyView.vue";
 import LoveView from "../views/LoveView.vue";
 import TravelView from "../views/TravelView.vue";
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(), // 這裡改掉
   routes: [
     {
       path: "/",
