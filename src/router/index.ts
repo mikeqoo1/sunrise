@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import HappyView from "../views/HappyView.vue";
 import LoveView from "../views/LoveView.vue";
 import TravelView from "../views/TravelView.vue";
+import TraveListlView from "../views/TraveListlView.vue";
 const router = createRouter({
   history: createWebHashHistory(), // 這裡改掉
   routes: [
@@ -33,6 +34,11 @@ const router = createRouter({
       path: "/travel",
       name: "travel",
       component: TravelView,
+    },
+    {
+      path: "/travellist",
+      name: "travellist",
+      component: TraveListlView,
     },
   ],
 });
