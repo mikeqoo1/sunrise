@@ -31,9 +31,6 @@ const markdownContent = ref(`
 | 05/16(五) | 春日部車站![Shin](/tokyo/14121d78-202d-491c-b4a9-4022adf88ee9.png)/ AEON LakeTown🛍 | 
 | 05/17(六) | 搭飛機回台灣✈ | 
 
-
-
-
 # 其他連結
 
 [晴空塔的寄物櫃使用狀況](<https://www.akilocker.biz/mobile/area.html?locationId=SOLAMACHI&lang=4>)
@@ -65,6 +62,10 @@ TR898
 
 ![](/tokyo/0724270b-abef-40af-925c-38cec6d48293.png)
 
+秋葉原車站地圖
+
+![](/tokyo/26a9e1d2-4d3c-47af-9d26-3cd5e859f1cb.png)
+
 看完祭典可以先回民宿休息 或是 逛秋葉原
  
 記得買水!!
@@ -82,6 +83,7 @@ ___
 牛排飯 Center Beef 橫濱關內本店
 
 橫濱市區是搭港未來線(刷卡)
+
 ![](/tokyo/c235fe4f-e3f1-425c-83c4-d0acb56d09e8.png)
 
 從橫濱搭車去東京車站逛逛地下街
@@ -92,6 +94,7 @@ ___
 
 ![](/tokyo/78ed0ff7-4a69-48d6-8efe-29c858466c8d.png)
 
+![](/tokyo/b2d7938d-db35-4bff-8a1e-f8d6adb44c83.png)
 ___
 
 **05/12 築地市場 / 台場 /日本橋**
