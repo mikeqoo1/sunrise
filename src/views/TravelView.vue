@@ -39,9 +39,11 @@ const markdownContent = ref(`
 
 [快樂龍的地標](https://maps.app.goo.gl/wC7nH3pbngAqLYmV7)
 
-[入境日本網站] (https://services.digital.go.jp/zh-cmn-hant/visit-japan-web/)
+[入境日本網站](https://services.digital.go.jp/zh-cmn-hant/visit-japan-web/)
 
 [出國前準備](/tokyo/#/travellist)
+
+[東京車站地鐵圖](/tokyo/#/tokyostationsubway)
 
 **05/10 東京✈ / 神田祭**
 ==
@@ -163,7 +165,6 @@ ___
 
 **05/17 回台灣**
 
-![東京車站地鐵圖](/tokyo/東京車站地鐵圖.png)
 ==
 `);
 
