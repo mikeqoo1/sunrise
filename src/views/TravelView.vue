@@ -24,11 +24,11 @@ const markdownContent = ref(`
 | -------- | -------- |
 | 05/10(六) | 到東京✈ / 神田祭 ⛩️| 
 | 05/11(日) | 橫濱![pokemon_ball](/tokyo/bfe62b69-3936-4efe-8385-0c10058c0ba7.png)/ 東京地下街🍜| 
-| 05/12(一) | 築地市場🍣/ 台場🤖 /日本橋![pokemon_ball](/tokyo/bfe62b69-3936-4efe-8385-0c10058c0ba7.png)| 
+| 05/12(一) | 澀谷![pokemon_ball](/tokyo/bfe62b69-3936-4efe-8385-0c10058c0ba7.png)/新宿(六歌仙)放生🥩 | 
 | 05/13(二) | 哈利波特🧙 /池袋![pokemon_ball](/tokyo/bfe62b69-3936-4efe-8385-0c10058c0ba7.png)| 
-| 05/14(三) | 澀谷![pokemon_ball](/tokyo/bfe62b69-3936-4efe-8385-0c10058c0ba7.png)/新宿(六歌仙)放生🥩 | 
+| 05/14(三) | 先留空白| 
 | 05/15(四) | 淺草⛩️ /上野🦖 / 晴空塔![pokemon_ball](/tokyo/bfe62b69-3936-4efe-8385-0c10058c0ba7.png)|
-| 05/16(五) | 春日部車站![Shin](/tokyo/14121d78-202d-491c-b4a9-4022adf88ee9.png)/ AEON LakeTown🛍 | 
+| 05/16(五) | (待處理)春日部車站![Shin](/tokyo/14121d78-202d-491c-b4a9-4022adf88ee9.png)/ AEON LakeTown🛍 | 
 | 05/17(六) | 搭飛機回台灣✈ | 
 
 # 其他連結
@@ -73,7 +73,6 @@ TR898
 看完祭典可以先回民宿休息 或是 逛秋葉原
  
 記得買水!!
-
 ___
 
 **05/11 橫濱 / 東京地下街**
@@ -115,32 +114,51 @@ ___
 回程從大手町站搭半藏門線回押上
 
 ![](/tokyo/05f4b6b0-e631-4488-891e-1cd9bc36a3bc.png)
-
 ___
 
-**05/12 築地市場 / 台場 /日本橋**
+**05/12 澀谷 / 新宿**
 ==
-* 築地市場
+[快樂龍的地標](https://maps.app.goo.gl/wC7nH3pbngAqLYmV7)
 
-築地市場評估一下要不要去 若還好的話 其實可以直接去千客萬來
+![](http://vm-proj3-1.concords.com.tw:3000/uploads/6f14508f-aed8-4ae9-ae67-9fc8f3ef6b1a.png)
 
-![](/tokyo/f8c23643-36e4-4d9b-beff-c51c6581b60e.png)
+**早上先在澀谷晃晃**
 
-* 台場(千客萬來 / 台場)
+![](http://vm-proj3-1.concords.com.tw:3000/uploads/22da8781-b3b3-4be0-a37b-6375074ab4a6.png)
 
-![](/tokyo/72cf0672-f064-478d-a8a8-f3da59eb3f13.png)
+中午再去新宿吃六歌仙
 
+六歌仙燒肉在西新宿，這裏交通四通八達最少有超過20條路線匯集，
+
+其中最靠近的是地鐵大江戶線的「新宿西口站」出站就到了，
+
+或者從「JR新宿站」中央西口出來，走路也約2~3分鐘而已
+
+![](http://vm-proj3-1.concords.com.tw:3000/uploads/f943e7df-9577-4947-af48-81b6c4bf5dc7.png)
+
+在這棟裡面
+
+吃完之後就散會，自由活動時間，大家晚上再見
 ___
 
 **05/13 哈利波特 / 池袋**
 ==
 ![](/tokyo/9df71337-a09f-4bb2-8356-2495ecd7298e.png)
+![](http://vm-proj3-1.concords.com.tw:3000/uploads/7c99f017-9302-404f-aa55-b87c1b13ffc6.png)
 ![](/tokyo/a96d4766-0c4a-49c7-be65-df8fcfb25496.png)
 ___
 
-**05/14 澀谷 / 新宿**
+**05/14 **
 ==
-[快樂龍的地標](https://maps.app.goo.gl/wC7nH3pbngAqLYmV7)
+先留空白
+
+先留空白
+
+先留空白
+
+先留空白
+
+先留空白
 ___
 
 **05/15 淺草 /上野**
@@ -162,12 +180,13 @@ ___
 「1比1的擬真動物」「恐龍化石🦕」「地球科學」
 
 ![](/tokyo/63f67ac3-edbd-43f7-9202-ec23411efe81.png)
-
 ___
 
 **05/16 春日部 / OUTLET**
 ==
-* 春日部車站/ AEON LakeTown(有OUTLET) |
+(待處理)
+
+* 春日部車站/ AEON LakeTown(有OUTLET)
 
 ![](/tokyo/cf984788-bce1-4dc0-ab22-36100313224b.png)
 
