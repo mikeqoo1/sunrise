@@ -14,8 +14,10 @@ renderer.image = ({ href, title, text }: { href: string; title: string | null | 
 
 // 定義 Markdown 內容
 const markdownContent = ref(`
-加菲日本團05/10-05/17
+快樂東京團05/10-05/17
 ===
+![封面](/tokyo/2025封面.png)
+
 ![鄭主母](/tokyo/38e81488-44e7-4d54-8cb4-b87f70c99a2e.png)
 
 ![皮卡丘](/tokyo/a7cc0e64-47c9-4ae3-8eee-84a32c0f770d.png)
@@ -44,6 +46,8 @@ const markdownContent = ref(`
 [出國前準備](/tokyo/#/travellist)
 
 [東京車站地鐵圖](/tokyo/#/tokyostationsubway)
+
+![72小時票](/tokyo/079cbe52-72f8-4236-bf48-7f88c43fd429.png)
 
 **05/10(六) ✈東京 / 神田祭**
 ==
@@ -124,6 +128,8 @@ ___
 
 **早上先在澀谷晃晃**
 
+有 "KITH" "Sports shop Gallery 2" "ballaholic TOKYO" 3間店可以去逛逛
+
 ![](/tokyo/22da8781-b3b3-4be0-a37b-6375074ab4a6.png)
 
 中午再去新宿吃六歌仙
@@ -137,6 +143,8 @@ ___
 ![](/tokyo/f943e7df-9577-4947-af48-81b6c4bf5dc7.png)
 
 在這棟裡面
+
+![](/tokyo/c6f9b3bd-7541-4dfe-8ea2-bed54d951308.png)
 
 吃完之後就散會，自由活動時間，大家晚上再見
 ___
