@@ -1,6 +1,6 @@
 <template>
   <div class="tokyostationsubway">
-        <img src="/Tokyo_station_subway_map.png"/>
+    <img src="/Tokyo_station_subway_map.png" />
   </div>
 </template>
 

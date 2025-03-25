@@ -16,7 +16,6 @@ renderer.image = ({ href, title, text }: { href: string; title: string | null | 
 const markdownContent = ref(`
 快樂東京團05/10-05/17
 ===
-![封面](/tokyo/2025封面.png)
 
 ![鄭主母](/tokyo/38e81488-44e7-4d54-8cb4-b87f70c99a2e.png)
 
@@ -284,12 +283,73 @@ const htmlContent = computed(() => marked(markdownContent.value));
 </script>
 
 <template>
-  <div class="Travel"></div>
-  <div class="markdown-content" v-html="htmlContent"></div>
+  <div class="container">
+    <div class="cover-image">
+      <img src="/tokyo/2025封面.png" alt="封面图" />
+    </div>
+    <div class="markdown-content" v-html="htmlContent"></div>
+  </div>
 </template>
 
 <style>
+.top-container {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  background-color: #000;
+  /* Optional: set background color for contrast */
+}
+
+.cover-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.greetings {
+  padding: 20px;
+}
+
+.greetings h1,
+.greetings h3 {
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+
+  .greetings h1,
+  .greetings h3 {
+    text-align: left;
+  }
+}
+
+.content-container {
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  /* 垂直对齐到顶部 */
+  padding: 20px;
+}
+
+.cover-image {
+  margin-right: 20px;
+  /* 图片和内容之间的间距 */
+  flex-shrink: 0;
+  /* 防止图片缩小 */
+}
+
+.cover-image img {
+  max-width: 500px;
+  /* 为图片设置最大宽度 */
+  height: auto;
+  /* 保持纵横比 */
+}
+
 .markdown-content {
+  flex-grow: 1;
+  /* 让内容可以扩展 */
   padding: 20px;
 }
 
@@ -312,7 +372,8 @@ const htmlContent = computed(() => marked(markdownContent.value));
   background-color: #e0e0e0;
   font-weight: bold;
   color: #ff2f00;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3); /* 添加文字陰影 */
+  /* 添加文字陰影 */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .markdown-content td {
