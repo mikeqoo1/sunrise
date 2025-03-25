@@ -17,8 +17,6 @@ const markdownContent = ref(`
 快樂東京團05/10-05/17
 ===
 
-![鄭主母](/tokyo/38e81488-44e7-4d54-8cb4-b87f70c99a2e.png)
-
 ![皮卡丘](/tokyo/a7cc0e64-47c9-4ae3-8eee-84a32c0f770d.png)
 
 | 日期 | 行程 |
