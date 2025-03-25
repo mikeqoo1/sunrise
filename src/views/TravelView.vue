@@ -292,67 +292,33 @@ const htmlContent = computed(() => marked(markdownContent.value));
 </template>
 
 <style>
-.top-container {
-  display: flex;
-  justify-content: center;
-  padding: 10px 0;
-  background-color: #000;
-  /* Optional: set background color for contrast */
-}
-
-.cover-image {
-  max-width: 100%;
-  height: auto;
-}
-
-.greetings {
-  padding: 20px;
-}
-
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
-}
-
-.content-container {
-  padding: 20px;
-}
-
 .container {
   display: flex;
-  align-items: flex-start;
-  /* 垂直对齐到顶部 */
+  flex-direction: column;
+  /* 将内容垂直排列 */
+  align-items: center;
+  /* 水平居中 */
   padding: 20px;
-}
-
-.cover-image {
-  margin-right: 20px;
-  /* 图片和内容之间的间距 */
-  flex-shrink: 0;
-  /* 防止图片缩小 */
 }
 
 .cover-image img {
-  max-width: 500px;
-  /* 为图片设置最大宽度 */
+  max-width: 88%;
+  /* 设置图片宽度为容器的最大宽度 */
   height: auto;
   /* 保持纵横比 */
+  margin-bottom: 20px;
+  /* 增加图片和内容之间的间距 */
 }
 
 .markdown-content {
-  flex-grow: 1;
-  /* 让内容可以扩展 */
+  width: 100%;
+  /* 确保内容区域填满容器 */
+  max-width: 800px;
+  /* 限制内容区域的最大宽度 */
   padding: 20px;
 }
 
+/* 其他样式保持不变 */
 .markdown-content table {
   border-collapse: collapse;
   width: 100%;
@@ -362,17 +328,16 @@ const htmlContent = computed(() => marked(markdownContent.value));
 
 .markdown-content th,
 .markdown-content td {
-  border: 2px solid #888;
+  border: 2px solid #7f8b73;
   padding: 12px;
   text-align: left;
   font-size: 16px;
 }
 
 .markdown-content th {
-  background-color: #e0e0e0;
+  background-color: #aee0e6;
   font-weight: bold;
   color: #ff2f00;
-  /* 添加文字陰影 */
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
