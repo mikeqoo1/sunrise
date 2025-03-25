@@ -285,7 +285,7 @@ const htmlContent = computed(() => marked(markdownContent.value));
 <template>
   <div class="container">
     <div class="cover-image">
-      <img src="/tokyo/2025封面.png" alt="封面图" />
+      <img src="/2025封面.png" alt="封面图" />
     </div>
     <div class="markdown-content" v-html="htmlContent"></div>
   </div>
