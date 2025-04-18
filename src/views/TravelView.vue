@@ -25,9 +25,9 @@ const markdownContent = ref(`
 | 05/11(日) | 橫濱![pokemon_ball](/tokyo/bfe62b69-3936-4efe-8385-0c10058c0ba7.png)/ 東京地下街🍜| 
 | 05/12(一) | 澀谷![pokemon_ball](/tokyo/bfe62b69-3936-4efe-8385-0c10058c0ba7.png)/新宿(六歌仙)放生🥩 | 
 | 05/13(二) | 哈利波特🧙 /池袋![pokemon_ball](/tokyo/bfe62b69-3936-4efe-8385-0c10058c0ba7.png)| 
-| 05/14(三) | 先留空白| 
+| 05/14(三) | 台場🤖 /博品館/日本橋 ![pokemon_ball][/tokyo/bfe62b69-3936-4efe-8385-0c10058c0ba7.png] | 
 | 05/15(四) | 淺草⛩️ /上野🦖 / 晴空塔![pokemon_ball](/tokyo/bfe62b69-3936-4efe-8385-0c10058c0ba7.png)|
-| 05/16(五) | (待處理)春日部車站![Shin](/tokyo/14121d78-202d-491c-b4a9-4022adf88ee9.png)/ AEON LakeTown🛍 | 
+| 05/16(五) | 龜有/![Shin](/tokyo/14121d78-202d-491c-b4a9-4022adf88ee9.png)/ AEON LakeTown🛍 | 
 | 05/17(六) | 搭飛機回台灣✈ | 
 
 # 其他連結
@@ -111,6 +111,15 @@ ___
 ![](/tokyo/78ed0ff7-4a69-48d6-8efe-29c858466c8d.png)
 
 ![](/tokyo/b2d7938d-db35-4bff-8a1e-f8d6adb44c83.png)
+
+JR「東京站」八重洲北口步行5分鐘・東京Metro 銀座線、東西線「日本橋站」B2出口步行3分鐘
+
+日本橋高島屋S.C. 東館 5F(如果有時間可以當天直接去，雖然沒時間的機率很高)
+
+#### 東京車站限定伴手禮
+
+https://tokyo.letsgojp.com/archives/496735/
+
 
 回程從大手町站搭半藏門線回押上
 
