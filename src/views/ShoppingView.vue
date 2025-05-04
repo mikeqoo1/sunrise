@@ -78,7 +78,7 @@
             <li>恐龍 以下3雙擇一</li>
             <li>UNPRE ARS LOW 2 (US 9.5)</li>
             <li>GLIDE NOVA FF 3 (US 10)</li>
-            <li>(代購)GELBURST 28 櫻花粉（小哲）</li>
+            <li>(代購)GELBURST 28 櫻花粉（小哲US 8）</li>
         </ul>
     </div>
 </template>
