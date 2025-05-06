@@ -1,6 +1,6 @@
 <template>
   <div class="travellist">
-    <img src="/ec61dc9e-a1f3-451d-9df4-ecb6302b2a20.png" />
+    <img src="/準備行李.png" />
   </div>
 </template>
 
