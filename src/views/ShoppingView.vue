@@ -79,6 +79,14 @@
             <li>UNPRE ARS LOW 2 (US 9.5)</li>
             <li>GLIDE NOVA FF 3 (US 10)</li>
             <li>(代購)GELBURST 28 櫻花粉（小哲US 8）</li>
+            <li>
+                <img src="/美津濃樂福鞋US9.png" alt="休閒鞋" class="item-img" />
+                (代購)美津濃樂福鞋（小哲 US9）
+            </li>
+            <li>
+                <img src="/類似的休閒鞋US9.png" alt="休閒鞋2" class="item-img" />
+                (代購)類似的休閒鞋（小哲 US9）
+            </li>
         </ul>
     </div>
 </template>
@@ -103,5 +111,13 @@
     padding-left: 1.5rem;
     color: #f1c40f;
     font-weight: 500;
+}
+
+.item-img {
+    width: 40px;
+    height: auto;
+    vertical-align: middle;
+    margin-right: 8px;
+    border-radius: 4px;
 }
 </style>
