@@ -5,16 +5,51 @@
             <li><span class="person">👤 嘎菲</span></li>
             <li>藥粧
                 <ul>
-                    <li>(代購)蓬姊的納豆酵素*1</li>
-                    <li>(代購)蓬姊的能量水*2</li>
-                    <li>(代購)小喻的合力他命*1</li>
-                    <li>(代購)小喻的巧克力大包裝*1</li>
+                    <li>
+                        <img src="/daigou/阿康代購蓬姊.png" class="item-img" />
+                        (代購)蓬姊的納豆酵素*1
+                    </li>
+                    <li>
+                        <img src="/daigou/阿康代購蓬姊2.png" class="item-img" />
+                        (代購)蓬姊的能量水*2
+                    </li>
+                    <li>
+                        <img src="/daigou/合力他命.png" class="item-img" />
+                        (代購)小喻的合力他命*1
+                    </li>
+                    <li>
+                        <img src="/daigou/阿康代購小喻.png" class="item-img" />
+                        (代購)小喻的巧克力大包裝*1
+                    </li>
                     <li>(代購)嘎菲媽媽OK蹦*1</li>
-                    <li>(代購)嘎菲媽媽合力他命*1</li>
-                    <li>合力他命*2</li>
-                    <li>胃藥*2</li>
-                    <li>EVE 止痛*2</li>
-                    <li>EVE 經痛*3</li>
+                    <li>
+                        <img src="/daigou/合力他命.png" class="item-img" />
+                        (代購)嘎菲媽媽合力他命*1
+                    </li>
+                    <li>
+                        <img src="/daigou/合力他命.png" class="item-img" />
+                        (代購)嘎菲媽媽合力他命*1
+                    </li>
+                    <li>
+                        <img src="/daigou/合力他命.png" class="item-img" />
+                        (代購)嘎菲媽媽合力他命*1
+                    </li>
+                    <li>
+                        <img src="/daigou/合力他命.png" class="item-img" />
+                        合力他命*2
+                    </li>
+                    <li>
+                        <img src="/daigou/滅蚊器.png" class="item-img" />
+                        胃藥*2
+                    </li>
+                    <li>
+                        <img src="/daigou/止痛藥.png" class="item-img" />
+                        EVE 止痛*2
+                    </li>
+                    <li>
+                        <img src="/daigou/止痛藥.png" class="item-img" />
+                        EVE 經痛*3
+                    </li>
                 </ul>
             </li>
 
@@ -29,8 +64,17 @@
                 <ul>
                     <li>kate唇膏</li>
                     <li>臉部防曬</li>
-                    <li>滅蚊器</li>
-                    <li>(代購)外婆的Asahi MINTIA 酷涼薄荷糖大包裝*10</li>
+                    <li><img src="/daigou/薄荷糖.png" class="item-img" />
+                        Asahi MINTIA 酷涼薄荷糖大包裝
+                    </li>
+                    <li>
+                        <img src="/daigou/滅蚊器.png" class="item-img" />
+                        (代購)滅蚊器
+                    </li>
+                    <li>
+                        <img src="/daigou/眼藥水.png" class="item-img" />
+                        (代購)樂敦勁Z!眼藥水
+                    </li>
                 </ul>
             </li>
 
@@ -44,9 +88,18 @@
 
             <li>Nici 的吊飾
                 <ul>
-                    <li>(代購)庫洛米 ×2</li>
-                    <li>(代購)黃色雞飯糰 ×1</li>
-                    <li>(代購)愛心熊飯糰 ×1</li>
+                    <li>
+                        <img src="/daigou/庫落米.jpg" class="item-img" />
+                        (代購)庫洛米 ×2
+                    </li>
+                    <li>
+                        <img src="/daigou/黃色雞飯糰.jpg" class="item-img" />
+                        (代購)黃色雞飯糰 ×1
+                    </li>
+                    <li>
+                        <img src="/daigou/愛心熊飯糰.jpg" class="item-img" />
+                        (代購)愛心熊飯糰 ×1
+                    </li>
                 </ul>
             </li>
 
@@ -80,11 +133,11 @@
             <li>GLIDE NOVA FF 3 (US 10)</li>
             <li>(代購)GELBURST 28 櫻花粉（小哲US 8）</li>
             <li>
-                <img src="/美津濃樂福鞋US9.png" alt="休閒鞋" class="item-img" />
+                <img src="/daigou/美津濃樂福鞋US9.png" class="item-img" />
                 (代購)美津濃樂福鞋（小哲 US9）
             </li>
             <li>
-                <img src="/類似的休閒鞋US9.png" alt="休閒鞋2" class="item-img" />
+                <img src="/daigou/類似的休閒鞋US9.png" class="item-img" />
                 (代購)類似的休閒鞋（小哲 US9）
             </li>
         </ul>
@@ -114,10 +167,10 @@
 }
 
 .item-img {
-    width: 40px;
+    width: 60px;
     height: auto;
     vertical-align: middle;
-    margin-right: 8px;
-    border-radius: 4px;
+    margin-right: 10px;
+    border-radius: 10px;
 }
 </style>
