@@ -32,6 +32,8 @@ const markdownContent = ref(`
 
 # 其他連結
 
+第一天當地要買 牙膏 牙刷 沐浴乳 鏡子 梳子 調味料
+
 [晴空塔的寄物櫃使用狀況](<https://www.akilocker.biz/mobile/area.html?locationId=SOLAMACHI&lang=4>)
 
 [車站的寄物櫃使用狀況](https://cloak.ecbo.io/zh-TW/jpn/city/tokyo/184)
