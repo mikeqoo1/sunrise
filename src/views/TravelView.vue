@@ -25,7 +25,7 @@ const markdownContent = ref(`
 | 05/11(日) | 神田祭 ⛩️/ 橫濱![pokemon_ball](/tokyo/寶貝球.png) | 
 | 05/12(一) | 澀谷![pokemon_ball](/tokyo/寶貝球.png)/ 新宿(六歌仙)放生🥩 | 
 | 05/13(二) | 哈利波特🧙 / 池袋![pokemon_ball](/tokyo/寶貝球.png) | 
-| 05/14(三) | 千客萬來🤖 / 日本橋![pokemon_ball][/tokyo/寶貝球.png]/ 晴空塔![pokemon_ball](/tokyo/寶貝球.png) | 
+| 05/14(三) | 千客萬來🤖 / 日本橋![pokemon_ball](/tokyo/寶貝球.png) / 晴空塔![pokemon_ball](/tokyo/寶貝球.png) | 
 | 05/15(四) | 上野🦖 / 東京車站🍜 |
 | 05/16(五) | 龜有 / 淺草三社祭⛩️ | 
 | 05/17(六) | 搭飛機回台灣✈ | 
