@@ -14,6 +14,7 @@ import HelloWorld from "./components/HelloWorld.vue";
         <RouterLink to="/happy"><img src="/可愛劍龍.png" alt="Happy" class="nav-icon" />恐龍戰隊</RouterLink>
         <RouterLink to="/travel"><img src="/t-rex.png" alt="Travel" class="nav-icon" />旅遊計畫</RouterLink>
         <RouterLink to="/shopping"><img src="/黃色劍龍.png" alt="Shopping" class="nav-icon" />2025東京購買清單</RouterLink>
+        <RouterLink to="/lunch"><img src="/寶貝球.png" alt="lunch" class="nav-icon" />中午吃飯</RouterLink>
       </nav>
     </div>
   </header>

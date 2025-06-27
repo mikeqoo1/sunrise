@@ -6,6 +6,7 @@ import TravelView from "../views/TravelView.vue";
 import TraveListlView from "../views/TraveListlView.vue";
 import TokyoStationView from "../views/TokyoStationView.vue";
 import ShoppingView from "../views/ShoppingView.vue";
+import LunchView from "../views/LunchView.vue";
 const router = createRouter({
   history: createWebHashHistory(), // 這裡改掉
   routes: [
@@ -51,6 +52,11 @@ const router = createRouter({
       path: "/shopping",
       name: "shopping",
       component: ShoppingView,
+    },
+    {
+      path: "/lunch",
+      name: "lunch",
+      component: LunchView,
     },
   ],
 });
