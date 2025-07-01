@@ -62,3 +62,17 @@ npm run test:e2e -- --debug
 ```sh
 npm run lint
 ```
+
+### 午餐推薦格式
+
+```js
+types 請選符合的 方便統計
+  {
+    name: '店名',
+    types: ['飯', '麵', '水餃', '火鍋', '中式', '西式', '早餐', '線上支付', '遠', '巨無霸'],
+    price: 200,
+    distance: '走路時間',
+    note: '備註',
+    mapUrl: 'https://maps.google.com/?q=店名 or google map 分享短網址'
+  },
+```

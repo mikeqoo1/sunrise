@@ -39,7 +39,7 @@ type Restaurant = {
 }
 
 const allTypes = [
-  '飯', '麵', '水餃', '火鍋', '中式', '西式', '早餐', '線上支付', '遠', '巨無霸'
+  '飯', '麵', '水餃', '火鍋', '中式', '西式', '早餐', '線上支付', '遠', '巨無霸', '減薪家'
 ]
 
 
@@ -274,10 +274,10 @@ const restaurants: Restaurant[] = [
   },
   {
     name: '雞湯桑 Torisan 市府店',
-    types: ['麵', '線上支付', '遠'],
+    types: ['麵', '線上支付', '遠', '減薪家'],
     price: 300,
     distance: '15分鐘',
-    note: '雞湯桑 Torisan 市府店 連鎖拉麵店',
+    note: '減薪家賠錢專用5',
     mapUrl: 'https://maps.google.com/?q=雞湯桑 Torisan 市府店'
   },
   {
@@ -298,10 +298,10 @@ const restaurants: Restaurant[] = [
   },
   {
     name: '福勝亭 市府店',
-    types: ['飯', '線上支付', '遠'],
+    types: ['飯', '線上支付', '遠', '減薪家'],
     price: 200,
     distance: '15分鐘',
-    note: '就連鎖豬排店',
+    note: '減薪家賠錢專用4',
     mapUrl: 'https://maps.google.com/?q=福勝亭 市府店'
   },
   {
@@ -327,6 +327,70 @@ const restaurants: Restaurant[] = [
     distance: '15分鐘',
     note: '龍涎居好湯 冬天應該很適合',
     mapUrl: 'https://maps.google.com/?q=龍涎居好湯 信義永吉店'
+  },
+  {
+    name: '武鼎越豐',
+    types: ['飯', '麵', '遠', '巨無霸'],
+    price: 200,
+    distance: '15分鐘',
+    note: '份量不錯好吃的越式料理',
+    mapUrl: 'https://maps.app.goo.gl/fSs8YWbFtP3WgpwQ8'
+  },
+  {
+    name: '新牛屋（牛一牛）厚切牛排-永吉店',
+    types: ['線上支付', '遠', '巨無霸', '減薪家'],
+    price: 300,
+    distance: '15分鐘',
+    note: '減薪家賠錢專用',
+    mapUrl: 'https://maps.app.goo.gl/vbvwUmZG1LTiAUMG7'
+  },
+  {
+    name: '牛肉麵．雞湯 新信義店',
+    types: ['麵', '中式', '遠', '線上支付'],
+    price: 250,
+    distance: '15分鐘',
+    note: '好吃的牛肉麵評價很高但是距離比較遠',
+    mapUrl: 'https://maps.app.goo.gl/yJdnGAZX2wrsSi4W7'
+  },
+  {
+    name: '半島牛肉麵',
+    types: ['麵', '中式', '遠', '線上支付'],
+    price: 250,
+    distance: '20分鐘',
+    note: '好吃的牛肉麵評價很高比較遠',
+    mapUrl: 'https://maps.app.goo.gl/ZQxAzVtZmph9U5Nu9'
+  },
+  {
+    name: '靜岡勝政日式豬排 統一時代台北店',
+    types: ['飯', '遠', '線上支付', '減薪家'],
+    price: 300,
+    distance: '15分鐘',
+    note: '減薪家賠錢專用2',
+    mapUrl: 'https://maps.app.goo.gl/eMiCY3SZ4MnxEsJWA'
+  },
+  {
+    name: '新娘子麵館（忠孝店）',
+    types: ['麵', '遠', '線上支付'],
+    price: 150,
+    distance: '15分鐘',
+    note: '皮蛋麵 讚',
+    mapUrl: 'https://maps.app.goo.gl/QsTcE6aj5SvwSegJ8'
+  },
+  {
+    name: '丸舢拉麵 市府店',
+    types: ['麵', '遠', '線上支付', '減薪家'],
+    price: 200,
+    distance: '15分鐘',
+    note: '減薪家賠錢專用3',
+    mapUrl: 'https://maps.app.goo.gl/j2MK5uB7R5xqT7oQ7'
+  },
+  {
+    name: '麵大廚—市府店',
+    types: ['麵', '遠', '線上支付'],
+    price: 200,
+    distance: '15分鐘',
+    note: '豆花吃到飽',
+    mapUrl: 'https://maps.app.goo.gl/HwrQTwhUo2yE8JUG7'
   },
   {
     name: '30巷咖哩飯',
