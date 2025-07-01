@@ -265,6 +265,78 @@ const restaurants: Restaurant[] = [
     mapUrl: 'https://maps.google.com/?q=永吉油飯'
   },
   {
+    name: '小樂天餃子館',
+    types: ['水餃', '麵', '中式', '遠'],
+    price: 120,
+    distance: '15分鐘',
+    note: '餃子店',
+    mapUrl: 'https://maps.google.com/?q=小樂天餃子館'
+  },
+  {
+    name: '雞湯桑 Torisan 市府店',
+    types: ['麵', '線上支付', '遠'],
+    price: 300,
+    distance: '15分鐘',
+    note: '雞湯桑 Torisan 市府店 連鎖拉麵店',
+    mapUrl: 'https://maps.google.com/?q=雞湯桑 Torisan 市府店'
+  },
+  {
+    name: '芝香雞肉飯 涼麵',
+    types: ['飯', '麵', '中式', '遠'],
+    price: 120,
+    distance: '15分鐘',
+    note: '好吃的飯跟麵',
+    mapUrl: 'https://maps.google.com/?q=芝香雞肉飯 涼麵'
+  },
+  {
+    name: '珍品九如湖州粽專賣店',
+    types: ['飯', '麵', '中式', '遠'],
+    price: 120,
+    distance: '15分鐘',
+    note: '有賣粽子跟飯跟麵的店家',
+    mapUrl: 'https://maps.google.com/?q=珍品九如湖州粽專賣店'
+  },
+  {
+    name: '福勝亭 市府店',
+    types: ['飯', '線上支付', '遠'],
+    price: 200,
+    distance: '15分鐘',
+    note: '就連鎖豬排店',
+    mapUrl: 'https://maps.google.com/?q=福勝亭 市府店'
+  },
+  {
+    name: '摩斯漢堡 台北市府店',
+    types: ['西式', '線上支付', '遠'],
+    price: 200,
+    distance: '15分鐘',
+    note: '摩斯',
+    mapUrl: 'https://maps.google.com/?q=摩斯漢堡 台北市府店'
+  },
+  {
+    name: 'すき家 SUKIYA 台北市政府店',
+    types: ['飯', '線上支付', '遠'],
+    price: 100,
+    distance: '15分鐘',
+    note: 'すき家 SUKIYA',
+    mapUrl: 'https://maps.google.com/?q=すき家 SUKIYA 台北市政府店'
+  },
+  {
+    name: '龍涎居好湯 信義永吉店',
+    types: ['飯', '麵', '線上支付', '遠'],
+    price: 200,
+    distance: '15分鐘',
+    note: '龍涎居好湯 冬天應該很適合',
+    mapUrl: 'https://maps.google.com/?q=龍涎居好湯 信義永吉店'
+  },
+  {
+    name: '30巷咖哩飯',
+    types: ['飯', '中式', '遠'],
+    price: 120,
+    distance: '15分鐘',
+    note: '30巷咖哩飯',
+    mapUrl: 'https://maps.app.goo.gl/mQNpDugpLjQoz661A'
+  },
+  {
     name: '阿瑋紅燒排骨',
     types: ['飯', '麵', '中式', '遠'],
     price: 120,
@@ -278,7 +350,7 @@ const restaurants: Restaurant[] = [
     price: 100,
     distance: '15分鐘',
     note: '小菜給很多',
-    mapUrl: '沒有google地圖在阿瑋紅燒排骨對面'
+    mapUrl: 'https://maps.app.goo.gl/GezuDLdD9fJsNiN47'
   }
 ]
 

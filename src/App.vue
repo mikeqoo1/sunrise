@@ -12,9 +12,10 @@ import HelloWorld from "./components/HelloWorld.vue";
         <RouterLink to="/"><img src="/太空龍.png" alt="Home" class="nav-icon" />首頁</RouterLink>
         <RouterLink to="/about"><img src="/頭套恐龍.png" alt="About" class="nav-icon" />關於我</RouterLink>
         <RouterLink to="/happy"><img src="/可愛劍龍.png" alt="Happy" class="nav-icon" />恐龍戰隊</RouterLink>
-        <RouterLink to="/travel"><img src="/t-rex.png" alt="Travel" class="nav-icon" />旅遊計畫</RouterLink>
-        <RouterLink to="/shopping"><img src="/黃色劍龍.png" alt="Shopping" class="nav-icon" />2025東京購買清單</RouterLink>
-        <RouterLink to="/lunch"><img src="/寶貝球.png" alt="lunch" class="nav-icon" />中午吃飯</RouterLink>
+        <RouterLink to="/lunch"><img src="/卡比獸.png" alt="lunch" class="nav-icon" />中午吃飯</RouterLink>
+        <!-- 等下次出去玩再更新旅遊計畫跟購買清單 2025/07/01 -->
+        <!-- <RouterLink to="/travel"><img src="/t-rex.png" alt="Travel" class="nav-icon" />旅遊計畫</RouterLink> -->
+        <!-- <RouterLink to="/shopping"><img src="/黃色劍龍.png" alt="Shopping" class="nav-icon" />2025東京購買清單</RouterLink>  -->
       </nav>
     </div>
   </header>
