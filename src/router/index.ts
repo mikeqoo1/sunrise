@@ -7,6 +7,7 @@ import TraveListlView from "../views/TraveListlView.vue";
 import TokyoStationView from "../views/TokyoStationView.vue";
 import ShoppingView from "../views/ShoppingView.vue";
 import LunchView from "../views/LunchView.vue";
+import JerseyView from "../views/JerseyVotePage.vue";
 const router = createRouter({
   history: createWebHashHistory(), // 這裡改掉
   routes: [
@@ -57,6 +58,11 @@ const router = createRouter({
       path: "/lunch",
       name: "lunch",
       component: LunchView,
+    },
+    {
+      path: "/jersey",
+      name: "jersey",
+      component: JerseyView,
     },
   ],
 });
