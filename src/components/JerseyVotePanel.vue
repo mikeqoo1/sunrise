@@ -22,15 +22,22 @@ interface Jersey {
 
 const jerseys = ref<Jersey[]>([
     { title: '米腸哥吉拉&射手兔兔', img: 'happy/快樂龍新戰衣.jpeg', voteCount: 0, voted: false },
-    { title: '火焰犬圖案', img: 'happy/火焰犬.png', voteCount: 0, voted: false },
-    { title: '地獄三頭犬圖案', img: 'happy/地獄三頭犬.png', voteCount: 0, voted: false },
-    { title: '呆呆吉拉王圖案', img: 'happy/呆呆吉拉王.png', voteCount: 0, voted: false },
-    { title: 'Mega呆呆吉拉王圖案', img: 'happy/Mega呆呆吉拉王.png', voteCount: 0, voted: false },
-    { title: '超極巨化呆呆吉拉王圖案', img: 'happy/超極巨化呆呆吉拉王 .png', voteCount: 0, voted: false },
-    { title: '熾翼龍圖案', img: 'happy/熾翼龍.png', voteCount: 0, voted: false },
-    { title: '風速狗圖案', img: 'happy/風速狗.png', voteCount: 0, voted: false },
-    { title: '閃齧鼠圖案', img: 'happy/閃齧鼠.png', voteCount: 0, voted: false },
-    { title: '可愛獅圖案', img: 'happy/阿庭獅子.webp', voteCount: 0, voted: false },
+    { title: '金屬快樂龍', img: 'happy/金屬快樂龍1.png', voteCount: 0, voted: false },
+    { title: '金屬快樂龍噴三球', img: 'happy/金屬快樂龍2.png', voteCount: 0, voted: false },
+    { title: '金屬快樂龍噴火', img: 'happy/金屬快樂龍3.png', voteCount: 0, voted: false },
+    { title: '金屬快樂龍尾巴球', img: 'happy/金屬快樂龍4.png', voteCount: 0, voted: false },
+    { title: '金屬快樂翼龍', img: 'happy/金屬快樂翼龍1.png', voteCount: 0, voted: false },
+    { title: '金屬快樂翼龍胸口籃球', img: 'happy/金屬快樂翼龍2.png', voteCount: 0, voted: false },
+    { title: '球褲標誌', img: 'happy/球褲標誌.png', voteCount: 0, voted: false },
+    // { title: '火焰犬圖案', img: 'happy/火焰犬.png', voteCount: 0, voted: false },
+    // { title: '地獄三頭犬圖案', img: 'happy/地獄三頭犬.png', voteCount: 0, voted: false },
+    // { title: '呆呆吉拉王圖案', img: 'happy/呆呆吉拉王.png', voteCount: 0, voted: false },
+    // { title: 'Mega呆呆吉拉王圖案', img: 'happy/Mega呆呆吉拉王.png', voteCount: 0, voted: false },
+    // { title: '超極巨化呆呆吉拉王圖案', img: 'happy/超極巨化呆呆吉拉王 .png', voteCount: 0, voted: false },
+    // { title: '熾翼龍圖案', img: 'happy/熾翼龍.png', voteCount: 0, voted: false },
+    // { title: '風速狗圖案', img: 'happy/風速狗.png', voteCount: 0, voted: false },
+    // { title: '閃齧鼠圖案', img: 'happy/閃齧鼠.png', voteCount: 0, voted: false },
+    // { title: '可愛獅圖案', img: 'happy/阿庭獅子.webp', voteCount: 0, voted: false },
 ])
 
 function vote(index: number) {
