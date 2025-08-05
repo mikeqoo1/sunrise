@@ -8,6 +8,8 @@ import TokyoStationView from "../views/TokyoStationView.vue";
 import ShoppingView from "../views/ShoppingView.vue";
 import LunchView from "../views/LunchView.vue";
 import JerseyView from "../views/JerseyVotePage.vue";
+import RandomPicker from '../views/RandomPicker.vue';
+
 const router = createRouter({
   history: createWebHashHistory(), // 這裡改掉
   routes: [
@@ -63,6 +65,11 @@ const router = createRouter({
       path: "/jersey",
       name: "jersey",
       component: JerseyView,
+    },
+    {
+      path: '/random',
+      name: 'RandomPicker',
+      component: RandomPicker,
     },
   ],
 });
