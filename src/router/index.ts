@@ -9,6 +9,7 @@ import ShoppingView from "../views/ShoppingView.vue";
 import LunchView from "../views/LunchView.vue";
 import JerseyView from "../views/JerseyVotePage.vue";
 import RandomPicker from '../views/RandomPicker.vue';
+import DesignView from '../views/DesignView.vue';
 
 const router = createRouter({
   history: createWebHashHistory(), // 這裡改掉
@@ -70,6 +71,11 @@ const router = createRouter({
       path: '/random',
       name: 'RandomPicker',
       component: RandomPicker,
+    },
+    {
+      path: "/design",
+      name: "DesignView",
+      component: DesignView,
     },
   ],
 });

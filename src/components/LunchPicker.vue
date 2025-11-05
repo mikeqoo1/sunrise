@@ -39,7 +39,8 @@ type Restaurant = {
 }
 
 const allTypes = [
-  '飯', '麵', '水餃', '火鍋', '中式', '西式', '早餐', '線上支付', '遠', '巨無霸', '減薪家'
+  '飯', '麵', '水餃', '火鍋', '中式', '西式', '早餐', '線上支付',
+  '遠', '巨無霸', '減薪家', '小點心', '奢侈'
 ]
 
 
@@ -138,7 +139,7 @@ const restaurants: Restaurant[] = [
   },
   {
     name: '養鍋 石頭涮涮鍋 台北松菸店（寵物友善餐廳）',
-    types: ['火鍋', '線上支付'],
+    types: ['火鍋', '線上支付', '奢侈'],
     price: 300,
     distance: '5分鐘',
     note: '火鍋店翁中午時間不夠吃(可以line pay)',
@@ -226,8 +227,8 @@ const restaurants: Restaurant[] = [
   },
   {
     name: '瑞記海南雞飯 永吉店',
-    types: ['飯', '麵', '中式', '線上支付', '遠'],
-    price: 250,
+    types: ['飯', '麵', '中式', '線上支付', '遠', '奢侈'],
+    price: 300,
     distance: '15分鐘',
     note: '好吃但稍微貴一點(可以line pay)',
     mapUrl: 'https://maps.google.com/?q=瑞記海南雞飯 永吉店'
@@ -274,7 +275,7 @@ const restaurants: Restaurant[] = [
   },
   {
     name: '雞湯桑 Torisan 市府店',
-    types: ['麵', '線上支付', '遠', '減薪家'],
+    types: ['麵', '線上支付', '遠', '減薪家', '奢侈'],
     price: 300,
     distance: '15分鐘',
     note: '減薪家賠錢專用5',
@@ -322,8 +323,8 @@ const restaurants: Restaurant[] = [
   },
   {
     name: '龍涎居好湯 信義永吉店',
-    types: ['飯', '麵', '線上支付', '遠'],
-    price: 200,
+    types: ['飯', '麵', '線上支付', '遠', '奢侈'],
+    price: 300,
     distance: '15分鐘',
     note: '龍涎居好湯 冬天應該很適合',
     mapUrl: 'https://maps.google.com/?q=龍涎居好湯 信義永吉店'
@@ -338,7 +339,7 @@ const restaurants: Restaurant[] = [
   },
   {
     name: '新牛屋（牛一牛）厚切牛排-永吉店',
-    types: ['線上支付', '遠', '巨無霸', '減薪家'],
+    types: ['線上支付', '遠', '巨無霸', '減薪家', '奢侈'],
     price: 300,
     distance: '15分鐘',
     note: '減薪家賠錢專用',
@@ -346,8 +347,8 @@ const restaurants: Restaurant[] = [
   },
   {
     name: '牛肉麵．雞湯 新信義店',
-    types: ['麵', '中式', '遠', '線上支付'],
-    price: 250,
+    types: ['麵', '中式', '遠', '線上支付', '奢侈'],
+    price: 300,
     distance: '15分鐘',
     note: '好吃的牛肉麵評價很高但是距離比較遠',
     mapUrl: 'https://maps.app.goo.gl/yJdnGAZX2wrsSi4W7'
@@ -362,8 +363,8 @@ const restaurants: Restaurant[] = [
   },
   {
     name: '靜岡勝政日式豬排 統一時代台北店',
-    types: ['飯', '遠', '線上支付', '減薪家'],
-    price: 300,
+    types: ['飯', '遠', '線上支付', '減薪家', '奢侈'],
+    price: 400,
     distance: '15分鐘',
     note: '減薪家賠錢專用2',
     mapUrl: 'https://maps.app.goo.gl/eMiCY3SZ4MnxEsJWA'
@@ -378,8 +379,8 @@ const restaurants: Restaurant[] = [
   },
   {
     name: '丸舢拉麵 市府店',
-    types: ['麵', '遠', '線上支付', '減薪家'],
-    price: 200,
+    types: ['麵', '遠', '線上支付', '減薪家', '奢侈'],
+    price: 300,
     distance: '15分鐘',
     note: '減薪家賠錢專用3',
     mapUrl: 'https://maps.app.goo.gl/j2MK5uB7R5xqT7oQ7'
@@ -400,14 +401,14 @@ const restaurants: Restaurant[] = [
     note: '30巷咖哩飯',
     mapUrl: 'https://maps.app.goo.gl/mQNpDugpLjQoz661A'
   },
-  {
-    name: '阿瑋紅燒排骨',
-    types: ['飯', '麵', '中式', '遠'],
-    price: 120,
-    distance: '15分鐘',
-    note: '有G腿 有排骨 有飯 有麵 一般的小吃店',
-    mapUrl: 'https://maps.google.com/?q=阿瑋紅燒排骨'
-  },
+  // {
+  //   name: '阿瑋紅燒排骨(倒閉)',
+  //   types: ['飯', '麵', '中式', '遠'],
+  //   price: 120,
+  //   distance: '15分鐘',
+  //   note: '有G腿 有排骨 有飯 有麵 一般的小吃店',
+  //   mapUrl: 'https://maps.google.com/?q=阿瑋紅燒排骨'
+  // },
   {
     name: '冠美小吃',
     types: ['水餃', '麵', '飯', '中式', '遠', '巨無霸'],
@@ -415,7 +416,56 @@ const restaurants: Restaurant[] = [
     distance: '15分鐘',
     note: '小菜給很多',
     mapUrl: 'https://maps.app.goo.gl/GezuDLdD9fJsNiN47'
-  }
+  },
+  {
+    name: '30號早餐吧',
+    types: ['麵', '早餐'],
+    price: 100,
+    distance: '10分鐘',
+    note: '在全聯旁邊的早餐店有養一隻黑狗',
+    mapUrl: 'https://maps.app.goo.gl/vKQBWJ5fQF11dhKr5'
+  },
+  {
+    name: '老三豬腳永吉店',
+    types: ['飯', '麵', '中式', '遠'],
+    price: 200,
+    distance: '15分鐘',
+    note: '好吃豬腳飯',
+    mapUrl: 'https://maps.app.goo.gl/1qmu2UjGtnNGMrYf6'
+  },
+  {
+    name: '捲餅達人 (Pancake Roll)',
+    types: ['小點心', '遠', '奢侈'],
+    price: 150,
+    distance: '15分鐘',
+    note: '有名的烤鴨捲餅',
+    mapUrl: 'https://maps.app.goo.gl/vk7ZEZevmxp4A8yy9'
+  },
+  {
+    name: '貳虎 OFFTEA 永吉店',
+    types: ['小點心', '遠', '奢侈'],
+    price: 100,
+    distance: '15分鐘',
+    note: '超好吃G排',
+    mapUrl: 'https://maps.app.goo.gl/qdsMjiQm87hFZgkaA'
+  },
+  {
+    name: '丸 地瓜球 永吉店',
+    types: ['小點心', '遠'],
+    price: 80,
+    distance: '15分鐘',
+    note: '讚讚 地瓜球',
+    mapUrl: 'https://maps.app.goo.gl/J2ouV9h8sjz2984s6'
+  },
+  {
+    name: 'BURNT BURGER SOCIAL CLUB',
+    types: ['西式', '遠', '奢侈'],
+    price: 400,
+    distance: '15分鐘',
+    note: '超好吃漢堡跟肯窮薯條',
+    mapUrl: 'https://maps.app.goo.gl/gpECGit7PsptkMcq5'
+  },
+
 ]
 
 function pickRestaurant() {
