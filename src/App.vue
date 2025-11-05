@@ -18,6 +18,7 @@ import HelloWorld from "./components/HelloWorld.vue";
         <RouterLink to="/happy"><img src="/去背_球褲logo.png" alt="Happy" class="nav-icon" />快樂龍戰隊</RouterLink>
         <RouterLink to="/design"><img src="/design/Happy_3_CS6.png" alt="Design" class="nav-icon" />設計的球衣</RouterLink>
         <RouterLink to="/random"><img src="/happy/呆呆吉拉王.png" alt="random" class="nav-icon" />先發人員</RouterLink>
+        <RouterLink to="/mrt"><img src="/design/Happy_1_CS6.png" alt="random" class="nav-icon" />出趣玩</RouterLink>
         <div
           style="text-align: center; font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: #00ffcc;">
           掃碼加入戰隊獲得更多資訊
