@@ -76,3 +76,11 @@ types 請選符合的 方便統計
     mapUrl: 'https://maps.google.com/?q=店名 or google map 分享短網址'
   },
 ```
+
+### 旅遊車站擴充
+
+```txt
+想擴充就去改
+src/data/trains.ts（台鐵/高鐵）
+src/data/taipei-mrt.ts（捷運）
+```
