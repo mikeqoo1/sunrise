@@ -2,55 +2,66 @@
 import { ref, computed } from 'vue';
 import type { LineKey } from '@/data/taipei-mrt';
 import { lineNames, mrtStations, getAllStations } from '@/data/taipei-mrt';
+import { highSpeedRail, taiwanRail } from '@/data/trains';
 
-const pickedLine = ref<LineKey>('ALL');      // ALL = 不指定路線
+const category = ref<'MRT' | 'HSR' | 'TRA'>('MRT');
+const pickedLine = ref<LineKey>('ALL');
 const result = ref<string | null>(null);
 const showCongrats = ref(false);
 
-// 路線顏色（接近台北捷運色）
+// 不同來源對應 emoji
+const travelEmoji = computed(() => {
+    if (category.value === 'HSR') return '🚄';
+    if (category.value === 'TRA') return '🚆';
+    return '🚇';
+});
+
 const lineColor: Record<Exclude<LineKey, 'ALL'>, string> = {
-    BL: '#0070bd', // 藍
-    R: '#d13a3a', // 紅
-    G: '#00a75a', // 綠
-    O: '#f08a00', // 橘
-    BR: '#9c6b30', // 棕
-    Y: '#ffcc00', // 黃
+    BL: '#0070bd',
+    R: '#d13a3a',
+    G: '#00a75a',
+    O: '#f08a00',
+    BR: '#9c6b30',
+    Y: '#ffcc00',
 };
 
 const lineOptions = computed(() => [
     { key: 'ALL', label: '全部路線' },
-    ...Object.entries(lineNames).map(([k, v]) => ({ key: k, label: v }))
+    ...Object.entries(lineNames).map(([k, v]) => ({ key: k, label: v })),
 ]) as unknown as { key: LineKey; label: string }[];
 
+function currentPool(): string[] {
+    if (category.value === 'HSR') return highSpeedRail;
+    if (category.value === 'TRA') return taiwanRail;
+    return pickedLine.value === 'ALL'
+        ? getAllStations()
+        : (mrtStations[pickedLine.value] ?? []);
+}
+
 function drawOne() {
-    const pool =
-        pickedLine.value === 'ALL'
-            ? getAllStations()
-            : mrtStations[pickedLine.value] ?? [];
+    const pool = currentPool();
     if (!pool.length) {
-        result.value = '（這條線還沒填站名，先抽別條吧 🤣）';
+        result.value = '（這個來源沒有資料可抽 😅）';
         return;
     }
     const idx = Math.floor(Math.random() * pool.length);
     result.value = pool[idx];
 
-    // 觸發恭喜動畫
     showCongrats.value = false;
     requestAnimationFrame(() => {
         showCongrats.value = true;
-        setTimeout(() => (showCongrats.value = false), 2200);
+        setTimeout(() => (showCongrats.value = false), 2500);
     });
 }
 
 function mapsLink(name: string) {
-    const q = encodeURIComponent(`台北捷運 ${name}`);
+    const q = encodeURIComponent(name);
     return `https://www.google.com/maps/search/?api=1&query=${q}`;
 }
 
-// 產生 confetti 參數（位置/延遲/旋轉）
 const confetti = Array.from({ length: 18 }).map((_, i) => {
-    const left = Math.random() * 100;     // vw %
-    const delay = Math.random() * 0.6;    // s
+    const left = Math.random() * 100;
+    const delay = Math.random() * 0.6;
     const rotate = Math.floor(Math.random() * 360);
     const emoji = ['🎉', '🎊', '✨', '🥳'][i % 4];
     return { left, delay, rotate, emoji };
@@ -60,14 +71,22 @@ const confetti = Array.from({ length: 18 }).map((_, i) => {
 <template>
     <section class="relative space-y-6">
         <h1 class="text-3xl md:text-4xl font-extrabold tracking-wide">
-            抽捷運站出趣玩
+            抽捷運 / 台鐵 / 高鐵 出趣玩
         </h1>
 
         <!-- 控制列 -->
         <div class="flex flex-wrap items-center gap-3">
-            <label class="text-base opacity-80">選擇路線：</label>
+            <label class="text-base opacity-80">選擇來源：</label>
+            <select v-model="category"
+                class="rounded-2xl bg-neutral-900/80 px-4 py-2 text-base outline-none ring-1 ring-white/10 focus:ring-2 focus:ring-white/30">
+                <option value="MRT">台北捷運</option>
+                <option value="TRA">台鐵</option>
+                <option value="HSR">高鐵</option>
+            </select>
 
-            <div class="flex items-center gap-2">
+            <template v-if="category === 'MRT'">
+                <span class="mx-1 text-sm opacity-70">｜</span>
+                <label class="text-base opacity-80">捷運路線：</label>
                 <select v-model="pickedLine"
                     class="rounded-2xl bg-neutral-900/80 px-4 py-2 text-base outline-none ring-1 ring-white/10 focus:ring-2 focus:ring-white/30">
                     <option v-for="opt in lineOptions" :key="opt.key" :value="opt.key">
@@ -79,7 +98,7 @@ const confetti = Array.from({ length: 18 }).map((_, i) => {
                     :style="{ background: (lineColor as any)[pickedLine], color: '#0b0b0b' }">
                     {{ (lineNames as any)[pickedLine] }}
                 </div>
-            </div>
+            </template>
 
             <button class="ml-1 px-5 py-2 rounded-2xl text-lg font-semibold shadow hover:shadow-lg transition
                hover:scale-[1.02] active:scale-[0.98]" @click="drawOne">
@@ -91,8 +110,8 @@ const confetti = Array.from({ length: 18 }).map((_, i) => {
         <div v-if="result" class="relative overflow-hidden rounded-3xl p-6 md:p-8 shadow-lg
              bg-gradient-to-r from-emerald-500/15 via-cyan-500/15 to-indigo-500/15
              ring-1 ring-white/10">
-            <div class="text-xl md:text-2xl mb-2">🎯 抽到：</div>
-            <div class="text-xl md:text-60xl font-black leading-tight">
+            <div class="text-xl md:text-2xl mb-2">{{ travelEmoji }} 抽到：</div>
+            <div class="text-3xl md:text-5xl font-black leading-tight">
                 {{ result }}
             </div>
 
@@ -103,10 +122,13 @@ const confetti = Array.from({ length: 18 }).map((_, i) => {
                 </a>
             </div>
 
-            <!-- 恭喜動畫 -->
+            <!-- 恭喜動畫（含對應交通工具 emoji） -->
             <transition name="fade">
                 <div v-if="showCongrats" class="congrats">
-                    <div class="shout">恭喜抽中！今天就出發去玩吧 🚇</div>
+                    <div class="shout">
+                        🎉 恭喜抽中 <span class="font-bold text-yellow-300">{{ result }}</span>！
+                        今天就出發去玩吧 {{ travelEmoji }}
+                    </div>
                     <span v-for="(c, i) in confetti" :key="i" class="piece" :style="{
                         left: c.left + '%',
                         animationDelay: c.delay + 's',
@@ -119,29 +141,27 @@ const confetti = Array.from({ length: 18 }).map((_, i) => {
 </template>
 
 <style scoped>
-/* 恭喜浮層 */
 .congrats {
     pointer-events: none;
     position: absolute;
     inset: 0;
 }
 
-/* 大喊字 */
 .shout {
     position: absolute;
     top: 12px;
     right: 16px;
     font-weight: 900;
-    font-size: clamp(18px, 2.2vw, 28px);
-    padding: .35rem .75rem;
+    font-size: clamp(18px, 2.4vw, 28px);
+    padding: 0.4rem 0.9rem;
     border-radius: 999px;
-    background: rgba(255, 255, 255, .15);
+    background: rgba(255, 255, 255, .18);
     backdrop-filter: blur(6px);
     border: 1px solid rgba(255, 255, 255, .25);
-    text-shadow: 0 1px 0 rgba(0, 0, 0, .2);
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .3);
+    color: #fff;
 }
 
-/* confetti */
 .piece {
     position: absolute;
     top: -10px;
@@ -165,7 +185,6 @@ const confetti = Array.from({ length: 18 }).map((_, i) => {
     }
 }
 
-/* 進出淡入 */
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity .25s;
