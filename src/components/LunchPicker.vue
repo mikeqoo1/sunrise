@@ -465,7 +465,22 @@ const restaurants: Restaurant[] = [
     note: '超好吃漢堡跟肯窮薯條',
     mapUrl: 'https://maps.app.goo.gl/gpECGit7PsptkMcq5'
   },
-
+  {
+    name: '麵食主義 KIRIN PASTA',
+    types: ['飯', '麵', '西式', '遠', '線上支付'],
+    price: 200,
+    distance: '15分鐘',
+    note: '義大利麵跟燉飯 4人內用送飲料喝',
+    mapUrl: 'https://maps.app.goo.gl/wMftkjbZnDMK8uEG7'
+  },
+  {
+    name: 'BHC炸雞',
+    types: ['遠', '線上支付', '減薪家', '奢侈'],
+    price: 300,
+    distance: '15分鐘',
+    note: '大巨蛋裡面的BHC炸雞',
+    mapUrl: 'https://maps.app.goo.gl/7ut9LF3PTjmL7eLm9'
+  },
 ]
 
 function pickRestaurant() {
