@@ -4,7 +4,8 @@ import type { LineKey } from '@/data/taipei-mrt';
 import { lineNames, mrtStations, getAllStations } from '@/data/taipei-mrt';
 import { highSpeedRail, taiwanRail } from '@/data/trains';
 
-const category = ref<'MRT' | 'HSR' | 'TRA'>('MRT');
+// ✅ 多一個 'ALL'，代表「全部混合抽」
+const category = ref<'MRT' | 'HSR' | 'TRA' | 'ALL'>('MRT');
 const pickedLine = ref<LineKey>('ALL');
 const result = ref<string | null>(null);
 const showCongrats = ref(false);
@@ -13,6 +14,7 @@ const showCongrats = ref(false);
 const travelEmoji = computed(() => {
     if (category.value === 'HSR') return '🚄';
     if (category.value === 'TRA') return '🚆';
+    if (category.value === 'ALL') return '🎲';
     return '🚇';
 });
 
@@ -30,9 +32,18 @@ const lineOptions = computed(() => [
     ...Object.entries(lineNames).map(([k, v]) => ({ key: k, label: v })),
 ]) as unknown as { key: LineKey; label: string }[];
 
+// ✅ 根據 category 決定抽籤母體，多加 ALL 的情況
 function currentPool(): string[] {
     if (category.value === 'HSR') return highSpeedRail;
     if (category.value === 'TRA') return taiwanRail;
+    if (category.value === 'ALL') {
+        return [
+            ...getAllStations(),
+            ...highSpeedRail,
+            ...taiwanRail,
+        ];
+    }
+    // MRT
     return pickedLine.value === 'ALL'
         ? getAllStations()
         : (mrtStations[pickedLine.value] ?? []);
@@ -82,8 +93,11 @@ const confetti = Array.from({ length: 18 }).map((_, i) => {
                 <option value="MRT">台北捷運</option>
                 <option value="TRA">台鐵</option>
                 <option value="HSR">高鐵</option>
+                <!-- ✅ 新增：全部混合抽 -->
+                <option value="ALL">全部混合抽（捷運 + 台鐵 + 高鐵）</option>
             </select>
 
+            <!-- 只有選 MRT 才需要選路線 -->
             <template v-if="category === 'MRT'">
                 <span class="mx-1 text-sm opacity-70">｜</span>
                 <label class="text-base opacity-80">捷運路線：</label>
@@ -133,7 +147,9 @@ const confetti = Array.from({ length: 18 }).map((_, i) => {
                         left: c.left + '%',
                         animationDelay: c.delay + 's',
                         transform: `rotate(${c.rotate}deg)`
-                    }">{{ c.emoji }}</span>
+                    }">
+                        {{ c.emoji }}
+                    </span>
                 </div>
             </transition>
         </div>
