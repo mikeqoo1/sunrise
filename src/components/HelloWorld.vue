@@ -6,35 +6,62 @@ defineProps<{
 
 <template>
   <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
-    <h3>
-      用Vite+Vue3搞出一個簡單的小東西
-    </h3>
+    <p class="pill">遊客你好</p>
+    <h1>{{ msg }}</h1>
+    <p class="lede">用 Vite + Vue 3 打造的小小恐龍星球，結合抽籤、旅遊、球衣設計與出遊路線。</p>
+    <div class="badges">
+      <span class="badge">互動任務</span>
+      <span class="badge">創意設計</span>
+      <span class="badge">隊伍管理</span>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.greetings {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.pill {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(125, 240, 255, 0.12);
+  border: 1px solid rgba(125, 240, 255, 0.35);
+  font-size: 0.85rem;
+  letter-spacing: 0.08rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  width: fit-content;
+}
+
 h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
+  font-weight: 700;
+  font-size: clamp(2.1rem, 3vw, 2.6rem);
+  letter-spacing: 0.02rem;
 }
 
-h3 {
-  font-size: 1.2rem;
+.lede {
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 520px;
 }
 
-.greetings h1,
-.greetings h3 {
-  text-align: center;
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
 }
 
-@media (min-width: 1024px) {
-
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
+.badge {
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.9rem;
+  color: var(--text-primary);
 }
 </style>

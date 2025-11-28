@@ -1,110 +1,281 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
 import HelloWorld from "./components/HelloWorld.vue";
+
+const base = import.meta.env.BASE_URL;
+const assetUrl = (path: string) => `${base}${path.replace(/^\//, "")}`;
+
+const logoSrc = assetUrl("恐龍愛吃漢堡包.png");
+
+const navLinks = [
+  { to: "/", label: "首頁", caption: "互動展示", icon: assetUrl("太空龍.png") },
+  { to: "/about", label: "關於我", caption: "恐龍檔案", icon: assetUrl("頭套恐龍.png") },
+  { to: "/lunch", label: "中午吃飯", caption: "抽籤選店", icon: assetUrl("卡比獸.png") },
+  { to: "/happy", label: "快樂龍戰隊", caption: "球衣與隊伍", icon: assetUrl("去背_球褲logo.png") },
+  { to: "/design", label: "設計的球衣", caption: "創意草稿", icon: assetUrl("design/Happy_3_CS6.png") },
+  { to: "/random", label: "先發人員", caption: "隨機挑選", icon: assetUrl("happy/呆呆吉拉王.png") },
+  { to: "/mrt", label: "出趣玩", caption: "捷運出行", icon: assetUrl("design/Happy_1_CS6.png") },
+];
 </script>
 
 <template>
-  <header>
+  <div class="app-shell">
+    <div class="ambient ambient-one" />
+    <div class="ambient ambient-two" />
 
-    <!-- 引入 Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-    <img alt="Homelogo" class="logo" src="/恐龍愛吃漢堡包.png" width="125" height="125" />
-    <div class="wrapper">
-      <HelloWorld msg="歡迎來到恐龍天地" />
-      <nav>
-        <RouterLink to="/"><img src="/太空龍.png" alt="Home" class="nav-icon" />首頁</RouterLink>
-        <RouterLink to="/about"><img src="/頭套恐龍.png" alt="About" class="nav-icon" />關於我</RouterLink>
-        <RouterLink to="/lunch"><img src="/卡比獸.png" alt="lunch" class="nav-icon" />中午吃飯</RouterLink>
-        <RouterLink to="/happy"><img src="/去背_球褲logo.png" alt="Happy" class="nav-icon" />快樂龍戰隊</RouterLink>
-        <RouterLink to="/design"><img src="/design/Happy_3_CS6.png" alt="Design" class="nav-icon" />設計的球衣</RouterLink>
-        <RouterLink to="/random"><img src="/happy/呆呆吉拉王.png" alt="random" class="nav-icon" />先發人員</RouterLink>
-        <RouterLink to="/mrt"><img src="/design/Happy_1_CS6.png" alt="random" class="nav-icon" />出趣玩</RouterLink>
-        <div
-          style="text-align: center; font-family: 'Orbitron', sans-serif; font-size: 20px; font-weight: 700; color: #00ffcc;">
-          掃碼加入戰隊獲得更多資訊
-          <br>
-          <img src="https://qr-official.line.me/gs/M_212cwsii_BW.png?oat_content=qr" width="95" height="95"
-            alt="Line QR Code" />
+    <header class="hero">
+      <div class="brand-block">
+        <div class="logo-wrap">
+          <img alt="Homelogo" class="logo" :src="logoSrc" width="125" height="125" />
+          <span class="logo-chip">Dino Lab</span>
         </div>
-        <!-- 等下次出去玩再更新旅遊計畫跟購買清單 2025/07/01 -->
-        <!-- <RouterLink to="/travel"><img src="/t-rex.png" alt="Travel" class="nav-icon" />旅遊計畫</RouterLink> -->
-        <!-- <RouterLink to="/shopping"><img src="/黃色劍龍.png" alt="Shopping" class="nav-icon" />2025東京購買清單</RouterLink>  -->
-        <!-- 恐龍戰隊球衣已經做了3個版本不用再做了 2025/11/05 -->
-        <!-- <RouterLink to="/jersey"><img src="/夢幻.png" alt="jersey" class="nav-icon" />預計戰袍</RouterLink> -->
-      </nav>
-    </div>
-  </header>
-  <main>
-    <RouterView />
-  </main>
+        <div class="hero-copy">
+          <p class="eyebrow">恐龍天地</p>
+          <HelloWorld msg="歡迎來到恐龍天地" />
+        </div>
+      </div>
+      <div class="info-card">
+        <p class="info-label">加入戰隊</p>
+        <h3>掃碼加入戰隊獲得更多資訊</h3>
+        <p class="info-desc">解鎖最新任務、旅遊計畫、球衣設計，恐龍天天陪你衝。</p>
+        <img src="https://qr-official.line.me/gs/M_212cwsii_BW.png?oat_content=qr" width="95" height="95"
+          alt="Line QR Code" />
+      </div>
+    </header>
+
+    <nav class="nav-grid">
+      <RouterLink v-for="link in navLinks" :key="link.to" :to="link.to" class="nav-card">
+        <span class="nav-icon-wrap">
+          <img :src="link.icon" :alt="link.label" class="nav-icon" />
+        </span>
+        <div class="nav-text">
+          <span class="nav-label">{{ link.label }}</span>
+          <span class="nav-caption">{{ link.caption }}</span>
+        </div>
+      </RouterLink>
+    </nav>
+
+    <main class="content-panel">
+      <RouterView />
+    </main>
+  </div>
 </template>
+
 <style scoped>
-.nav-icon {
-  width: 24px;
-  height: 24px;
-  margin-right: 5px;
-  vertical-align: middle;
+.app-shell {
+  position: relative;
+  overflow: hidden;
 }
 
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+.ambient {
+  position: absolute;
+  filter: blur(90px);
+  opacity: 0.6;
+  z-index: -1;
+}
+
+.ambient-one {
+  width: 380px;
+  height: 380px;
+  top: -120px;
+  left: -120px;
+  background: radial-gradient(circle, rgba(140, 248, 216, 0.3), transparent 60%);
+}
+
+.ambient-two {
+  width: 320px;
+  height: 320px;
+  bottom: -80px;
+  right: -120px;
+  background: radial-gradient(circle, rgba(125, 240, 255, 0.3), transparent 60%);
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.6rem;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(8px);
+}
+
+.brand-block {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.logo-wrap {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(145deg, rgba(125, 240, 255, 0.25), rgba(140, 248, 216, 0.15));
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.logo-chip {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(140, 248, 216, 0.14);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  letter-spacing: 0.6px;
 }
 
 .logo {
-  display: block;
-  margin: 0 auto 2rem;
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
+.hero-copy {
+  max-width: 520px;
+}
+
+.eyebrow {
+  font-size: 0.85rem;
+  letter-spacing: 0.24rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.info-card {
+  padding: 1rem 1.2rem;
+  background: linear-gradient(145deg, rgba(140, 248, 216, 0.18), rgba(125, 240, 255, 0.12));
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
   text-align: center;
-  margin-top: 2rem;
+  width: 260px;
+  box-shadow: var(--shadow-soft);
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+.info-label {
+  color: var(--text-muted);
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+  font-size: 0.75rem;
 }
 
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
+.info-card h3 {
+  margin: 0.3rem 0;
+  font-size: 1.1rem;
 }
 
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
+.info-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
 }
 
-nav a:first-of-type {
-  border: 0;
+.nav-grid {
+  margin-top: 1.4rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.9rem;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+.nav-card {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  padding: 0.9rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+  color: var(--text-primary);
+}
+
+.nav-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.nav-card.router-link-exact-active {
+  border-color: var(--accent);
+  background: linear-gradient(145deg, rgba(140, 248, 216, 0.16), rgba(125, 240, 255, 0.12));
+}
+
+.nav-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+}
+
+.nav-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.nav-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.nav-label {
+  font-weight: 600;
+  letter-spacing: 0.02rem;
+}
+
+.nav-caption {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.content-panel {
+  margin-top: 1.4rem;
+  padding: 1.4rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow-soft);
+}
+
+@media (max-width: 820px) {
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .brand-block {
+    width: 100%;
+  }
+
+  .info-card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .logo-wrap {
+    width: 96px;
+    height: 96px;
   }
 
   .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+    width: 76px;
+    height: 76px;
   }
 }
 </style>
