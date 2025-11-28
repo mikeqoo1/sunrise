@@ -27,7 +27,6 @@ const navLinks = [
       <div class="brand-block">
         <div class="logo-wrap">
           <img alt="Homelogo" class="logo" :src="logoSrc" width="125" height="125" />
-          <span class="logo-chip">Dino Lab</span>
         </div>
         <div class="hero-copy">
           <p class="eyebrow">恐龍天地</p>
