@@ -11,6 +11,7 @@ import JerseyView from "../views/JerseyVotePage.vue";
 import RandomPicker from '../views/RandomPicker.vue';
 import DesignView from '../views/DesignView.vue';
 import MrtView from '@/views/MrtView.vue';
+import AnnualTravelView from '@/views/AnnualTravelView.vue';
 
 const router = createRouter({
   history: createWebHashHistory(), // 這裡改掉
@@ -82,6 +83,11 @@ const router = createRouter({
       path: "/mrt",
       name: "mrt",
       component: MrtView,
+    },
+    {
+      path: "/2025travel",
+      name: "annualTravel",
+      component: AnnualTravelView,
     },
   ],
 });
