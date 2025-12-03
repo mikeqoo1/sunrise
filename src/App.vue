@@ -15,7 +15,8 @@ const navLinks = [
   { to: "/design", label: "設計的球衣", caption: "創意草稿", icon: assetUrl("design/Happy_3_CS6.png") },
   { to: "/random", label: "先發人員", caption: "隨機挑選", icon: assetUrl("happy/呆呆吉拉王.png") },
   { to: "/mrt", label: "出趣玩", caption: "捷運出行", icon: assetUrl("design/Happy_1_CS6.png") },
-  { to: "/2025travel", label: "2025 旅遊", caption: "年度手冊", icon: assetUrl("72小時票.png") },
+  { to: "/2025travel", label: "2025 東京旅遊", caption: "年度手冊", icon: assetUrl("72小時票.png") },
+  { to: "/2026travel", label: "2026 大阪寶可夢之旅", caption: "USJ 寶可夢萬聖節", icon: assetUrl("2026Osaka/usj.png") },
 ];
 </script>
 
