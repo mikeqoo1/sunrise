@@ -17,6 +17,7 @@ const navLinks = [
   { to: "/mrt", label: "出趣玩", caption: "捷運出行", icon: assetUrl("design/Happy_1_CS6.png") },
   { to: "/2025travel", label: "2025 東京旅遊", caption: "年度手冊", icon: assetUrl("72小時票.png") },
   { to: "/2026travel", label: "2026 大阪寶可夢之旅", caption: "USJ 寶可夢萬聖節", icon: assetUrl("2026Osaka/usj.png") },
+  { to: "/vietnam", label: "越南代購", caption: "商品 / 價格表", icon: assetUrl("vietnam/Vietnam.png") },
 ];
 </script>
 

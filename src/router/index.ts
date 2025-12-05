@@ -14,6 +14,7 @@ import MrtView from '@/views/MrtView.vue';
 import AnnualTravelView from '@/views/AnnualTravelView.vue';
 import Osaka2026View from '@/views/Osaka2026View.vue';
 import Osaka2026DetailView from '@/views/Osaka2026DetailView.vue';
+import VietnamDaigouView from '@/views/VietnamDaigouView.vue';
 
 const router = createRouter({
   history: createWebHashHistory(), // 這裡改掉
@@ -100,6 +101,11 @@ const router = createRouter({
       path: "/2026travel/detail",
       name: "osakaTravelDetail",
       component: Osaka2026DetailView,
+    },
+    {
+      path: "/vietnam",
+      name: "vietnam",
+      component: VietnamDaigouView,
     },
   ],
 });
