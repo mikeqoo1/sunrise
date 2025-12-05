@@ -1,13 +1,9 @@
 <script setup lang="ts">
 const items = [
-  { name: "G7 三合一咖啡", price: "NT$ 220 / 袋", image: "/vietnam/g7-3in1.jpg", note: "22 包入，熱水即可沖" },
-  { name: "滴漏黑咖啡組", price: "NT$ 320 / 盒", image: "/vietnam/drip-coffee.jpg", note: "小巧濾掛包，隨行好帶" },
-  { name: "腰果 / 果乾禮盒", price: "NT$ 260 / 盒", image: "/vietnam/nuts-gift.jpg", note: "香脆腰果＋果乾混合" },
-  { name: "越南米紙", price: "NT$ 90 / 包", image: "/vietnam/rice-paper.jpg", note: "生春捲專用，直徑 22cm" },
-  { name: "椰子花蜜", price: "NT$ 180 / 罐", image: "/vietnam/coconut-syrup.jpg", note: "甜度低，適合沖茶或抹吐司" },
-  { name: "順化牛肉河粉調理包", price: "NT$ 130 / 包", image: "/vietnam/beef-pho.jpg", note: "附香料包，回家也能複刻" },
-  { name: "越南滴漏壺套裝", price: "NT$ 220 / 套", image: "/vietnam/drip-set.jpg", note: "含鋁杯濾網與玻璃杯" },
-  { name: "蓮花茶", price: "NT$ 150 / 盒", image: "/vietnam/lotus-tea.jpg", note: "淡淡花香，不苦澀" },
+  { name: "瑜伽褲", price: "NT$ ??? / 件", image: "vietnam/lululemon.png", note: "瑜伽系列" },
+  { name: "運動服", price: "NT$ ??? / 件", image: "vietnam/nike.png", note: "運動系列" },
+  { name: "外套A", price: "NT$ ???? / 件", image: "vietnam/ARCTERYX.png", note: "冬天外套" },
+  { name: "外套B", price: "NT$ ???? / 件", image: "vietnam/TheNorthFace.png", note: "冬天外套" },
 ];
 </script>
 
@@ -17,13 +13,6 @@ const items = [
       <p class="eyebrow">越南代購</p>
       <div>
         <h1>越南好物簡易清單</h1>
-        <p class="lede">
-          圖片放在 <code>public/vietnam</code>，每張卡片就是商品名稱、照片、價格，方便直接傳給大家確認。
-        </p>
-      </div>
-      <div class="tips">
-        <span>TIP</span>
-        <p>價格可直接改這個頁面的陣列，圖片檔名對應 <code>/vietnam</code> 資料夾。</p>
       </div>
     </header>
 
