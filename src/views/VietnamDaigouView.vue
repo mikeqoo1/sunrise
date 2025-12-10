@@ -13,6 +13,7 @@ const items = [
   { name: "始祖鳥代購", price: "NT$ ???? / 件", image: "vietnam/ARCTERYX.png", note: "大熊*1" },
   { name: "Arcteryx 始祖鳥 Atom Hoody 化纖保暖外套(X00000955602)", price: "大熊2XL號 NT$ ???? / 件", image: "vietnam/X00000955602.jpg", note: "X00000955602" },
   { name: "Arcteryx 始祖鳥 Beta GORE-TEX(X000010513)", price: "振業L號 NT$ ???? / 件", image: "vietnam/X000010513.jpeg", note: "X000010513" },
+  { name: "加拿大鵝薄外套(Lightweight Killarney Jacket)", price: "振業L號 NT$ ???? / 件", image: "vietnam/振業加拿大鵝外套.jpeg", note: "Lightweight Killarney Jacket" },
 ];
 
 const tabs = [
