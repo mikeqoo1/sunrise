@@ -32,7 +32,9 @@ const confirmedOrders = [
   { buyer: "腦哲", item: "北臉防風外套(黑)-XL", price: 400, quantity: 1, image: "vietnam/北臉便宜外套.jpeg" },
   { buyer: "腦哲", item: "狼牌毛毛外套-L", price: 600, quantity: 1, image: "vietnam/腦哲毛毛外套.jpeg" },
   { buyer: "腦哲", item: "始祖鳥褲子-M", price: 400, quantity: 1, image: "vietnam/腦哲始祖鳥褲.jpeg" },
+  { buyer: "腦哲", item: "始祖鳥2合1外套(黑)-L", price: 2000, quantity: 1, image: "vietnam/腦哲始祖鳥2合1外套黑L.jpg" },
   { buyer: "帥奎", item: "K-WAY薄外套雙色", price: 600, quantity: 1, image: "vietnam/K-WAY薄外套雙色.jpeg" },
+  { buyer: "振業", item: "始祖鳥薄外套", price: 1000, quantity: 1, image: "vietnam/振業始祖鳥薄外套L.jpg" },
 ];
 
 const totalAmount = computed(() =>
