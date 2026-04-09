@@ -1,0 +1,50 @@
+# 自動部署工作流程
+# 當 main 分支有新的 push 時，自動建置並部署到 mikeqoo1/tokyo 倉庫 (GitHub Pages)
+#
+# 注意：需要先在 GitHub 倉庫設定中新增一個名為 DEPLOY_TOKEN 的 Secret
+# 步驟：
+#   1. 前往 https://github.com/settings/tokens 建立 Personal Access Token (classic)
+#   2. 勾選 repo 權限（需要完整的 repo 存取權限才能推送到外部倉庫）
+#   3. 前往本倉庫的 Settings > Secrets and variables > Actions
+#   4. 新增一個名為 DEPLOY_TOKEN 的 Repository Secret，貼上剛才產生的 Token
+
+name: 建置並部署到 GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+# 避免同時執行多個部署，只保留最新的
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 檢出程式碼
+        uses: actions/checkout@v4
+
+      - name: 設定 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: 安裝依賴
+        run: npm ci
+
+      - name: 建置專案
+        run: npm run build
+
+      - name: 部署到 tokyo 倉庫
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.DEPLOY_TOKEN }}
+          external_repository: mikeqoo1/tokyo
+          publish_branch: main
+          publish_dir: ./dist
+          force_orphan: true
