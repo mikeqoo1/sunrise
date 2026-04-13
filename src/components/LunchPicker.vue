@@ -1,27 +1,27 @@
 <template>
-  <div class="min-h-screen bg-gray-100 p-6">
-    <h1 class="text-3xl font-bold mb-4">中午吃什麼？</h1>
+  <div class="lunch-picker">
+    <h1 class="page-title">中午吃什麼？</h1>
 
     <!-- 篩選區 -->
-    <div class="mb-4 space-x-2">
-      <label v-for="type in allTypes" :key="type" class="inline-flex items-center">
-        <input type="checkbox" v-model="selectedTypes" :value="type" class="mr-1">
-        {{ type }}
+    <div class="filter-section">
+      <label v-for="type in allTypes" :key="type" class="filter-chip">
+        <input type="checkbox" v-model="selectedTypes" :value="type" class="chip-checkbox" />
+        <span class="chip-label">{{ type }}</span>
       </label>
     </div>
 
     <!-- 抽選按鈕 -->
-    <button @click="pickRestaurant" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+    <button @click="pickRestaurant" class="draw-btn">
       抽一家店 🍱
     </button>
 
     <!-- 結果顯示 -->
-    <div v-if="picked" class="mt-6 p-4 bg-white rounded shadow">
-      <h2 class="text-xl font-semibold">今天吃：{{ picked.name }}</h2>
-      <p>類型：{{ picked.types.join('、') }}</p>
-      <p>價格：約 {{ picked.price }} 元</p>
-      <p>備註：{{ picked.note }}</p>
-      <a :href="picked.mapUrl" target="_blank" class="text-blue-600 underline">查看地圖</a>
+    <div v-if="picked" class="result-card">
+      <h2 class="result-name">今天吃：{{ picked.name }}</h2>
+      <p class="result-detail">類型：{{ picked.types.join('、') }}</p>
+      <p class="result-detail">價格：約 {{ picked.price }} 元</p>
+      <p class="result-detail">備註：{{ picked.note }}</p>
+      <a :href="picked.mapUrl" target="_blank" class="map-link">查看地圖</a>
     </div>
   </div>
 </template>
@@ -498,8 +498,146 @@ function pickRestaurant() {
 }
 </script>
 
-<style>
-body {
-  font-family: 'Helvetica Neue', sans-serif;
+<style scoped>
+.lunch-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding: 1.2rem;
+}
+
+.page-title {
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Filter chips */
+.filter-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1.2rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+}
+
+.filter-chip:hover {
+  border-color: var(--accent);
+  background: rgba(140, 248, 216, 0.08);
+}
+
+.chip-checkbox {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+}
+
+.chip-label {
+  white-space: nowrap;
+}
+
+/* Draw button */
+.draw-btn {
+  align-self: flex-start;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius-md);
+  border: none;
+  background: linear-gradient(145deg, var(--accent), var(--accent-strong));
+  color: #0a0a0a;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(140, 248, 216, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.draw-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(140, 248, 216, 0.35);
+}
+
+.draw-btn:active {
+  transform: scale(0.98);
+}
+
+/* Result card */
+.result-card {
+  padding: 1.2rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.result-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.result-detail {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.map-link {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-top: 0.3rem;
+}
+
+.map-link:hover {
+  color: var(--accent-strong);
+}
+
+@media (max-width: 640px) {
+  .lunch-picker {
+    padding: 0.8rem;
+  }
+
+  .filter-section {
+    padding: 0.8rem;
+    gap: 0.4rem;
+  }
+
+  .filter-chip {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.84rem;
+  }
+
+  .draw-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .result-card {
+    padding: 1rem;
+  }
+
+  .result-name {
+    font-size: 1.1rem;
+  }
 }
 </style>
