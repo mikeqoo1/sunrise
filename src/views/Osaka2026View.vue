@@ -49,8 +49,6 @@ const quickLinks = [
   { label: "2026 詳細手冊", desc: "每日圖文與票券連結", to: "/2026travel/detail" },
   { label: "行前清單", desc: "打包/證件/藥品", to: "/travellist" },
   { label: "2025 東京手冊", desc: "延續格式參考", to: "/2025travel" },
-  { label: "午餐抽籤", desc: "旅途中隨機決策", to: "/lunch" },
-  { label: "隨機決策器", desc: "人員/景點抽籤", to: "/random" },
   { label: "任天堂搶票倒數", desc: "倒數計時與訂票資訊", to: "/nintendo-ticket" },
 ];
 </script>
