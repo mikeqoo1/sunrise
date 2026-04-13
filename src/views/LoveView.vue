@@ -43,6 +43,7 @@ onMounted(() => {
   min-height: 40vh;
   display: grid;
   place-items: center;
+  padding: 1.2rem;
 }
 
 .love-card {
@@ -50,7 +51,7 @@ onMounted(() => {
   padding: 2rem;
   background: linear-gradient(145deg, rgba(140, 248, 216, 0.08), rgba(125, 240, 255, 0.06));
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
   text-align: center;
 }
@@ -60,6 +61,7 @@ onMounted(() => {
   font-weight: 700;
   letter-spacing: 0.04rem;
   margin-bottom: 1.6rem;
+  color: var(--text-primary);
 }
 
 .avatar-row {
@@ -80,7 +82,7 @@ onMounted(() => {
   width: 140px;
   height: 140px;
   object-fit: contain;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.45));
 }
 
 .avatar span {
@@ -100,5 +102,28 @@ onMounted(() => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+@media (max-width: 640px) {
+  .love-wrapper {
+    padding: 0.8rem;
+  }
+
+  .love-card {
+    padding: 1.4rem;
+  }
+
+  .avatar img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .avatar-row {
+    gap: 1rem;
+  }
+
+  .heart-stack {
+    font-size: 1.4rem;
+  }
 }
 </style>
