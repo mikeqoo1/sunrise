@@ -12,7 +12,7 @@ const itinerary = [
     date: "10/10(六)",
     title: "Day 1 — 抵達大阪",
     items: [
-      "航班：TPE → KIX（班次/時間待填）",
+      "航班：台灣虎航 IT710 TPE → KIX",
       "交通：關西機場 → 南海電鐵特急 → 難波站",
       "住宿報到：心齋橋/難波區域（地址待填）",
       "傍晚散步：道頓堀、戎橋、心齋橋筋商店街",
@@ -92,14 +92,15 @@ const itinerary = [
       "上午：收拾行李、退房",
       "交通：住宿 → 南海電鐵 / JR → 關西機場",
       "機場：退稅、托運確認、登機前最後購物",
-      "航班：KIX → TPE（班次/時間待填）",
+      "航班：星宇航空 JX821 KIX → TPE",
       "備註：注意托運重量限制，液體需托運",
     ],
   },
 ];
 
 const essentialInfo = [
-  { label: "航班", value: "TPE → KIX / KIX → TPE（班次待填）" },
+  { label: "航班（去程）", value: "2026/10/10（六）台灣虎航 IT710 TPE → KIX" },
+  { label: "航班（回程）", value: "2026/10/17（六）星宇航空 JX821 KIX → TPE" },
   { label: "住宿", value: "心齋橋/難波區域（地址待填）" },
   { label: "票券", value: "USJ 門票、Express Pass、任天堂世界預約、任天堂博物館抽選、ICOCA" },
   { label: "APP", value: "USJ 官方、Google Maps、NAVITIME、Klook/KKday 票券檔" },

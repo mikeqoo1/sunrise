@@ -27,14 +27,14 @@ const attractions = [
 ];
 
 const travelDays = [
-  { date: "10/10(六)", title: "抵達大阪", detail: "關西機場 → 住宿報到 → 心齋橋/道頓堀踩點" },
+  { date: "10/10(六)", title: "抵達大阪", detail: "虎航 IT710 抵達關西機場 → 住宿報到 → 心齋橋/道頓堀踩點" },
   { date: "10/11(日)", title: "環球影城 | 第一日", detail: "超級任天堂世界、哈利波特區、園區周邊採買" },
   { date: "10/12(一)", title: "環球影城 | 寶可夢遊行", detail: "寶可夢主題大遊行、限定餐點、園區周邊商品" },
   { date: "10/13(二)", title: "任天堂博物館", detail: "京都宇治任天堂博物館、互動體驗區、紀念商品" },
   { date: "10/14(三)", title: "大阪城 / 天王寺", detail: "天守閣散步、四天王寺、阿倍野展望台" },
   { date: "10/15(四)", title: "奈良半日 / 京都黃昏", detail: "奈良公園餵鹿、京都河原町逛街" },
   { date: "10/16(五)", title: "大阪自由活動", detail: "採買日、道頓堀美食巡禮、相撲火鍋晚餐" },
-  { date: "10/17(六)", title: "返台", detail: "收拾行李、關西機場回程" },
+  { date: "10/17(六)", title: "返台", detail: "收拾行李、星宇 JX821 返台" },
 ];
 
 const prepTasks = [
@@ -48,6 +48,7 @@ const prepTasks = [
 const quickLinks = [
   { label: "2026 詳細手冊", desc: "每日圖文與票券連結", to: "/2026travel/detail" },
   { label: "行前清單", desc: "打包/證件/藥品", to: "/travellist" },
+  { label: "大阪購物清單", desc: "籃球/泳衣/潮流/藥粧清單", to: "/2026shopping" },
   { label: "2025 東京手冊", desc: "延續格式參考", to: "/2025travel" },
   { label: "任天堂搶票倒數", desc: "倒數計時與訂票資訊", to: "/nintendo-ticket" },
 ];
