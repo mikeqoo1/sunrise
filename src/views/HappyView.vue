@@ -1,15 +1,29 @@
 <template>
-  <div class="viewer-container">
-    <!-- 新增這段 -->
-    <div class="player-description">
-      <div>20號 - 快樂阿奎：快樂龍 靈魂人物，核心角色</div>
-      <div>10號 - 快樂阿源：迅猛龍 切入破壞，輕鬆上籃</div>
-      <div>18號 - 快樂阿哲：偷蛋龍 抄截神偷，快攻高手</div>
-      <div>99號 - 快樂阿昌：護城龍 防守大鎖，可以防住所有的攻擊</div>
-      <div>23號 - 快樂阿震：圈圈熊 雖然面目猙獰，但在舔食最喜歡的蜜時，會開心到忍不住露出笑容</div>
-    </div>
+  <div class="happy">
+    <section class="hero-card">
+      <div class="pill">快樂龍戰隊</div>
+      <h1>快樂龍戰隊成員</h1>
+    </section>
+
+    <!-- 球員描述 -->
+    <section class="card player-description">
+      <header class="card-head">
+        <div>
+          <p class="eyebrow">成員介紹</p>
+          <h2>球員資訊</h2>
+        </div>
+      </header>
+      <div class="player-list">
+        <div class="player-item">20號 - 快樂阿奎：快樂龍 靈魂人物，核心角色</div>
+        <div class="player-item">10號 - 快樂阿源：迅猛龍 切入破壞，輕鬆上籃</div>
+        <div class="player-item">18號 - 快樂阿哲：偷蛋龍 抄截神偷，快攻高手</div>
+        <div class="player-item">99號 - 快樂阿昌：護城龍 防守大鎖，可以防住所有的攻擊</div>
+        <div class="player-item">23號 - 快樂阿震：圈圈熊 雖然面目猙獰，但在舔食最喜歡的蜜時，會開心到忍不住露出笑容</div>
+      </div>
+    </section>
+
     <!-- 深色樣式 -->
-    <div class="image-block">
+    <section class="card image-block">
       <div class="floating-label">快樂龍戰隊・深色樣式</div>
       <div class="photo-wrapper" @wheel.prevent="onWheelDark" @mousedown="onMouseDownDark" @mousemove="onMouseMoveDark"
         @mouseup="onMouseUpDark" @mouseleave="onMouseUpDark">
@@ -17,10 +31,10 @@
           transform: `translate(${darkPosition.x}px, ${darkPosition.y}px) scale(${darkScale})`
         }" draggable="false" />
       </div>
-    </div>
+    </section>
 
     <!-- 淺色樣式 -->
-    <div class="image-block">
+    <section class="card image-block">
       <div class="floating-label">快樂龍戰隊・淺色樣式</div>
       <div class="photo-wrapper" @wheel.prevent="onWheelLight" @mousedown="onMouseDownLight"
         @mousemove="onMouseMoveLight" @mouseup="onMouseUpLight" @mouseleave="onMouseUpLight">
@@ -28,7 +42,7 @@
           transform: `translate(${lightPosition.x}px, ${lightPosition.y}px) scale(${lightScale})`
         }" draggable="false" />
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
@@ -89,31 +103,96 @@ function onMouseUpLight() {
 </script>
 
 <style scoped>
-.viewer-container {
+.happy {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 1.2rem;
   max-width: 1000px;
   margin: auto;
-  padding: 30px 0;
+}
+
+.hero-card {
+  padding: 1.6rem;
+  background: linear-gradient(135deg, rgba(140, 248, 216, 0.14), rgba(125, 240, 255, 0.12));
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-soft);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.32rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.hero-card h1 {
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  margin: 0.4rem 0;
+  font-weight: 700;
+}
+
+.card {
+  padding: 1.2rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+.card-head h2 {
+  font-weight: 700;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.player-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.player-item {
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 .image-block {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.6rem;
 }
 
 .floating-label {
-  background: rgba(0, 0, 0, 0.85);
-  color: #fff;
-  font-weight: bold;
-  font-size: 16px;
-  padding: 6px 12px;
-  border-radius: 6px;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1rem;
   user-select: none;
   pointer-events: none;
-  text-align: center;
 }
 
 .photo-wrapper {
@@ -121,8 +200,9 @@ function onMouseUpLight() {
   height: 60vh;
   position: relative;
   overflow: hidden;
-  border: 1px solid #ccc;
-  background: #f8f8f8;
+  border: 1px solid var(--border);
+  background: var(--surface-strong);
+  border-radius: var(--radius-md);
   cursor: grab;
 }
 
@@ -141,14 +221,30 @@ function onMouseUpLight() {
   z-index: 1;
 }
 
-.player-description {
-  margin-top: 8px;
-  background: #f1f1f1;
-  padding: 10px 12px;
-  border-radius: 6px;
-  font-size: 14px;
-  color: #333;
-  line-height: 1.6;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+@media (max-width: 640px) {
+  .happy {
+    padding: 0 0.4rem;
+  }
+
+  .hero-card {
+    padding: 1.2rem;
+  }
+
+  .hero-card h1 {
+    font-size: 1.4rem;
+  }
+
+  .card {
+    padding: 0.8rem;
+  }
+
+  .player-item {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.6rem;
+  }
+
+  .photo-wrapper {
+    height: 45vh;
+  }
 }
 </style>

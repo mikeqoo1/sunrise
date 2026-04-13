@@ -21,14 +21,14 @@ const markdownContent = ref(`
 
 | 日期 | 行程 |
 | -------- | -------- |
-| 05/10(六) | 到東京✈ / 神田祭 ⛩️| 
-| 05/11(日) | 神田祭 ⛩️/ 橫濱![pokemon_ball](/tokyo/寶貝球.png) | 
-| 05/12(一) | 澀谷![pokemon_ball](/tokyo/寶貝球.png)/ 新宿(六歌仙)放生🥩 | 
-| 05/13(二) | 哈利波特🧙 / 池袋![pokemon_ball](/tokyo/寶貝球.png) | 
-| 05/14(三) | 千客萬來🤖 / 日本橋![pokemon_ball](/tokyo/寶貝球.png)/ 晴空塔![pokemon_ball](/tokyo/寶貝球.png) | 
+| 05/10(六) | 到東京✈ / 神田祭 ⛩️|
+| 05/11(日) | 神田祭 ⛩️/ 橫濱![pokemon_ball](/tokyo/寶貝球.png) |
+| 05/12(一) | 澀谷![pokemon_ball](/tokyo/寶貝球.png)/ 新宿(六歌仙)放生🥩 |
+| 05/13(二) | 哈利波特🧙 / 池袋![pokemon_ball](/tokyo/寶貝球.png) |
+| 05/14(三) | 千客萬來🤖 / 日本橋![pokemon_ball](/tokyo/寶貝球.png)/ 晴空塔![pokemon_ball](/tokyo/寶貝球.png) |
 | 05/15(四) | 上野🦖 / 東京車站🍜 |
-| 05/16(五) | 龜有 / 淺草三社祭⛩️ | 
-| 05/17(六) | 搭飛機回台灣✈ | 
+| 05/16(五) | 龜有 / 淺草三社祭⛩️ |
+| 05/17(六) | 搭飛機回台灣✈ |
 
 # 其他連結
 
@@ -55,7 +55,7 @@ const markdownContent = ref(`
 TR876
 桃園國際機場(第一航廈)
 
-06:40➔日本成田國際機場(第一航廈)10:45 
+06:40➔日本成田國際機場(第一航廈)10:45
 
 在機場搭Access特快(橘色車車)
 
@@ -80,7 +80,7 @@ TR876
 ![](/tokyo/第1天秋葉原車站地圖.png)
 
 看完祭典可以先回民宿休息 或是 逛秋葉原
- 
+
 記得買水!!
 ___
 
@@ -301,82 +301,246 @@ const htmlContent = computed(() => marked(markdownContent.value));
 </script>
 
 <template>
-  <div class="container">
-    <div class="cover-image">
-      <img src="/2025封面.png" alt="封面图" />
-    </div>
-    <div class="markdown-content" v-html="htmlContent"></div>
+  <div class="travel">
+    <section class="hero-card">
+      <div class="pill">2025 東京旅行手冊</div>
+      <h1>快樂東京團</h1>
+      <p class="lede">05/10 - 05/17 八天七夜的完整行程規劃</p>
+    </section>
+
+    <section class="card">
+      <div class="cover-image">
+        <img src="/2025封面.png" alt="封面图" />
+      </div>
+      <div class="markdown-content" v-html="htmlContent"></div>
+    </section>
   </div>
 </template>
 
-<style>
-.container {
+<style scoped>
+.travel {
   display: flex;
   flex-direction: column;
-  /* 将内容垂直排列 */
+  gap: 1.2rem;
+}
+
+.hero-card {
+  padding: 1.6rem;
+  background: linear-gradient(135deg, rgba(140, 248, 216, 0.14), rgba(125, 240, 255, 0.12));
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-soft);
+}
+
+.pill {
+  display: inline-flex;
   align-items: center;
-  /* 水平居中 */
-  padding: 20px;
+  gap: 0.4rem;
+  padding: 0.32rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.hero-card h1 {
+  font-size: clamp(1.6rem, 3vw, 2.3rem);
+  margin: 0.4rem 0;
+  font-weight: 700;
+}
+
+.lede {
+  color: var(--text-muted);
+  max-width: 720px;
+}
+
+.card {
+  padding: 1.2rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .cover-image img {
   max-width: 88%;
-  /* 设置图片宽度为容器的最大宽度 */
   height: auto;
-  /* 保持纵横比 */
-  margin-bottom: 20px;
-  /* 增加图片和内容之间的间距 */
+  margin-bottom: 1.2rem;
+  border-radius: var(--radius-md);
 }
 
 .markdown-content {
   width: 100%;
-  /* 确保内容区域填满容器 */
   max-width: 800px;
-  /* 限制内容区域的最大宽度 */
-  padding: 20px;
+  padding: 1.2rem;
 }
 
-/* 其他样式保持不变 */
-.markdown-content table {
+/* Markdown rendered content — use :deep() for v-html */
+.markdown-content :deep(h1) {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 1.5rem 0 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.markdown-content :deep(h2) {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 1.2rem 0 0.6rem;
+}
+
+.markdown-content :deep(h3) {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--accent-strong);
+  margin: 1rem 0 0.5rem;
+}
+
+.markdown-content :deep(h4) {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0.8rem 0 0.4rem;
+}
+
+.markdown-content :deep(p) {
+  color: var(--text-primary);
+  line-height: 1.7;
+  margin: 0.5rem 0;
+}
+
+.markdown-content :deep(strong) {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.markdown-content :deep(a) {
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+}
+
+.markdown-content :deep(a:hover) {
+  color: var(--accent);
+}
+
+.markdown-content :deep(img) {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  margin: 0.8rem 0;
+}
+
+.markdown-content :deep(table) {
   border-collapse: collapse;
   width: 100%;
-  margin: 20px 0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 1.2rem 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
 }
 
-.markdown-content th,
-.markdown-content td {
-  border: 2px solid #7f8b73;
-  padding: 12px;
+.markdown-content :deep(th),
+.markdown-content :deep(td) {
+  border: 1px solid var(--border);
+  padding: 0.75rem;
   text-align: left;
-  font-size: 16px;
+  font-size: 0.95rem;
 }
 
-.markdown-content th {
-  background-color: #aee0e6;
-  font-weight: bold;
-  color: #ff2f00;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+.markdown-content :deep(th) {
+  background: var(--surface-strong);
+  font-weight: 700;
+  color: var(--accent);
 }
 
-.markdown-content td {
-  color: #289393;
+.markdown-content :deep(td) {
+  color: var(--text-primary);
 }
 
-.markdown-content tr:nth-child(even) {
-  background-color: #f9f9f9;
+.markdown-content :deep(tr:nth-child(even)) {
+  background: rgba(255, 255, 255, 0.02);
 }
 
-.markdown-content tr:hover {
-  background-color: #f1f1f1;
+.markdown-content :deep(tr:hover) {
+  background: rgba(255, 255, 255, 0.04);
   transition: background-color 0.3s ease;
 }
 
-@media (max-width: 600px) {
-  .markdown-content table {
+.markdown-content :deep(ul),
+.markdown-content :deep(ol) {
+  color: var(--text-primary);
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.markdown-content :deep(li) {
+  margin: 0.3rem 0;
+  color: var(--text-primary);
+}
+
+.markdown-content :deep(hr) {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.5rem 0;
+}
+
+.markdown-content :deep(blockquote) {
+  border-left: 3px solid var(--accent);
+  padding-left: 1rem;
+  margin: 0.8rem 0;
+  color: var(--text-muted);
+}
+
+@media (max-width: 640px) {
+  .hero-card {
+    padding: 1.2rem;
+  }
+
+  .hero-card h1 {
+    font-size: 1.4rem;
+  }
+
+  .card {
+    padding: 0.8rem;
+  }
+
+  .cover-image img {
+    max-width: 100%;
+  }
+
+  .markdown-content {
+    padding: 0.6rem;
+  }
+
+  .markdown-content :deep(h1) {
+    font-size: 1.4rem;
+  }
+
+  .markdown-content :deep(h2) {
+    font-size: 1.15rem;
+  }
+
+  .markdown-content :deep(table) {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
+  }
+
+  .markdown-content :deep(th),
+  .markdown-content :deep(td) {
+    padding: 0.5rem;
+    font-size: 0.85rem;
   }
 }
 </style>
