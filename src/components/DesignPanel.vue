@@ -17,29 +17,87 @@ const pics: Pic[] = [
 </script>
 
 <template>
-    <section class="design-panel space-y-4">
-        <h1 class="text-2xl font-bold mb-4 text-center">球衣設計展示</h1>
+    <section class="design-panel">
+        <h1 class="page-title">球衣設計展示</h1>
 
         <!-- 圖片牆 -->
-        <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center">
-            <div v-for="p in pics" :key="p.src"
-                class="flex flex-col items-center bg-white/5 rounded-2xl p-4 shadow hover:shadow-xl transition">
-                <img :src="p.src" :alt="p.name" class="thumb" :title="p.name" />
-                <span class="mt-2 text-sm opacity-80">{{ p.name }}</span>
+        <div class="gallery-grid">
+            <div v-for="pic in pics" :key="pic.src" class="gallery-card">
+                <img :src="pic.src" :alt="pic.name" class="thumb" :title="pic.name" />
+                <span class="card-label">{{ pic.name }}</span>
             </div>
         </div>
     </section>
 </template>
 
 <style scoped>
-.design-panel .thumb {
-    width: 600px !important;
-    height: 600px !important;
-    max-width: 600px !important;
-    max-height: 600px !important;
-    object-fit: contain !important;
-    display: block !important;
-    border-radius: 1rem;
-    background-color: #111;
+.design-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.page-title {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 700;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    justify-items: center;
+}
+
+.gallery-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.2rem;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    width: 100%;
+    max-width: 600px;
+}
+
+.gallery-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+}
+
+.thumb {
+    width: 100%;
+    max-width: 560px;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    display: block;
+    border-radius: var(--radius-md);
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.card-label {
+    margin-top: 0.6rem;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+}
+
+@media (max-width: 640px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .gallery-card {
+        padding: 0.8rem;
+    }
+
+    .thumb {
+        max-width: 100%;
+    }
 }
 </style>

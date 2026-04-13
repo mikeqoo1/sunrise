@@ -1,11 +1,15 @@
 <template>
-    <div class="jersey-grid">
-        <div v-for="(item, index) in jerseys" :key="index" class="jersey-panel">
-            <h2>{{ item.title }}</h2>
-            <img :src="item.img" :alt="item.title" />
-            <button @click="vote(index)">投這一件</button>
-            <p class="vote-count">🗳️ 得票數：<strong>{{ item.voteCount }}</strong></p>
-            <p v-if="item.voted" class="voted-message">✅ 已投票，感謝支持！</p>
+    <div class="jersey-vote">
+        <div class="jersey-grid">
+            <div v-for="(item, index) in jerseys" :key="index" class="jersey-panel">
+                <h2 class="jersey-title">{{ item.title }}</h2>
+                <img :src="item.img" :alt="item.title" class="jersey-img" />
+                <button class="vote-btn" @click="vote(index)" :disabled="item.voted">
+                    {{ item.voted ? '已投票' : '投這一件' }}
+                </button>
+                <p class="vote-count">得票數：<strong>{{ item.voteCount }}</strong></p>
+                <p v-if="item.voted" class="voted-message">感謝支持！</p>
+            </div>
         </div>
     </div>
 </template>
@@ -76,73 +80,118 @@ loadVotes()
 </script>
 
 <style scoped>
+.jersey-vote {
+    padding: 0.4rem;
+}
+
 .jersey-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 24px;
-    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    justify-items: center;
 }
 
 .jersey-panel {
     text-align: center;
-    width: 500px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    background: #f9f9f9;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 500px;
+    padding: 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-img {
+.jersey-panel:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+}
+
+.jersey-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    padding: 0.6rem 0.8rem;
+    border-radius: var(--radius-md);
+    background: rgba(140, 248, 216, 0.08);
+    border: 1px solid rgba(140, 248, 216, 0.15);
+}
+
+.jersey-img {
     max-width: 100%;
     height: auto;
-    border: 2px solid #333;
-    margin-bottom: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: rgba(0, 0, 0, 0.2);
 }
 
-button {
-    padding: 8px 16px;
-    font-size: 16px;
-    background: #007bff;
-    color: white;
+.vote-btn {
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background: linear-gradient(145deg, var(--accent), var(--accent-strong));
+    color: #0a0a0a;
     border: none;
-    border-radius: 6px;
+    border-radius: var(--radius-md);
     cursor: pointer;
+    box-shadow: 0 8px 24px rgba(140, 248, 216, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-button:hover {
-    background: #0056b3;
+.vote-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(140, 248, 216, 0.35);
+}
+
+.vote-btn:disabled {
+    background: var(--surface-strong);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    box-shadow: none;
 }
 
 .vote-count {
-    background-color: #e7f1ff;
-    color: #084298;
-    padding: 6px 10px;
-    border-radius: 6px;
+    padding: 0.5rem 0.8rem;
+    border-radius: var(--radius-md);
+    background: rgba(140, 248, 216, 0.06);
+    border: 1px solid rgba(140, 248, 216, 0.12);
+    color: var(--text-primary);
+    font-size: 0.92rem;
     font-weight: 600;
-    font-size: 14px;
-    margin-top: 6px;
-    box-shadow: inset 0 0 0 1px #b6d4fe;
+}
+
+.vote-count strong {
+    color: var(--accent);
+    font-weight: 700;
 }
 
 .voted-message {
-    background-color: #d1e7dd;
-    color: #0f5132;
-    padding: 6px 10px;
-    border-radius: 6px;
-    font-weight: bold;
-    margin-top: 6px;
+    padding: 0.5rem 0.8rem;
+    border-radius: var(--radius-md);
+    background: rgba(140, 248, 216, 0.1);
+    border: 1px solid rgba(140, 248, 216, 0.2);
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.9rem;
 }
 
-.jersey-panel h2 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #222;
-    background: #eaf4ff;
-    padding: 8px 12px;
-    border-radius: 6px;
-    box-shadow: inset 0 0 0 1px #b6d4fe;
+@media (max-width: 640px) {
+    .jersey-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .jersey-panel {
+        padding: 1rem;
+        max-width: 100%;
+    }
+
+    .vote-btn {
+        width: 100%;
+    }
 }
 </style>
