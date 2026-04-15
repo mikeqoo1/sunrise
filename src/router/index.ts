@@ -17,6 +17,7 @@ import Osaka2026DetailView from '@/views/Osaka2026DetailView.vue';
 import VietnamDaigouView from '@/views/VietnamDaigouView.vue';
 import OsakaShoppingView from '@/views/OsakaShoppingView.vue';
 import NintendoTicketView from '@/views/NintendoTicketView.vue';
+import OsakaHotelView from '@/views/OsakaHotelView.vue';
 
 const router = createRouter({
   history: createWebHashHistory(), // 這裡改掉
@@ -118,6 +119,11 @@ const router = createRouter({
       path: "/nintendo-ticket",
       name: "nintendoTicket",
       component: NintendoTicketView,
+    },
+    {
+      path: "/2026hotel",
+      name: "osakaHotel",
+      component: OsakaHotelView,
     },
   ],
 });
