@@ -24,6 +24,16 @@ const attractions = [
     title: "相撲火鍋",
     desc: "大阪道地相撲火鍋（ちゃんこ鍋），滿滿的雞肉丸、蔬菜與濃厚高湯，力士的元氣料理大家一起吃！",
   },
+  {
+    icon: "🦖",
+    title: "哥吉拉御守",
+    desc: "大阪限定哥吉拉御守！特定神社或周邊商店才有，數量有限，記得早點去搶。",
+  },
+  {
+    icon: "🚂",
+    title: "和歌山一日遊",
+    desc: "搭 JR 南方號前進和歌山，遊覽和歌山城、港町、貓站長電車，在地和歌山拉麵必吃！",
+  },
 ];
 
 const travelDays = [
@@ -43,6 +53,21 @@ const prepTasks = [
   { title: "交通票券", detail: "關西周遊券 vs ICOCA；關空到市區南海/JR 路線" },
   { title: "住宿選擇", detail: "環球影城周邊一晚 + 難波/心齋橋市區住宿" },
   { title: "餐廳預約", detail: "相撲火鍋、燒肉、蟹道樂或壽司需事先預約" },
+  { title: "哥吉拉御守採買", detail: "確認大阪哥吉拉御守販售地點與庫存，數量限制要早點去" },
+  { title: "Aktr sports supply", detail: "好喝咖啡 + 籃球東西，確認店鋪地址與營業時間再排入行程" },
+];
+
+const meatLinks = [
+  {
+    label: "大阪燒肉懶人包",
+    note: "Klook 精選燒肉餐廳推薦",
+    url: "https://www.klook.com/zh-TW/blog/osaka-yakiniku/",
+  },
+  {
+    label: "大阪燒肉完整指南",
+    note: "Tasting Japan 深度介紹",
+    url: "https://tasting-japan.com/archives/5763",
+  },
 ];
 
 const quickLinks = [
@@ -148,6 +173,29 @@ const quickLinks = [
             <p class="resource-desc">{{ link.desc }}</p>
             <span class="arrow">開啟</span>
           </RouterLink>
+        </div>
+      </article>
+
+      <article class="card meat">
+        <header class="card-head">
+          <div>
+            <p class="eyebrow">大阪肉肉</p>
+            <h2>燒肉推薦</h2>
+          </div>
+        </header>
+        <div class="resource-grid">
+          <a
+            v-for="link in meatLinks"
+            :key="link.url"
+            class="resource-card"
+            :href="link.url"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="resource-title">{{ link.label }}</div>
+            <p class="resource-desc">{{ link.note }}</p>
+            <span class="arrow">前往 →</span>
+          </a>
         </div>
       </article>
     </section>
