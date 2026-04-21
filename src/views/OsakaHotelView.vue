@@ -208,6 +208,17 @@ const areas: Area[] = [
   },
 ]
 
+const tripConfig = {
+  checkIn: '2026-10-10',
+  checkOut: '2026-10-17',
+  adults: 4,
+  get nights() {
+    const a = new Date(this.checkIn + 'T00:00:00')
+    const b = new Date(this.checkOut + 'T00:00:00')
+    return Math.round((b.getTime() - a.getTime()) / 86_400_000)
+  },
+}
+
 const totalListings = areas.reduce((sum, a) => sum + a.listings.length, 0)
 
 function starsDisplay(rating: number | null): string {
@@ -218,6 +229,24 @@ function starsDisplay(rating: number | null): string {
 function mapUrl(lat: number, lng: number): string {
   return `https://www.google.com/maps?q=${lat},${lng}`
 }
+
+function bookingUrl(listing: Listing): string {
+  const params = new URLSearchParams({
+    check_in: tripConfig.checkIn,
+    check_out: tripConfig.checkOut,
+    adults: String(tripConfig.adults),
+  })
+  return `${listing.url}?${params.toString()}`
+}
+
+function formatDate(dateStr: string): string {
+  const d = new Date(dateStr + 'T00:00:00')
+  const days = ['日', '一', '二', '三', '四', '五', '六']
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${y}/${m}/${day}（${days[d.getDay()]}）`
+}
 </script>
 
 <template>
@@ -227,21 +256,21 @@ function mapUrl(lat: number, lng: number): string {
       <h1>住宿選擇整理</h1>
       <p class="lede">
         大阪之旅 {{ totalListings }} 間候選住宿，依區域分類整理。入住日期
-        2026/10/10 ~ 10/17（7 晚），4 人同行。點擊卡片可前往 Airbnb
+        {{ formatDate(tripConfig.checkIn) }} ~ {{ formatDate(tripConfig.checkOut) }}（{{ tripConfig.nights }} 晚），{{ tripConfig.adults }} 人同行。點擊「查詢空房＆價格」可前往 Airbnb
         查看最新價格與空房。
       </p>
       <div class="meta">
         <div class="meta-item">
           <span class="meta-label">入住</span>
-          <span class="meta-value">2026/10/10（六）</span>
+          <span class="meta-value">{{ formatDate(tripConfig.checkIn) }}</span>
         </div>
         <div class="meta-item">
           <span class="meta-label">退房</span>
-          <span class="meta-value">2026/10/17（六）</span>
+          <span class="meta-value">{{ formatDate(tripConfig.checkOut) }}</span>
         </div>
         <div class="meta-item">
           <span class="meta-label">人數</span>
-          <span class="meta-value">4 人</span>
+          <span class="meta-value">{{ tripConfig.adults }} 人</span>
         </div>
         <div class="meta-item">
           <span class="meta-label">候選</span>
@@ -272,12 +301,9 @@ function mapUrl(lat: number, lng: number): string {
       </div>
 
       <div class="listing-grid">
-        <a
+        <div
           v-for="listing in area.listings"
           :key="listing.id"
-          :href="`${listing.url}?adults=4&check_in=2026-10-10&check_out=2026-10-17`"
-          target="_blank"
-          rel="noopener"
           class="listing-card"
         >
           <div class="listing-img-wrap">
@@ -298,19 +324,24 @@ function mapUrl(lat: number, lng: number): string {
             <p class="listing-area">{{ listing.area }}</p>
             <p class="listing-desc">{{ listing.desc }}</p>
             <div class="listing-actions">
-              <span class="action-link" :style="{ color: area.color }">查看 Airbnb</span>
+              <a
+                :href="bookingUrl(listing)"
+                target="_blank"
+                rel="noopener"
+                class="action-link booking-btn"
+                :style="{ background: area.color }"
+              >查詢空房＆價格</a>
               <a
                 class="action-link map-link"
                 :href="mapUrl(listing.lat, listing.lng)"
                 target="_blank"
                 rel="noopener"
-                @click.stop
               >
                 Google Map
               </a>
             </div>
           </div>
-        </a>
+        </div>
       </div>
     </section>
 
@@ -460,17 +491,14 @@ function mapUrl(lat: number, lng: number): string {
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.03);
   overflow: hidden;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
 }
 
 .listing-card:hover {
-  transform: translateY(-4px);
   border-color: var(--accent);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 .listing-img-wrap {
@@ -565,6 +593,24 @@ function mapUrl(lat: number, lng: number): string {
 
 .map-link:hover {
   color: var(--text-primary) !important;
+}
+
+.booking-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: #0a0a0a !important;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.booking-btn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
 }
 
 /* Note card */
