@@ -11,248 +11,51 @@ interface Listing {
   maxGuests: number
   image: string
   desc: string
+  highlights: string[]
   lat: number
   lng: number
   url: string
+  estPrice: string
 }
 
-interface Area {
-  name: string
-  icon: string
-  color: string
-  desc: string
-  attractions: string[]
-  listings: Listing[]
-}
-
-const areas: Area[] = [
+const listings: Listing[] = [
   {
-    name: '環球影城/西九條 區',
-    icon: '🎢',
-    color: '#ff9966',
-    desc: '距離 USJ 最近，適合連兩天玩環球影城的行程安排',
-    attractions: ['環球影城 (USJ)', '天保山摩天輪', '海遊館', '2025 世博紀念公園'],
-    listings: [
-      {
-        id: '1402843086264680755',
-        name: 'USJ兩站｜門口即公園｜溫馨獨棟',
-        area: '此花區',
-        rating: 4.97,
-        reviews: 35,
-        bedrooms: 3,
-        beds: 4,
-        bathrooms: '2',
-        maxGuests: 4,
-        image: 'https://a0.muscache.com/im/pictures/hosting/Hosting-1402843086264680755/original/4f1abbec-73de-4844-a947-c0e50fc40067.jpeg?im_w=720',
-        desc: '關西機場電車直達，距 USJ 僅 2 站。三層獨棟，一樓長輩房含衛浴，頂樓大露台。附近有 Life 超市（營業至凌晨）。',
-        lat: 34.68284,
-        lng: 135.45923,
-        url: 'https://www.airbnb.com.tw/rooms/1402843086264680755',
-      },
-      {
-        id: '1419357307031751742',
-        name: '西九條 Maison Le Bleu 千草｜地中海風別墅',
-        area: '此花區',
-        rating: 4.96,
-        reviews: 23,
-        bedrooms: 3,
-        beds: 5,
-        bathrooms: '2',
-        maxGuests: 5,
-        image: 'https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQxOTM1NzMwNzAzMTc1MTc0Mg==/original/c0fd2046-8b56-420c-b0cc-81ae090371f4.jpeg?im_w=720',
-        desc: '地中海風格三層獨棟別墅，約 80 平方米。鄰近西九條上公園，世博、USJ、梅田、難波電車直達。設有浴缸。',
-        lat: 34.6818,
-        lng: 135.4698,
-        url: 'https://www.airbnb.com.tw/rooms/1419357307031751742',
-      },
-      {
-        id: '1252602666981252423',
-        name: '西九條站步行5分｜USJ電車5分｜整棟出租',
-        area: '此花區',
-        rating: 4.92,
-        reviews: 60,
-        bedrooms: 2,
-        beds: 4,
-        bathrooms: '1',
-        maxGuests: 6,
-        image: 'https://a0.muscache.com/im/pictures/miso/Hosting-1252602666981252423/original/dedd5948-3599-4455-91d0-21a1728e926f.jpeg?im_w=720',
-        desc: '2024 年 10 月新開幕。時尚設計，滾筒洗衣機（含烘乾）、3 台空調、Netflix 電視、完整廚房設備。',
-        lat: 34.68254,
-        lng: 135.47061,
-        url: 'https://www.airbnb.com.tw/rooms/1252602666981252423',
-      },
-    ],
+    id: '1597546007884684618',
+    name: '松Inn｜天下茶屋6分｜花園町站直達難波/梅田',
+    area: '西成區（天下茶屋／花園町）',
+    rating: 5.0,
+    reviews: 6,
+    bedrooms: 3,
+    beds: 4,
+    bathrooms: '2',
+    maxGuests: 8,
+    image:
+      'https://a0.muscache.com/im/pictures/hosting/Hosting-1597546007884684618/original/9cfd1d3f-4232-4371-b965-f4d687f83a4d.jpeg?im_w=720',
+    desc: '三層獨棟新一戶建，88 ㎡，3 臥室 4 床雙衛浴。南海線天下茶屋站步行 6 分（直達關西機場 25 分），地鐵四橋線花園町站 7 分，距難波 5 分鐘、梅田 15 分鐘。住宅區內鬧中取靜，超市、藥妝、便利商店齊全。',
+    highlights: ['直達關西機場 25 分', '南海線+地鐵雙站', '一樓長輩房', '88 ㎡ 三層獨棟'],
+    lat: 34.64071,
+    lng: 135.49588,
+    url: 'https://www.airbnb.com.tw/rooms/1597546007884684618',
+    estPrice: '約 NT$ 35,000 / 7 晚',
   },
   {
-    name: '野田/福島 區',
-    icon: '🚉',
-    color: '#7df0ff',
-    desc: '交通樞紐地段，前往大阪站、USJ、難波都很方便',
-    attractions: ['大阪站/梅田', '空中庭園展望台', '中之島公園', 'USJ 電車約 12 分'],
-    listings: [
-      {
-        id: '851024529727089380',
-        name: '大阪站8分｜USJ 11分｜4臥室安靜住宅',
-        area: '福島區',
-        rating: 5.0,
-        reviews: 1,
-        bedrooms: 4,
-        beds: 5,
-        bathrooms: '1',
-        maxGuests: 8,
-        image: 'https://a0.muscache.com/im/pictures/hosting/Hosting-851024529727089380/original/db325c7a-f3ff-4380-bb22-ca88b5d7b288.jpeg?im_w=720',
-        desc: '野田站/玉川站步行 3 分鐘。靠近超市和便利商店，環境安靜。前往大阪站 9 分、難波 16 分、USJ 12 分。',
-        lat: 34.68859,
-        lng: 135.4764,
-        url: 'https://www.airbnb.com.tw/rooms/851024529727089380',
-      },
-      {
-        id: '1237990081935362802',
-        name: '大阪站5分｜USJ 15分｜野田站2分｜4臥室',
-        area: '福島區',
-        rating: 4.94,
-        reviews: 66,
-        bedrooms: 4,
-        beds: 6,
-        bathrooms: '1.5',
-        maxGuests: 8,
-        image: 'https://a0.muscache.com/im/pictures/hosting/Hosting-1237990081935362802/original/d1e327a9-40f7-4e9c-bf27-0e19341dc188.jpeg?im_w=720',
-        desc: '市中心獨棟，步行範圍有燒鳥店、烤肉店、麵包房、日式咖啡廳。附近有菜市場，適合自炊體驗大阪生活。',
-        lat: 34.6915,
-        lng: 135.4764,
-        url: 'https://www.airbnb.com.tw/rooms/1237990081935362802',
-      },
-    ],
-  },
-  {
-    name: '市中心/難波 區',
-    icon: '🏙️',
-    color: '#ffd700',
-    desc: '逛街美食首選，道頓堀、心齋橋、新世界都在步行範圍',
-    attractions: ['道頓堀', '心齋橋筋商店街', '通天閣/新世界', '黑門市場', '大阪巨蛋'],
-    listings: [
-      {
-        id: '1401748623627579133',
-        name: '和の家・鶴鳴｜市中心獨棟｜2站到難波',
-        area: '大國町',
-        rating: 4.89,
-        reviews: 27,
-        bedrooms: 3,
-        beds: 5,
-        bathrooms: '1.5',
-        maxGuests: 8,
-        image: 'https://a0.muscache.com/im/pictures/hosting/Hosting-1401748623627579133/original/865a425e-9c45-4164-b5d7-2e72502fa1f1.png?im_w=720',
-        desc: '鶴見橋商店街旁，兩年內新屋。三層獨棟，附車庫。品牌床墊、完整廚房。地鐵站步行 5 分鐘，2 站到難波。',
-        lat: 34.647,
-        lng: 135.4945,
-        url: 'https://www.airbnb.com.tw/rooms/1401748623627579133',
-      },
-      {
-        id: '1528311482366788358',
-        name: '動物園前站2分｜難波直達5分｜整棟包棟',
-        area: '新世界',
-        rating: 5.0,
-        reviews: 12,
-        bedrooms: 3,
-        beds: 5,
-        bathrooms: '1.5',
-        maxGuests: 5,
-        image: 'https://a0.muscache.com/im/pictures/hosting/Hosting-1528311482366788358/original/e124bc4a-4725-4e65-a4da-abd84cc10847.jpeg?im_w=720',
-        desc: '步行可到 Don Quijote、新世界、通天閣、天王寺。關西機場約 60 分鐘直達。附近有串炸店、章魚燒、咖啡館。',
-        lat: 34.6471,
-        lng: 135.5051,
-        url: 'https://www.airbnb.com.tw/rooms/1528311482366788358',
-      },
-      {
-        id: '1635361989380289039',
-        name: '潁澤軒｜大阪巨蛋旁｜大正站步行5分',
-        area: '大正區',
-        rating: 5.0,
-        reviews: 2,
-        bedrooms: 3,
-        beds: 6,
-        bathrooms: '2',
-        maxGuests: 7,
-        image: 'https://a0.muscache.com/im/pictures/hosting/Hosting-1635361989380289039/original/de54b6b5-af43-4159-bd66-0b0818e93ca5.jpeg?im_w=720',
-        desc: '三室一廳，雙衛浴雙淋浴。JR/地鐵大正站步行 4-5 分鐘，可直達關西機場。緊鄰大阪巨蛋，乾濕分離設計。',
-        lat: 34.66665,
-        lng: 135.47587,
-        url: 'https://www.airbnb.com.tw/rooms/1635361989380289039',
-      },
-      {
-        id: '1380143419969759705',
-        name: 'Cu 道頓堀 1號店Ⅰ｜日本橋站9分｜黑門＆心齋橋步行圈',
-        area: '中央區',
-        rating: 4.71,
-        reviews: 224,
-        bedrooms: 2,
-        beds: 3,
-        bathrooms: '1',
-        maxGuests: 4,
-        image: 'https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTM4MDE0MzQxOTk2OTc1OTcwNQ==/original/bfffc97e-0f75-479f-83e5-795fdfae33ad.jpeg?im_w=720',
-        desc: '大阪市中央區，步行 9 分鐘抵日本橋站、約 10 分鐘到心齋橋商店街。鄰近道頓堀、美國村、黑門市場，安靜住宅區內卻緊臨市中心美食圈。住 3 晚以上享折扣。',
-        lat: 34.67232,
-        lng: 135.50906,
-        url: 'https://www.airbnb.com.tw/rooms/1380143419969759705',
-      },
-      {
-        id: '1637722554344788561',
-        name: '復古現代町屋｜谷町六丁目/松屋町3分｜55㎡整棟',
-        area: '中央區',
-        rating: 5.0,
-        reviews: 3,
-        bedrooms: 3,
-        beds: 4,
-        bathrooms: '1',
-        maxGuests: 6,
-        image: 'https://a0.muscache.com/im/pictures/hosting/Hosting-1637722554344788561/original/78a07a67-08d0-40f4-b1f2-da3f5d20c5ea.png?im_w=720',
-        desc: '中央區安靜住宅區內的兩層町屋，55 ㎡ 整棟出租，保留傳統氛圍加入現代簡約設計。谷町六丁目、松屋町站步行 3 分，電車約 5 分到道頓堀、10 分到大阪城。',
-        lat: 34.67528,
-        lng: 135.51383,
-        url: 'https://www.airbnb.com.tw/rooms/1637722554344788561',
-      },
-      {
-        id: '1584557713424765584',
-        name: '日居 Kee’s Cozy Home 九條｜九条站5分｜直達難波/日本橋',
-        area: '西區',
-        rating: 5.0,
-        reviews: 9,
-        bedrooms: 4,
-        beds: 4,
-        bathrooms: '2',
-        maxGuests: 4,
-        image: 'https://a0.muscache.com/im/pictures/hosting/Hosting-1584557713424765584/original/6f6f8eef-dd05-4b5d-b2d7-10f42cb31778.jpeg?im_w=720',
-        desc: '三層透天包棟，2026 年全面升級日本製床墊，4 間洋房雙衛浴。九條站步行約 5 分，地下鐵中央線＋阪神電車可直達難波、日本橋、梅田與奈良。',
-        lat: 34.6738,
-        lng: 135.4763,
-        url: 'https://www.airbnb.com.tw/rooms/1584557713424765584',
-      },
-    ],
-  },
-  {
-    name: '新大阪 區',
-    icon: '🚄',
-    color: '#a78bfa',
-    desc: '新幹線轉乘站，前往京都、神戶、奈良最方便',
-    attractions: ['新幹線直達京都/神戶', '梅田商圈（3站）', '新大阪站美食街'],
-    listings: [
-      {
-        id: '1401127338702256701',
-        name: '新大阪站步行6分｜新幹線/JR/地鐵皆可達',
-        area: '淀川區',
-        rating: 4.98,
-        reviews: 41,
-        bedrooms: 3,
-        beds: 3,
-        bathrooms: '1',
-        maxGuests: 3,
-        image: 'https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQwMTEyNzMzODcwMjI1NjcwMQ==/original/ccfceac1-f179-41f4-95b6-3bc5c025c431.jpeg?im_w=720',
-        desc: '一戶建一樓，新大阪站步行約 6 分鐘。可搭新幹線、JR 線、地鐵，直達關西機場、京都、神戶。',
-        lat: 34.737,
-        lng: 135.5064,
-        url: 'https://www.airbnb.com.tw/rooms/1401127338702256701',
-      },
-    ],
+    id: '1624285200618600616',
+    name: '日居・影 ECHO｜花園町站4分｜2026 全新裝潢／附車位',
+    area: '西成區（花園町／天下茶屋）',
+    rating: 5.0,
+    reviews: 3,
+    bedrooms: 4,
+    beds: 6,
+    bathrooms: '2',
+    maxGuests: 12,
+    image:
+      'https://a0.muscache.com/im/pictures/hosting/Hosting-1624285200618600616/original/a8023a25-81ee-43c8-a281-b25b8a04f751.jpeg?im_w=720',
+    desc: '2026 全新登場的三層獨棟包棟民宿，日系簡約 × 微北歐質感，全面採用日本製床墊。地鐵四橋線花園町站步行 4 分、南海線天下茶屋站可達，直達心齋橋、梅田，附 1 個停車位。',
+    highlights: ['2026 全新裝潢', '日本製床墊', '附停車位 1 個', '4 房 6 床／可睡 12 人'],
+    lat: 34.6417,
+    lng: 135.497,
+    url: 'https://www.airbnb.com.tw/rooms/1624285200618600616',
+    estPrice: '約 NT$ 35,000 / 7 晚',
   },
 ]
 
@@ -266,8 +69,6 @@ const tripConfig = {
     return Math.round((b.getTime() - a.getTime()) / 86_400_000)
   },
 }
-
-const totalListings = areas.reduce((sum, a) => sum + a.listings.length, 0)
 
 function starsDisplay(rating: number | null): string {
   if (rating === null) return '全新'
@@ -300,12 +101,12 @@ function formatDate(dateStr: string): string {
 <template>
   <div class="hotel-page">
     <section class="hero-card">
-      <div class="pill">2026 大阪住宿比較</div>
-      <h1>住宿選擇整理</h1>
+      <div class="pill">2026 大阪住宿｜最後票選</div>
+      <h1>最後 2 選 1</h1>
       <p class="lede">
-        大阪之旅 {{ totalListings }} 間候選住宿，依區域分類整理。入住日期
-        {{ formatDate(tripConfig.checkIn) }} ~ {{ formatDate(tripConfig.checkOut) }}（{{ tripConfig.nights }} 晚），{{ tripConfig.adults }} 人同行。點擊「查詢空房＆價格」可前往 Airbnb
-        查看最新價格與空房。
+        經過候選名單篩選，最終決選保留 2 間天下茶屋／花園町區的整棟 Airbnb，
+        7 晚預算皆落在 NT$ 35,000 上下。入住日期
+        {{ formatDate(tripConfig.checkIn) }} ~ {{ formatDate(tripConfig.checkOut) }}（{{ tripConfig.nights }} 晚），{{ tripConfig.adults }} 人同行。點擊「查詢空房＆價格」可前往 Airbnb 查看即時價格與空房狀況。
       </p>
       <div class="meta">
         <div class="meta-item">
@@ -322,84 +123,65 @@ function formatDate(dateStr: string): string {
         </div>
         <div class="meta-item">
           <span class="meta-label">候選</span>
-          <span class="meta-value">{{ totalListings }} 間</span>
+          <span class="meta-value">{{ listings.length }} 間（決選）</span>
         </div>
       </div>
     </section>
 
-    <section v-for="area in areas" :key="area.name" class="area-section">
-      <div class="area-header">
-        <span class="area-icon">{{ area.icon }}</span>
-        <div>
-          <h2 class="area-title">{{ area.name }}</h2>
-          <p class="area-desc">{{ area.desc }}</p>
+    <section class="finalist-grid">
+      <div
+        v-for="(listing, idx) in listings"
+        :key="listing.id"
+        class="listing-card"
+      >
+        <div class="finalist-tag">候選 {{ idx + 1 }}</div>
+        <div class="listing-img-wrap">
+          <img :src="listing.image" :alt="listing.name" loading="lazy" />
+          <span class="rating-badge">
+            ⭐ {{ starsDisplay(listing.rating) }}
+            <template v-if="listing.rating !== null"> ({{ listing.reviews }})</template>
+          </span>
         </div>
-      </div>
-
-      <div class="attractions-bar">
-        <span class="attractions-label">周邊景點</span>
-        <span
-          v-for="attr in area.attractions"
-          :key="attr"
-          class="attraction-tag"
-          :style="{ borderColor: area.color }"
-        >
-          {{ attr }}
-        </span>
-      </div>
-
-      <div class="listing-grid">
-        <div
-          v-for="listing in area.listings"
-          :key="listing.id"
-          class="listing-card"
-        >
-          <div class="listing-img-wrap">
-            <img :src="listing.image" :alt="listing.name" loading="lazy" />
-            <span class="rating-badge" :style="{ background: area.color }">
-              {{ starsDisplay(listing.rating) }}
-              <template v-if="listing.rating !== null"> ({{ listing.reviews }})</template>
-            </span>
+        <div class="listing-body">
+          <h2 class="listing-name">{{ listing.name }}</h2>
+          <p class="listing-area">{{ listing.area }}</p>
+          <div class="listing-specs">
+            <span>{{ listing.bedrooms }} 臥</span>
+            <span>{{ listing.beds }} 床</span>
+            <span>{{ listing.bathrooms }} 衛</span>
+            <span>{{ listing.maxGuests }} 人</span>
           </div>
-          <div class="listing-body">
-            <h3 class="listing-name">{{ listing.name }}</h3>
-            <div class="listing-specs">
-              <span>{{ listing.bedrooms }} 臥</span>
-              <span>{{ listing.beds }} 床</span>
-              <span>{{ listing.bathrooms }} 衛</span>
-              <span>{{ listing.maxGuests }} 人</span>
-            </div>
-            <p class="listing-area">{{ listing.area }}</p>
-            <p class="listing-desc">{{ listing.desc }}</p>
-            <div class="listing-actions">
-              <a
-                :href="bookingUrl(listing)"
-                target="_blank"
-                rel="noopener"
-                class="action-link booking-btn"
-                :style="{ background: area.color }"
-              >查詢空房＆價格</a>
-              <a
-                class="action-link map-link"
-                :href="mapUrl(listing.lat, listing.lng)"
-                target="_blank"
-                rel="noopener"
-              >
-                Google Map
-              </a>
-            </div>
+          <div class="price-pill">{{ listing.estPrice }}</div>
+          <ul class="highlights">
+            <li v-for="h in listing.highlights" :key="h">{{ h }}</li>
+          </ul>
+          <p class="listing-desc">{{ listing.desc }}</p>
+          <div class="listing-actions">
+            <a
+              :href="bookingUrl(listing)"
+              target="_blank"
+              rel="noopener"
+              class="action-link booking-btn"
+            >查詢空房＆價格</a>
+            <a
+              class="action-link map-link"
+              :href="mapUrl(listing.lat, listing.lng)"
+              target="_blank"
+              rel="noopener"
+            >
+              Google Map
+            </a>
           </div>
         </div>
       </div>
     </section>
 
     <section class="note-card">
-      <h2>注意事項</h2>
+      <h2>票選注意事項</h2>
       <ul>
-        <li>價格因季節與需求浮動，請點進 Airbnb 連結查看即時報價（目前日期較遠，部分房源尚未開放訂房）</li>
-        <li>環球影城周邊房源適合 Day 1-2 入住，市中心房源適合後半段逛街行程</li>
-        <li>新大阪房源最大容納 3 人，不適合 4 人同住，但交通最便利</li>
-        <li>建議選定後盡早預訂，10 月為大阪旅遊旺季</li>
+        <li>兩間皆位於天下茶屋／花園町區，南海線可直達關西機場、地鐵四橋線可直達難波及梅田，交通條件相近</li>
+        <li>價格因季節與需求浮動，請點進 Airbnb 連結確認即時報價（兩間目前估算約 NT$ 35,000 / 7 晚）</li>
+        <li>建議選定後盡早預訂，10 月為大阪旅遊旺季，房源容易被搶</li>
       </ul>
     </section>
   </div>
@@ -412,7 +194,6 @@ function formatDate(dateStr: string): string {
   gap: 1.2rem;
 }
 
-/* Hero */
 .hero-card {
   padding: 1.6rem;
   background: linear-gradient(135deg, rgba(255, 153, 102, 0.16), rgba(125, 240, 255, 0.14));
@@ -469,84 +250,43 @@ function formatDate(dateStr: string): string {
   font-weight: 600;
 }
 
-/* Area sections */
-.area-section {
-  padding: 1.2rem;
-  border-radius: 18px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-soft);
-}
-
-.area-header {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-bottom: 0.8rem;
-}
-
-.area-icon {
-  font-size: 2rem;
-}
-
-.area-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-}
-
-.area-desc {
-  color: var(--text-muted);
-  font-size: 0.92rem;
-}
-
-/* Attractions bar */
-.attractions-bar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-  padding: 0.6rem 0.8rem;
-  border-radius: 10px;
-  background: rgba(0, 0, 0, 0.2);
-}
-
-.attractions-label {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  letter-spacing: 0.06em;
-  font-weight: 600;
-}
-
-.attraction-tag {
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  border: 1px solid;
-  font-size: 0.82rem;
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.04);
-}
-
-/* Listing grid */
-.listing-grid {
+.finalist-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 1.2rem;
 }
 
 .listing-card {
-  border-radius: var(--radius-md);
+  position: relative;
+  border-radius: 18px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--surface);
   overflow: hidden;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--shadow-soft);
 }
 
 .listing-card:hover {
   border-color: var(--accent);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+.finalist-tag {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.8rem;
+  z-index: 2;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ffd700, #ff9966);
+  color: #0a0a0a;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .listing-img-wrap {
@@ -570,25 +310,33 @@ function formatDate(dateStr: string): string {
   position: absolute;
   top: 0.6rem;
   right: 0.6rem;
-  padding: 0.25rem 0.6rem;
+  padding: 0.3rem 0.7rem;
   border-radius: 999px;
-  font-size: 0.82rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: #ffd700;
+  font-size: 0.85rem;
   font-weight: 700;
-  color: #0a0a0a;
+  backdrop-filter: blur(4px);
 }
 
 .listing-body {
-  padding: 1rem;
+  padding: 1.2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.6rem;
   flex: 1;
 }
 
 .listing-name {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.35;
+}
+
+.listing-area {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .listing-specs {
@@ -600,30 +348,55 @@ function formatDate(dateStr: string): string {
 }
 
 .listing-specs span {
-  padding: 0.15rem 0.5rem;
+  padding: 0.2rem 0.55rem;
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.listing-area {
-  font-size: 0.85rem;
+.price-pill {
+  display: inline-block;
+  padding: 0.4rem 0.9rem;
+  border-radius: 10px;
+  background: rgba(125, 240, 255, 0.12);
+  border: 1px solid rgba(125, 240, 255, 0.35);
   color: var(--accent);
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 0.95rem;
+  align-self: flex-start;
+}
+
+.highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0.2rem 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem;
+}
+
+.highlights li {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  padding: 0.3rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 3px solid var(--accent);
 }
 
 .listing-desc {
   font-size: 0.9rem;
   color: var(--text-muted);
-  line-height: 1.5;
+  line-height: 1.6;
   flex: 1;
 }
 
 .listing-actions {
   display: flex;
   gap: 1rem;
-  margin-top: 0.5rem;
-  padding-top: 0.5rem;
+  align-items: center;
+  margin-top: 0.6rem;
+  padding-top: 0.8rem;
   border-top: 1px solid var(--border);
 }
 
@@ -647,21 +420,21 @@ function formatDate(dateStr: string): string {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  padding: 0.45rem 0.9rem;
-  border-radius: 8px;
+  padding: 0.55rem 1.1rem;
+  border-radius: 10px;
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
+  background: linear-gradient(135deg, #ffd700, #ff9966);
   color: #0a0a0a !important;
   text-decoration: none;
   transition: opacity 0.2s, transform 0.15s;
 }
 
 .booking-btn:hover {
-  opacity: 0.88;
+  opacity: 0.9;
   transform: translateY(-1px);
 }
 
-/* Note card */
 .note-card {
   padding: 1.2rem;
   border-radius: 18px;
@@ -688,9 +461,8 @@ function formatDate(dateStr: string): string {
   line-height: 1.5;
 }
 
-/* Mobile */
 @media (max-width: 640px) {
-  .listing-grid {
+  .finalist-grid {
     grid-template-columns: 1fr;
   }
 
@@ -698,10 +470,8 @@ function formatDate(dateStr: string): string {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .area-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.4rem;
+  .highlights {
+    grid-template-columns: 1fr;
   }
 }
 </style>
