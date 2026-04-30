@@ -18,26 +18,17 @@ interface Listing {
   estPrice: string
 }
 
+interface NearbySpot {
+  icon: string
+  name: string
+  note: string
+  walk: string
+  category: 'shopping' | 'food' | 'drugstore' | 'convenience' | 'transit'
+}
+
+const selectedId = '1624285200618600616'
+
 const listings: Listing[] = [
-  {
-    id: '1597546007884684618',
-    name: '松Inn｜天下茶屋6分｜花園町站直達難波/梅田',
-    area: '西成區（天下茶屋／花園町）',
-    rating: 5.0,
-    reviews: 6,
-    bedrooms: 3,
-    beds: 4,
-    bathrooms: '2',
-    maxGuests: 8,
-    image:
-      'https://a0.muscache.com/im/pictures/hosting/Hosting-1597546007884684618/original/9cfd1d3f-4232-4371-b965-f4d687f83a4d.jpeg?im_w=720',
-    desc: '三層獨棟新一戶建，88 ㎡，3 臥室 4 床雙衛浴。南海線天下茶屋站步行 6 分（直達關西機場 25 分），地鐵四橋線花園町站 7 分，距難波 5 分鐘、梅田 15 分鐘。住宅區內鬧中取靜，超市、藥妝、便利商店齊全。',
-    highlights: ['直達關西機場 25 分', '南海線+地鐵雙站', '一樓長輩房', '88 ㎡ 三層獨棟'],
-    lat: 34.64071,
-    lng: 135.49588,
-    url: 'https://www.airbnb.com.tw/rooms/1597546007884684618',
-    estPrice: '約 NT$ 35,000 / 7 晚',
-  },
   {
     id: '1624285200618600616',
     name: '日居・影 ECHO｜花園町站4分｜2026 全新裝潢／附車位',
@@ -57,7 +48,136 @@ const listings: Listing[] = [
     url: 'https://www.airbnb.com.tw/rooms/1624285200618600616',
     estPrice: '約 NT$ 35,000 / 7 晚',
   },
+  {
+    id: '1597546007884684618',
+    name: '松Inn｜天下茶屋6分｜花園町站直達難波/梅田',
+    area: '西成區（天下茶屋／花園町）',
+    rating: 5.0,
+    reviews: 6,
+    bedrooms: 3,
+    beds: 4,
+    bathrooms: '2',
+    maxGuests: 8,
+    image:
+      'https://a0.muscache.com/im/pictures/hosting/Hosting-1597546007884684618/original/9cfd1d3f-4232-4371-b965-f4d687f83a4d.jpeg?im_w=720',
+    desc: '三層獨棟新一戶建，88 ㎡，3 臥室 4 床雙衛浴。南海線天下茶屋站步行 6 分（直達關西機場 25 分），地鐵四橋線花園町站 7 分，距難波 5 分鐘、梅田 15 分鐘。住宅區內鬧中取靜，超市、藥妝、便利商店齊全。',
+    highlights: ['直達關西機場 25 分', '南海線+地鐵雙站', '一樓長輩房', '88 ㎡ 三層獨棟'],
+    lat: 34.64071,
+    lng: 135.49588,
+    url: 'https://www.airbnb.com.tw/rooms/1597546007884684618',
+    estPrice: '約 NT$ 35,000 / 7 晚',
+  },
 ]
+
+const nearbySpots: NearbySpot[] = [
+  {
+    icon: '🛒',
+    name: 'Super Tamade 花園店',
+    note: '大阪激安代表超市，24 小時營業，蔬菜生肉熟食飲料一應俱全',
+    walk: '步行 1 分',
+    category: 'shopping',
+  },
+  {
+    icon: '🏪',
+    name: 'Daily Kana-art Izumiya 花園店',
+    note: '中型超市，店內含大創百元店＋ cocokara fine 藥妝，一次購足',
+    walk: '步行 2 分',
+    category: 'shopping',
+  },
+  {
+    icon: '💊',
+    name: 'Daikoku Drug 花園町駅前店',
+    note: '大阪本土最強藥妝連鎖，藥品、保養品、食品雜貨全都有',
+    walk: '步行 2 分',
+    category: 'drugstore',
+  },
+  {
+    icon: '🏬',
+    name: 'FamilyMart 花園町店',
+    note: '最近的便利商店，24 小時',
+    walk: '步行 1 分',
+    category: 'convenience',
+  },
+  {
+    icon: '🏬',
+    name: 'Lawson 花園北2丁目店',
+    note: '24 小時，離住宿另一方向',
+    walk: '步行 3 分',
+    category: 'convenience',
+  },
+  {
+    icon: '🏮',
+    name: '鶴見橋商店街',
+    note: '昭和復古有蓋商店街全長約 1 公里，老肉舖、魚店、立吞み小酒館，大阪庶民街景代表',
+    walk: '步行 3〜5 分',
+    category: 'shopping',
+  },
+  {
+    icon: '🍢',
+    name: 'ひげ勝（Hige Katsu）',
+    note: '創業 40 年串炸老舖，每串 90 日圓起，西成在地人愛店，常客滿需早到',
+    walk: '步行 3 分',
+    category: 'food',
+  },
+  {
+    icon: '🍜',
+    name: '鶴見橋商店街 立吞み小酒館',
+    note: '商店街內多間站著喝的小居酒屋，啤酒 350〜500 日圓，串燒關東煮即叫即上',
+    walk: '步行 5 分',
+    category: 'food',
+  },
+  {
+    icon: '🛍️',
+    name: '業務超市 天下茶屋站前店',
+    note: '量販型食材超市，大容量冷凍食品、調味料超划算，適合補貨',
+    walk: '步行 12 分',
+    category: 'shopping',
+  },
+  {
+    icon: '🚇',
+    name: '難波（Namba）',
+    note: '地鐵四橋線直達 2 站，下車即是道頓堀、心齋橋商圈',
+    walk: '電車 3〜4 分',
+    category: 'transit',
+  },
+  {
+    icon: '🚇',
+    name: '心齋橋 / 美國村',
+    note: '四橋線至難波再換乘御堂筋線 1 站，或步行往北約 20 分',
+    walk: '電車 10〜15 分',
+    category: 'transit',
+  },
+  {
+    icon: '🗼',
+    name: '通天閣（新世界）',
+    note: '沿鶴見橋商店街方向步行可到，大阪庶民名所',
+    walk: '步行 20〜25 分',
+    category: 'transit',
+  },
+  {
+    icon: '✈️',
+    name: '天下茶屋駅（南海電鐵）',
+    note: '步行或地鐵可達，南海線直達關西機場約 25 分',
+    walk: '步行 15〜20 分',
+    category: 'transit',
+  },
+]
+
+const categoryLabel: Record<NearbySpot['category'], string> = {
+  shopping: '購物',
+  food: '飲食',
+  drugstore: '藥妝',
+  convenience: '便利商店',
+  transit: '交通',
+}
+
+const categoryOrder: NearbySpot['category'][] = ['convenience', 'drugstore', 'shopping', 'food', 'transit']
+
+const spotsByCategory = categoryOrder.map((cat) => ({
+  key: cat,
+  label: categoryLabel[cat],
+  spots: nearbySpots.filter((s) => s.category === cat),
+}))
 
 const tripConfig = {
   checkIn: '2026-10-10',
@@ -101,12 +221,11 @@ function formatDate(dateStr: string): string {
 <template>
   <div class="hotel-page">
     <section class="hero-card">
-      <div class="pill">2026 大阪住宿｜最後票選</div>
-      <h1>最後 2 選 1</h1>
+      <div class="pill confirmed">✓ 住宿已確定</div>
+      <h1>日居・影 ECHO</h1>
       <p class="lede">
-        經過候選名單篩選，最終決選保留 2 間天下茶屋／花園町區的整棟 Airbnb，
-        7 晚預算皆落在 NT$ 35,000 上下。入住日期
-        {{ formatDate(tripConfig.checkIn) }} ~ {{ formatDate(tripConfig.checkOut) }}（{{ tripConfig.nights }} 晚），{{ tripConfig.adults }} 人同行。點擊「查詢空房＆價格」可前往 Airbnb 查看即時價格與空房狀況。
+        票選結果出爐！選定花園町的全新裝潢整棟包棟民宿「日居・影 ECHO」。入住
+        {{ formatDate(tripConfig.checkIn) }} ~ {{ formatDate(tripConfig.checkOut) }}（{{ tripConfig.nights }} 晚），{{ tripConfig.adults }} 人同行。
       </p>
       <div class="meta">
         <div class="meta-item">
@@ -122,19 +241,22 @@ function formatDate(dateStr: string): string {
           <span class="meta-value">{{ tripConfig.adults }} 人</span>
         </div>
         <div class="meta-item">
-          <span class="meta-label">候選</span>
-          <span class="meta-value">{{ listings.length }} 間（決選）</span>
+          <span class="meta-label">狀態</span>
+          <span class="meta-value highlight-text">已選定</span>
         </div>
       </div>
     </section>
 
     <section class="finalist-grid">
       <div
-        v-for="(listing, idx) in listings"
+        v-for="listing in listings"
         :key="listing.id"
         class="listing-card"
+        :class="listing.id === selectedId ? 'selected' : 'dimmed'"
       >
-        <div class="finalist-tag">候選 {{ idx + 1 }}</div>
+        <div class="finalist-tag" :class="listing.id === selectedId ? 'chosen' : 'runner-up'">
+          {{ listing.id === selectedId ? '✓ 已選定' : '備選' }}
+        </div>
         <div class="listing-img-wrap">
           <img :src="listing.image" :alt="listing.name" loading="lazy" />
           <span class="rating-badge">
@@ -151,7 +273,7 @@ function formatDate(dateStr: string): string {
             <span>{{ listing.bathrooms }} 衛</span>
             <span>{{ listing.maxGuests }} 人</span>
           </div>
-          <div class="price-pill">{{ listing.estPrice }}</div>
+          <div class="price-pill" :class="{ selected: listing.id === selectedId }">{{ listing.estPrice }}</div>
           <ul class="highlights">
             <li v-for="h in listing.highlights" :key="h">{{ h }}</li>
           </ul>
@@ -162,7 +284,8 @@ function formatDate(dateStr: string): string {
               target="_blank"
               rel="noopener"
               class="action-link booking-btn"
-            >查詢空房＆價格</a>
+              :class="{ dimmed: listing.id !== selectedId }"
+            >{{ listing.id === selectedId ? '前往 Airbnb 預訂' : '查詢空房' }}</a>
             <a
               class="action-link map-link"
               :href="mapUrl(listing.lat, listing.lng)"
@@ -176,13 +299,31 @@ function formatDate(dateStr: string): string {
       </div>
     </section>
 
-    <section class="note-card">
-      <h2>票選注意事項</h2>
-      <ul>
-        <li>兩間皆位於天下茶屋／花園町區，南海線可直達關西機場、地鐵四橋線可直達難波及梅田，交通條件相近</li>
-        <li>價格因季節與需求浮動，請點進 Airbnb 連結確認即時報價（兩間目前估算約 NT$ 35,000 / 7 晚）</li>
-        <li>建議選定後盡早預訂，10 月為大阪旅遊旺季，房源容易被搶</li>
-      </ul>
+    <section class="nearby-section">
+      <div class="nearby-header">
+        <h2>住宿周邊指南</h2>
+        <p class="nearby-sub">花園町駅 4 分鐘步行圈內的實用店家與交通資訊</p>
+        <a
+          class="map-area-link"
+          href="https://www.google.com/maps/search/%E8%8A%B1%E5%9C%92%E7%94%BA%E9%A7%85+%E5%91%A8%E8%BE%BA/@34.6417,135.497,15z"
+          target="_blank"
+          rel="noopener"
+        >在地圖上查看整區 →</a>
+      </div>
+
+      <div class="category-row" v-for="group in spotsByCategory" :key="group.key">
+        <div class="category-label">{{ group.label }}</div>
+        <div class="spots-grid">
+          <div class="spot-card" v-for="spot in group.spots" :key="spot.name">
+            <div class="spot-icon">{{ spot.icon }}</div>
+            <div class="spot-info">
+              <div class="spot-name">{{ spot.name }}</div>
+              <div class="spot-note">{{ spot.note }}</div>
+            </div>
+            <div class="spot-walk">{{ spot.walk }}</div>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
 </template>
@@ -196,8 +337,8 @@ function formatDate(dateStr: string): string {
 
 .hero-card {
   padding: 1.6rem;
-  background: linear-gradient(135deg, rgba(255, 153, 102, 0.16), rgba(125, 240, 255, 0.14));
-  border: 1px solid var(--border);
+  background: linear-gradient(135deg, rgba(0, 220, 180, 0.12), rgba(125, 240, 255, 0.16));
+  border: 1px solid rgba(0, 220, 180, 0.3);
   border-radius: 20px;
   box-shadow: var(--shadow-soft);
 }
@@ -213,6 +354,13 @@ function formatDate(dateStr: string): string {
   letter-spacing: 0.08em;
   font-size: 0.82rem;
   color: var(--text-muted);
+}
+
+.pill.confirmed {
+  background: rgba(0, 220, 180, 0.18);
+  border-color: rgba(0, 220, 180, 0.5);
+  color: #00dcb4;
+  font-weight: 700;
 }
 
 .hero-card h1 {
@@ -250,12 +398,17 @@ function formatDate(dateStr: string): string {
   font-weight: 600;
 }
 
+.highlight-text {
+  color: #00dcb4;
+}
+
 .finalist-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
   gap: 1.2rem;
 }
 
+/* ── Selected card ── */
 .listing-card {
   position: relative;
   border-radius: 18px;
@@ -268,10 +421,26 @@ function formatDate(dateStr: string): string {
   box-shadow: var(--shadow-soft);
 }
 
-.listing-card:hover {
-  border-color: var(--accent);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+.listing-card.selected {
+  border-color: #00dcb4;
+  box-shadow: 0 0 0 1px #00dcb4, 0 12px 36px rgba(0, 220, 180, 0.18);
+}
+
+.listing-card.selected:hover {
+  box-shadow: 0 0 0 1px #00dcb4, 0 16px 48px rgba(0, 220, 180, 0.28);
   transform: translateY(-2px);
+}
+
+/* ── Dimmed / runner-up card ── */
+.listing-card.dimmed {
+  opacity: 0.45;
+  filter: grayscale(0.6);
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+.listing-card.dimmed:hover {
+  opacity: 0.6;
+  filter: grayscale(0.3);
 }
 
 .finalist-tag {
@@ -281,12 +450,21 @@ function formatDate(dateStr: string): string {
   z-index: 2;
   padding: 0.3rem 0.8rem;
   border-radius: 999px;
-  background: linear-gradient(135deg, #ffd700, #ff9966);
-  color: #0a0a0a;
   font-weight: 700;
   font-size: 0.85rem;
   letter-spacing: 0.05em;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.finalist-tag.chosen {
+  background: linear-gradient(135deg, #00dcb4, #7df0ff);
+  color: #0a0a0a;
+}
+
+.finalist-tag.runner-up {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--text-muted);
 }
 
 .listing-img-wrap {
@@ -302,7 +480,7 @@ function formatDate(dateStr: string): string {
   transition: transform 0.3s ease;
 }
 
-.listing-card:hover .listing-img-wrap img {
+.listing-card.selected:hover .listing-img-wrap img {
   transform: scale(1.05);
 }
 
@@ -366,6 +544,12 @@ function formatDate(dateStr: string): string {
   align-self: flex-start;
 }
 
+.price-pill.selected {
+  background: rgba(0, 220, 180, 0.14);
+  border-color: rgba(0, 220, 180, 0.45);
+  color: #00dcb4;
+}
+
 .highlights {
   list-style: none;
   padding: 0;
@@ -382,6 +566,10 @@ function formatDate(dateStr: string): string {
   border-radius: 6px;
   background: rgba(255, 255, 255, 0.04);
   border-left: 3px solid var(--accent);
+}
+
+.listing-card.selected .highlights li {
+  border-left-color: #00dcb4;
 }
 
 .listing-desc {
@@ -424,7 +612,7 @@ function formatDate(dateStr: string): string {
   border-radius: 10px;
   font-weight: 700;
   font-size: 0.92rem;
-  background: linear-gradient(135deg, #ffd700, #ff9966);
+  background: linear-gradient(135deg, #00dcb4, #7df0ff);
   color: #0a0a0a !important;
   text-decoration: none;
   transition: opacity 0.2s, transform 0.15s;
@@ -435,30 +623,126 @@ function formatDate(dateStr: string): string {
   transform: translateY(-1px);
 }
 
-.note-card {
-  padding: 1.2rem;
-  border-radius: 18px;
+.booking-btn.dimmed {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-muted) !important;
+}
+
+/* ── Nearby Section ── */
+.nearby-section {
+  border-radius: 20px;
   background: var(--surface);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-soft);
+  padding: 1.4rem 1.4rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.note-card h2 {
-  font-size: 1.1rem;
-  margin-bottom: 0.6rem;
+.nearby-header {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
 }
 
-.note-card ul {
-  padding-left: 1.2rem;
+.nearby-header h2 {
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.nearby-sub {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  margin: 0;
+  flex: 1;
+}
+
+.map-area-link {
+  font-size: 0.85rem;
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.map-area-link:hover {
+  text-decoration: underline;
+}
+
+.category-row {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
 }
 
-.note-card li {
+.category-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #00dcb4;
+  text-transform: uppercase;
+  padding: 0 0.2rem;
+}
+
+.spots-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.spot-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.65rem 0.8rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background 0.15s;
+}
+
+.spot-card:hover {
+  background: rgba(255, 255, 255, 0.065);
+}
+
+.spot-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.spot-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.spot-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.spot-note {
+  font-size: 0.82rem;
   color: var(--text-muted);
-  font-size: 0.92rem;
-  line-height: 1.5;
+  margin-top: 0.15rem;
+  line-height: 1.45;
+}
+
+.spot-walk {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #00dcb4;
+  white-space: nowrap;
+  flex-shrink: 0;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  background: rgba(0, 220, 180, 0.1);
+  border: 1px solid rgba(0, 220, 180, 0.2);
+  align-self: center;
 }
 
 @media (max-width: 640px) {
@@ -472,6 +756,11 @@ function formatDate(dateStr: string): string {
 
   .highlights {
     grid-template-columns: 1fr;
+  }
+
+  .nearby-header {
+    flex-direction: column;
+    gap: 0.3rem;
   }
 }
 </style>
