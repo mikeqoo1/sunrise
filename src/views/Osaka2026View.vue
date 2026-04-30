@@ -59,14 +59,14 @@ const prepTasks = [
 
 const meatLinks = [
   {
-    label: "大阪燒肉懶人包",
-    note: "Klook 精選燒肉餐廳推薦",
-    url: "https://www.klook.com/zh-TW/blog/osaka-yakiniku/",
+    label: "焼肉力丸 梅田東通り店 ⭐ 已預訂",
+    note: "吃到飽燒肉｜大阪市北區小松原町4-32 北大阪東通りビル3F｜東梅田站步行4分",
+    url: "https://tabelog.com/en/osaka/A2701/A270101/27139009/",
   },
   {
-    label: "大阪燒肉完整指南",
-    note: "Tasting Japan 深度介紹",
-    url: "https://tasting-japan.com/archives/5763",
+    label: "Google Maps 位置",
+    note: "焼肉力丸 梅田東通り店 地圖標註",
+    url: "https://www.google.com/maps/search/%E7%84%BC%E8%82%89%E5%8A%9B%E4%B8%B8+%E6%A2%85%E7%94%B0%E6%9D%B1%E9%80%9A%E3%82%8A%E5%BA%97",
   },
 ];
 
@@ -180,7 +180,7 @@ const quickLinks = [
         <header class="card-head">
           <div>
             <p class="eyebrow">大阪肉肉</p>
-            <h2>燒肉推薦</h2>
+            <h2>焼肉力丸（已預訂）</h2>
           </div>
         </header>
         <div class="resource-grid">
