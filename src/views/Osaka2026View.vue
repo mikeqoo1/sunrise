@@ -74,7 +74,7 @@ const quickLinks = [
   { label: "2026 詳細手冊", desc: "每日圖文與票券連結", to: "/2026travel/detail" },
   { label: "行前清單", desc: "打包/證件/藥品", to: "/travellist" },
   { label: "大阪購物清單", desc: "籃球/泳衣/潮流/藥粧清單", to: "/2026shopping" },
-  { label: "住宿比較", desc: "9 間候選 Airbnb 整理", to: "/2026hotel" },
+  { label: "住宿比較", desc: "最後 2 選 1 Airbnb 票選", to: "/2026hotel" },
   { label: "2025 東京手冊", desc: "延續格式參考", to: "/2025travel" },
   { label: "任天堂搶票倒數", desc: "倒數計時與訂票資訊", to: "/nintendo-ticket" },
 ];
