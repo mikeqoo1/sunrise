@@ -78,11 +78,13 @@ const itinerary = [
     date: "10/16(五)",
     title: "Day 7 — 大阪自由日 & 相撲火鍋",
     items: [
-      "全日自由活動：補買紀念品、藥妝採購",
-      "推薦：黑門市場、難波 PARKS、美國村",
-      "午餐：epais 阪神梅田店（嘎菲指定・北新地米其林必比登姊妹店）— 花園町搭四橋線直達西梅田 10 分，阪神百貨 B2 地下美食街",
+      "上午：AKTR Sports Supply 美國村（恐龍指定・籃球潮流 + Sporty Coffee）— 花園町搭四橋線 3 站直達四ツ橋，5 號出口步行 3 分；店家 8:30 開",
+      "中午前：心齋橋筋／道頓堀繼續逛街，補紀念品、藥妝",
+      "午餐：epais 阪神梅田店（嘎菲指定・北新地米其林必比登姊妹店）— 四ツ橋搭四橋線 4 站直達西梅田，阪神百貨 B2 地下美食街",
+      "下午：阪神/阪急百貨採買、藥妝（梅田站附近一次解決）",
       "晚餐重頭戲：相撲火鍋（ちゃんこ鍋）— 需事先預約",
       "宵夜：道頓堀最後巡禮",
+      "🚇 動線備註：全日四橋線一條線（花園町 ↔ 四ツ橋 ↔ 西梅田），不用轉車",
     ],
   },
   {
@@ -114,6 +116,7 @@ const ticketLinks = [
   { label: "關西機場交通", url: "https://www.kansai-airport.or.jp/access/" },
   { label: "焼肉力丸 梅田東通り店（已預訂）", url: "https://tabelog.com/en/osaka/A2701/A270101/27139009/" },
   { label: "epais 阪神梅田店（豬排・嘎菲指定）", url: "https://tabelog.com/en/osaka/A2701/A270101/27125466/" },
+  { label: "AKTR Sports Supply 美國村（籃球・恐龍指定）", url: "https://aktr.jp/en/pages/sports-supply" },
 ];
 </script>
 

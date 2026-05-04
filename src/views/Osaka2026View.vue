@@ -54,7 +54,7 @@ const prepTasks = [
   { title: "住宿選擇", detail: "環球影城周邊一晚 + 難波/心齋橋市區住宿" },
   { title: "餐廳預約", detail: "相撲火鍋、燒肉、蟹道樂或壽司需事先預約；epais 阪神梅田店通常排隊，平日提早到 B2 較佳" },
   { title: "哥吉拉御守採買", detail: "確認大阪哥吉拉御守販售地點與庫存，數量限制要早點去" },
-  { title: "Aktr sports supply", detail: "好喝咖啡 + 籃球東西，確認店鋪地址與營業時間再排入行程" },
+  { title: "AKTR Sports Supply（已排入 Day 7 上午）", detail: "美國村旗艦店｜西心斎橋2-10-13｜8:30–20:00｜花園町搭四橋線 3 站直達四ツ橋，店內附 Sporty Coffee" },
 ];
 
 const meatLinks = [
@@ -67,6 +67,24 @@ const meatLinks = [
     label: "Google Maps 位置",
     note: "焼肉力丸 梅田東通り店 地圖標註",
     url: "https://www.google.com/maps/search/%E7%84%BC%E8%82%89%E5%8A%9B%E4%B8%B8+%E6%A2%85%E7%94%B0%E6%9D%B1%E9%80%9A%E3%82%8A%E5%BA%97",
+  },
+];
+
+const aktrLinks = [
+  {
+    label: "AKTR Sports Supply 美國村店 ⭐ 恐龍指定",
+    note: "日本籃球潮流品牌旗艦店｜大阪市中央区西心斎橋2-10-13-101｜8:30–20:00｜店內 Sporty Coffee（芝加哥 Sawada Coffee 拉花世冠監修）",
+    url: "https://aktr.jp/en/pages/sports-supply",
+  },
+  {
+    label: "Sporty Coffee 介紹",
+    note: "與 Sawada Coffee／THE CUPS 合作｜店內現場拉花、季節限定豆，球鞋控買累了補咖啡因",
+    url: "https://aktr.jp/en/collections/sporty-coffee/sporty-aac",
+  },
+  {
+    label: "Google Maps 位置",
+    note: "AKTR Sports Supply Amemura 地圖標註",
+    url: "https://www.google.com/maps/search/AKTR+Sports+Supply+%E7%BE%8E%E5%9C%8B%E6%9D%91",
   },
 ];
 
@@ -204,6 +222,35 @@ const quickLinks = [
         <div class="resource-grid">
           <a
             v-for="link in meatLinks"
+            :key="link.url"
+            class="resource-card"
+            :href="link.url"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="resource-title">{{ link.label }}</div>
+            <p class="resource-desc">{{ link.note }}</p>
+            <span class="arrow">前往 →</span>
+          </a>
+        </div>
+      </article>
+
+      <article class="card meat">
+        <header class="card-head">
+          <div>
+            <p class="eyebrow">恐龍指定・籃球 + 咖啡</p>
+            <h2>AKTR Sports Supply（美國村）</h2>
+          </div>
+        </header>
+        <p class="meat-blurb">
+          日本籃球潮流品牌旗艦店，店內附設 SPORTY COFFEE（芝加哥 Sawada Coffee 拉花世界冠軍監修）。
+          住宿在花園町，搭<strong>四橋線一條線到底，3 站直達四ツ橋（約 6 分）</strong>，
+          5 號出口走 3 分到店，買完還可以順遊心齋橋筋／道頓堀。
+          <br />行程動線：上午 AKTR → 心齋橋逛街 → <strong>四ツ橋搭四橋線 4 站 10 分到西梅田</strong> → 午餐 epais 阪神梅田 → 阪神/阪急百貨採買。
+        </p>
+        <div class="resource-grid">
+          <a
+            v-for="link in aktrLinks"
             :key="link.url"
             class="resource-card"
             :href="link.url"
