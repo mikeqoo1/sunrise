@@ -80,7 +80,7 @@ const itinerary = [
     items: [
       "全日自由活動：補買紀念品、藥妝採購",
       "推薦：黑門市場、難波 PARKS、美國村",
-      "午餐：大阪燒/咖哩/迴轉壽司",
+      "午餐：epais 阪神梅田店（嘎菲指定・北新地米其林必比登姊妹店）— 花園町搭四橋線直達西梅田 10 分，阪神百貨 B2 地下美食街",
       "晚餐重頭戲：相撲火鍋（ちゃんこ鍋）— 需事先預約",
       "宵夜：道頓堀最後巡禮",
     ],
@@ -112,6 +112,8 @@ const ticketLinks = [
   { label: "Express Pass 購買", url: "https://www.usj.co.jp/ticket/" },
   { label: "任天堂博物館預約", url: "https://museum.nintendo.com/" },
   { label: "關西機場交通", url: "https://www.kansai-airport.or.jp/access/" },
+  { label: "焼肉力丸 梅田東通り店（已預訂）", url: "https://tabelog.com/en/osaka/A2701/A270101/27139009/" },
+  { label: "epais 阪神梅田店（豬排・嘎菲指定）", url: "https://tabelog.com/en/osaka/A2701/A270101/27125466/" },
 ];
 </script>
 

@@ -52,7 +52,7 @@ const prepTasks = [
   { title: "任天堂博物館門票", detail: "官網抽選制，需提前確認開放月份與登記" },
   { title: "交通票券", detail: "關西周遊券 vs ICOCA；關空到市區南海/JR 路線" },
   { title: "住宿選擇", detail: "環球影城周邊一晚 + 難波/心齋橋市區住宿" },
-  { title: "餐廳預約", detail: "相撲火鍋、燒肉、蟹道樂或壽司需事先預約" },
+  { title: "餐廳預約", detail: "相撲火鍋、燒肉、蟹道樂或壽司需事先預約；epais 阪神梅田店通常排隊，平日提早到 B2 較佳" },
   { title: "哥吉拉御守採買", detail: "確認大阪哥吉拉御守販售地點與庫存，數量限制要早點去" },
   { title: "Aktr sports supply", detail: "好喝咖啡 + 籃球東西，確認店鋪地址與營業時間再排入行程" },
 ];
@@ -67,6 +67,24 @@ const meatLinks = [
     label: "Google Maps 位置",
     note: "焼肉力丸 梅田東通り店 地圖標註",
     url: "https://www.google.com/maps/search/%E7%84%BC%E8%82%89%E5%8A%9B%E4%B8%B8+%E6%A2%85%E7%94%B0%E6%9D%B1%E9%80%9A%E3%82%8A%E5%BA%97",
+  },
+];
+
+const tonkatsuLinks = [
+  {
+    label: "epais 阪神梅田店（エペ）⭐ 嘎菲指定",
+    note: "北新地米其林必比登姊妹店｜大阪市北區梅田1-13-13 阪神梅田本店 B2F 阪神バル横丁｜花園町站搭四橋線直達西梅田 10 分，下車地下通道接阪神百貨 B2，全程不出地面",
+    url: "https://tabelog.com/en/osaka/A2701/A270101/27125466/",
+  },
+  {
+    label: "阪神百貨官方介紹",
+    note: "B2 阪神バル横丁グルメゾーン｜營業時間以阪神百貨為準｜可單點豬排、和牛、シャトーブリアン",
+    url: "https://www.hanshin-dept.jp/hshonten/restaurantguide/gourmetzone/gourmetzone02.html",
+  },
+  {
+    label: "Google Maps 位置",
+    note: "epais 阪神梅田店 地圖標註",
+    url: "https://www.google.com/maps/search/epais+%E9%98%AA%E7%A5%9E%E6%A2%85%E7%94%B0%E5%BA%97",
   },
 ];
 
@@ -186,6 +204,34 @@ const quickLinks = [
         <div class="resource-grid">
           <a
             v-for="link in meatLinks"
+            :key="link.url"
+            class="resource-card"
+            :href="link.url"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="resource-title">{{ link.label }}</div>
+            <p class="resource-desc">{{ link.note }}</p>
+            <span class="arrow">前往 →</span>
+          </a>
+        </div>
+      </article>
+
+      <article class="card meat">
+        <header class="card-head">
+          <div>
+            <p class="eyebrow">嘎菲指定・厚切豬排</p>
+            <h2>epais 阪神梅田店（エペ）</h2>
+          </div>
+        </header>
+        <p class="meat-blurb">
+          北新地米其林必比登姊妹店搬到阪神百貨地下美食街，主打嚴選品牌豬厚切豬排與單點和牛料理。
+          住宿在花園町，搭<strong>四橋線一站直達西梅田（約 10 分）</strong>，下車走地下通道接阪神百貨 B2，
+          全程不用出地面，是三家分店中最近、最不耗體力的一間。
+        </p>
+        <div class="resource-grid">
+          <a
+            v-for="link in tonkatsuLinks"
             :key="link.url"
             class="resource-card"
             :href="link.url"
@@ -429,6 +475,17 @@ const quickLinks = [
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 0.7rem;
+}
+
+.meat-blurb {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: -0.2rem 0 0.8rem;
+  font-size: 0.95rem;
+}
+
+.meat-blurb strong {
+  color: var(--text-primary);
 }
 
 .resource-card {
