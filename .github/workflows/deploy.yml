@@ -1,5 +1,5 @@
 # 自動部署工作流程
-# 當 main 分支有新的 push 時，自動建置並部署到 mikeqoo1/tokyo 倉庫 (GitHub Pages)
+# 當 main 分支有新的 push 時，自動建置並部署到 mikeqoo1/dino 倉庫 (GitHub Pages)
 #
 # 注意：需要先在 GitHub 倉庫設定中新增一個名為 DEPLOY_TOKEN 的 Secret
 # 步驟：
@@ -40,11 +40,11 @@ jobs:
       - name: 建置專案
         run: npm run build
 
-      - name: 部署到 tokyo 倉庫
+      - name: 部署到 dino 倉庫
         uses: peaceiris/actions-gh-pages@v4
         with:
           personal_token: ${{ secrets.DEPLOY_TOKEN }}
-          external_repository: mikeqoo1/tokyo
+          external_repository: mikeqoo1/dino
           publish_branch: main
           publish_dir: ./dist
           force_orphan: true

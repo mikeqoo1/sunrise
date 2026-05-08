@@ -6,7 +6,7 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/tokyo/', // 調整為你的 GitHub Pages 子路徑
+  base: '/dino/', // 調整為你的 GitHub Pages 子路徑
   plugins: [
     vue(),
     vueJsx(),

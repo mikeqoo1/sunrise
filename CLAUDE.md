@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Sunrise is a Vue 3 + Vite personal dashboard app (恐龍天地) for a Taiwanese team. It includes travel planning, restaurant selection, team management, shopping lists, and transit tools. It is a purely frontend app with no backend — all data lives in TypeScript files and images. UI and content are primarily in Traditional Chinese.
 
-Deployed to GitHub Pages at base path `/tokyo/` using hash-based routing.
+Deployed to GitHub Pages at base path `/dino/` using hash-based routing.
 
 ## Commands
 
@@ -34,7 +34,7 @@ Deployed to GitHub Pages at base path `/tokyo/` using hash-based routing.
 
 ## Key Conventions
 
-- Vite base path is `/tokyo/` (configured in `vite.config.ts`)
+- Vite base path is `/dino/` (configured in `vite.config.ts`)
 - Path alias: `@/` maps to `src/`
 - TypeScript config is split: `tsconfig.app.json` (app code), `tsconfig.node.json` (build tools), `tsconfig.vitest.json` (tests)
 - ESLint uses flat config format (ESLint 9+) with vue, typescript, vitest, playwright, and oxlint plugins
