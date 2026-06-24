@@ -17,7 +17,8 @@ const navLinks = [
   { to: "/mrt", label: "出趣玩", caption: "捷運出行", icon: assetUrl("design/Happy_1_CS6.png") },
   { to: "/2025travel", label: "2025 東京旅遊", caption: "年度手冊", icon: assetUrl("72小時票.png") },
   { to: "/2026travel", label: "2026 大阪寶可夢之旅", caption: "USJ 寶可夢萬聖節", icon: assetUrl("2026Osaka/usj.png") },
-  { to: "/vietnam", label: "越南代購", caption: "商品 / 價格表", icon: assetUrl("vietnam/Vietnam.png") },
+  // 越南代購已隱藏（功能停用）。如需恢復，取消下一行註解即可；路由 /vietnam 與 VietnamDaigouView 仍保留。
+  // { to: "/vietnam", label: "越南代購", caption: "商品 / 價格表", icon: assetUrl("vietnam/Vietnam.png") },
 ];
 </script>
 
@@ -26,47 +27,61 @@ const navLinks = [
     <div class="ambient ambient-one" />
     <div class="ambient ambient-two" />
 
-    <header class="hero">
-      <div class="brand-block">
+    <aside class="sidebar">
+      <RouterLink to="/" class="brand">
         <div class="logo-wrap">
           <img alt="Homelogo" class="logo" :src="logoSrc" width="125" height="125" />
         </div>
-        <div class="hero-copy">
-          <p class="eyebrow">恐龍天地</p>
-          <HelloWorld msg="歡迎來到恐龍天地" />
-        </div>
-      </div>
-      <div class="info-card">
-        <p class="info-label">加入戰隊</p>
-        <h3>掃碼加入戰隊獲得更多資訊</h3>
-        <p class="info-desc">解鎖最新任務、旅遊計畫、球衣設計，恐龍天天陪你衝。</p>
-        <img src="https://qr-official.line.me/gs/M_212cwsii_BW.png?oat_content=qr" width="95" height="95"
-          alt="Line QR Code" />
-      </div>
-    </header>
-
-    <nav class="nav-grid">
-      <RouterLink v-for="link in navLinks" :key="link.to" :to="link.to" class="nav-card">
-        <span class="nav-icon-wrap">
-          <img :src="link.icon" :alt="link.label" class="nav-icon" />
-        </span>
-        <div class="nav-text">
-          <span class="nav-label">{{ link.label }}</span>
-          <span class="nav-caption">{{ link.caption }}</span>
+        <div class="brand-text">
+          <span class="brand-name">恐龍天地</span>
+          <span class="brand-sub">DINO WORLD</span>
         </div>
       </RouterLink>
-    </nav>
 
-    <main class="content-panel">
-      <RouterView />
-    </main>
+      <nav class="side-nav">
+        <RouterLink v-for="link in navLinks" :key="link.to" :to="link.to" class="nav-card">
+          <span class="nav-icon-wrap">
+            <img :src="link.icon" :alt="link.label" class="nav-icon" />
+          </span>
+          <div class="nav-text">
+            <span class="nav-label">{{ link.label }}</span>
+            <span class="nav-caption">{{ link.caption }}</span>
+          </div>
+        </RouterLink>
+      </nav>
+    </aside>
+
+    <div class="main-col">
+      <header class="hero">
+        <div class="hero-copy">
+          <HelloWorld msg="歡迎來到恐龍天地" />
+        </div>
+        <div class="info-card">
+          <p class="info-label">加入戰隊</p>
+          <h3>掃碼加入戰隊獲得更多資訊</h3>
+          <p class="info-desc">解鎖最新任務、旅遊計畫、球衣設計，恐龍天天陪你衝。</p>
+          <img src="https://qr-official.line.me/gs/M_212cwsii_BW.png?oat_content=qr" width="95" height="95"
+            alt="Line QR Code" />
+        </div>
+      </header>
+
+      <main class="content-panel">
+        <RouterView />
+      </main>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .app-shell {
   position: relative;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: 264px minmax(0, 1fr);
+  gap: 1.4rem;
+  align-items: start;
+  /* clip (not hidden) contains the ambient glows without becoming a scroll
+     container, so the sticky sidebar still pins to the document scroll */
+  overflow: clip;
 }
 
 .ambient {
@@ -105,54 +120,71 @@ const navLinks = [
   backdrop-filter: blur(8px);
 }
 
-.brand-block {
+.sidebar {
+  position: sticky;
+  top: 1rem;
   display: flex;
+  flex-direction: column;
   gap: 1rem;
+  padding: 1.2rem;
+  background: var(--surface-strong);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(8px);
+  max-height: calc(100vh - 2rem);
+}
+
+.brand {
+  display: flex;
   align-items: center;
+  gap: 0.8rem;
+  padding: 0.4rem 0.4rem 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
 }
 
 .logo-wrap {
   position: relative;
-  width: 120px;
-  height: 120px;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
   background: linear-gradient(145deg, rgba(125, 240, 255, 0.25), rgba(140, 248, 216, 0.15));
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: 16px;
   display: grid;
   place-items: center;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
 }
 
-.logo-chip {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 999px;
-  background: rgba(140, 248, 216, 0.14);
-  color: var(--text-primary);
-  border: 1px solid var(--border);
-  letter-spacing: 0.6px;
-}
-
 .logo {
-  width: 90px;
-  height: 90px;
+  width: 48px;
+  height: 48px;
   object-fit: contain;
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.35));
 }
 
-.hero-copy {
-  max-width: 520px;
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
-.eyebrow {
-  font-size: 0.85rem;
-  letter-spacing: 0.24rem;
+.brand-name {
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: 0.04rem;
+}
+
+.brand-sub {
+  font-size: 0.7rem;
+  letter-spacing: 0.22rem;
   text-transform: uppercase;
   color: var(--text-muted);
-  margin-bottom: 0.4rem;
+}
+
+.hero-copy {
+  max-width: 520px;
 }
 
 .info-card {
@@ -183,29 +215,40 @@ const navLinks = [
   margin-bottom: 0.6rem;
 }
 
-.nav-grid {
-  margin-top: 1.4rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0.9rem;
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+  padding-right: 0.2rem;
+  margin-right: -0.2rem;
+}
+
+.side-nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.side-nav::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
 }
 
 .nav-card {
   display: flex;
-  gap: 0.9rem;
+  gap: 0.75rem;
   align-items: center;
-  padding: 0.9rem 1rem;
+  padding: 0.6rem 0.7rem;
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
   color: var(--text-primary);
 }
 
 .nav-card:hover {
-  transform: translateY(-4px);
+  transform: translateX(4px);
   border-color: var(--accent);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .nav-card.router-link-exact-active {
@@ -214,9 +257,10 @@ const navLinks = [
 }
 
 .nav-icon-wrap {
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 12px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border);
   display: grid;
@@ -224,34 +268,64 @@ const navLinks = [
 }
 
 .nav-icon {
-  width: 32px;
-  height: 32px;
+  width: 26px;
+  height: 26px;
   object-fit: contain;
 }
 
 .nav-text {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.1rem;
+  min-width: 0;
 }
 
 .nav-label {
   font-weight: 600;
+  font-size: 0.95rem;
   letter-spacing: 0.02rem;
 }
 
 .nav-caption {
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+}
+
+.main-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  min-width: 0;
 }
 
 .content-panel {
-  margin-top: 1.4rem;
   padding: 1.4rem;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border);
   border-radius: 18px;
   box-shadow: var(--shadow-soft);
+}
+
+/* Tablet / narrow: drop the sidebar to the top and lay nav out as a grid */
+@media (max-width: 900px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    max-height: none;
+  }
+
+  .side-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    overflow: visible;
+  }
+
+  .nav-card:hover {
+    transform: translateY(-4px);
+  }
 }
 
 @media (max-width: 820px) {
@@ -260,24 +334,8 @@ const navLinks = [
     align-items: flex-start;
   }
 
-  .brand-block {
-    width: 100%;
-  }
-
   .info-card {
     width: 100%;
-  }
-}
-
-@media (max-width: 560px) {
-  .logo-wrap {
-    width: 96px;
-    height: 96px;
-  }
-
-  .logo {
-    width: 76px;
-    height: 76px;
   }
 }
 </style>
