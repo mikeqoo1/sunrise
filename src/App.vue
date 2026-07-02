@@ -13,7 +13,7 @@ const navLinks = [
   { to: "/lunch", label: "中午吃飯", caption: "抽籤選店", icon: assetUrl("卡比獸.png") },
   { to: "/happy", label: "快樂龍戰隊", caption: "球衣與隊伍", icon: assetUrl("去背_球褲logo.png") },
   { to: "/design", label: "設計的球衣", caption: "創意草稿", icon: assetUrl("design/Happy_3_CS6.png") },
-  { to: "/jersey-logo", label: "球衣 LOGO 示意", caption: "深/淺・版位預覽", icon: assetUrl("HAPPY_v2/機械暴龍.png") },
+  { to: "/jersey-logo", label: "球衣 LOGO 示意", caption: "深/淺・版位預覽", icon: assetUrl("HAPPY_v2/星河柴犬.png") },
   { to: "/random", label: "先發人員", caption: "隨機挑選", icon: assetUrl("happy/呆呆吉拉王.png") },
   { to: "/mrt", label: "出趣玩", caption: "捷運出行", icon: assetUrl("design/Happy_1_CS6.png") },
   { to: "/2025travel", label: "2025 東京旅遊", caption: "年度手冊", icon: assetUrl("72小時票.png") },
