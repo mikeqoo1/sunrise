@@ -3,8 +3,8 @@
     <header class="mk-head">
       <h1 class="mk-title">戰隊球衣・LOGO 示意圖</h1>
       <p class="mk-sub">
-        每個版位可放<strong>不同的 LOGO</strong>：先點下方要編輯的版位，再從左側挑一款套上去。
-        右側即時預覽<strong>深底</strong>與<strong>淺底</strong>球衣，版位也可各自開關。
+        <strong>胸前大 LOGO</strong> 深底 / 淺底可以放不一樣；<strong>左胸</strong>與<strong>球褲下方</strong>則深淺共用同一款。
+        點下方要編輯的目標，再從左側挑 LOGO 套上去。
       </p>
     </header>
 
@@ -13,7 +13,7 @@
       <aside class="picker">
         <h2 class="picker-title">
           選擇 LOGO
-          <span class="picker-target">套用到：{{ activePlacement.label }}</span>
+          <span class="picker-target">套用到：{{ targetLabel }}</span>
         </h2>
         <div class="logo-grid">
           <button
@@ -36,22 +36,25 @@
       <section class="preview">
         <div class="slots">
           <button
-            v-for="p in placements"
-            :key="p.key"
+            v-for="s in slots"
+            :key="s.key"
             class="slot"
-            :class="{ active: activeKey === p.key, off: !p.on }"
+            :class="{ active: activeKey === s.key, off: !s.on }"
             type="button"
-            @click="activeKey = p.key"
+            @click="activeKey = s.key"
           >
             <span class="slot-thumb">
-              <img :src="logoSrc(p.logo.file)" :alt="p.logo.label" />
+              <img :src="logoSrc(s.logo.file)" :alt="s.logo.label" />
             </span>
             <span class="slot-info">
-              <span class="slot-name">{{ p.label }}</span>
-              <span class="slot-logo">{{ p.logo.label }}</span>
+              <span class="slot-name">
+                {{ s.group }}
+                <em class="slot-tag" :class="`tag-${s.theme}`">{{ s.tag }}</em>
+              </span>
+              <span class="slot-logo">{{ s.logo.label }}</span>
             </span>
             <label class="slot-toggle" @click.stop>
-              <input type="checkbox" v-model="p.on" />
+              <input type="checkbox" v-model="s.on" />
               <span>顯示</span>
             </label>
           </button>
@@ -93,14 +96,15 @@
                 <rect x="62" y="206" width="136" height="5" :fill="theme.trim" opacity="0.85" rx="2" />
               </svg>
 
-              <!-- LOGO 版位疊層（各自使用自己的 LOGO） -->
+              <!-- 胸前大 LOGO：深/淺各自 -->
               <div
-                v-if="chest.on"
+                v-if="chestOf(theme.key).on"
                 class="patch chest"
                 :style="{ '--trim': theme.trim }"
               >
-                <img :src="logoSrc(chest.logo.file)" :alt="chest.logo.label" />
+                <img :src="logoSrc(chestOf(theme.key).logo.file)" :alt="chestOf(theme.key).logo.label" />
               </div>
+              <!-- 左胸徽章：深淺共用 -->
               <div
                 v-if="leftChest.on"
                 class="patch badge left-chest"
@@ -108,6 +112,7 @@
               >
                 <img :src="logoSrc(leftChest.logo.file)" :alt="leftChest.logo.label" />
               </div>
+              <!-- 球褲下方：深淺共用 -->
               <div
                 v-if="shorts.on"
                 class="patch badge shorts"
@@ -130,6 +135,15 @@ import { reactive, ref, computed } from 'vue'
 interface Logo {
   file: string
   label: string
+}
+
+interface Slot {
+  key: string
+  group: string
+  tag: string
+  theme: 'dark' | 'light' | 'both'
+  on: boolean
+  logo: Logo
 }
 
 const base = import.meta.env.BASE_URL
@@ -156,27 +170,35 @@ const logos: Logo[] = [
 
 const byFile = (file: string) => logos.find((l) => l.file === file) as Logo
 
-// 每個版位各自記住自己的 LOGO，預設用不同款示範
-const placements = reactive([
-  { key: 'chest', label: '胸前大 LOGO', on: true, logo: byFile('雷電暴龍-精緻版.png') },
-  { key: 'leftChest', label: '左胸徽章', on: true, logo: byFile('劍龍.png') },
-  { key: 'shorts', label: '球褲下方', on: true, logo: byFile('星河柴犬.png') },
+// 可編輯的目標：胸前拆成深/淺兩個，左胸與球褲下方深淺共用
+const slots = reactive<Slot[]>([
+  { key: 'chestDark', group: '胸前大 LOGO', tag: '深底', theme: 'dark', on: true, logo: byFile('雷電暴龍-精緻版.png') },
+  { key: 'chestLight', group: '胸前大 LOGO', tag: '淺底', theme: 'light', on: true, logo: byFile('紅連暗影柴-精緻版.png') },
+  { key: 'leftChest', group: '左胸徽章', tag: '深淺一致', theme: 'both', on: true, logo: byFile('劍龍.png') },
+  { key: 'shorts', group: '球褲下方', tag: '深淺一致', theme: 'both', on: true, logo: byFile('星河柴犬.png') },
 ])
 
-const chest = placements[0]
-const leftChest = placements[1]
-const shorts = placements[2]
+// 深淺共用的兩個目標（參照穩定，可直接取用）
+const leftChest = slots.find((s) => s.key === 'leftChest') as Slot
+const shorts = slots.find((s) => s.key === 'shorts') as Slot
+// 依球衣底色取得對應的胸前目標
+const chestOf = (themeKey: string) =>
+  slots.find((s) => s.key === (themeKey === 'dark' ? 'chestDark' : 'chestLight')) as Slot
 
-// 目前正在編輯的版位
-const activeKey = ref('chest')
+// 目前正在編輯的目標
+const activeKey = ref('chestDark')
 const activePlacement = computed(
-  () => placements.find((p) => p.key === activeKey.value) ?? placements[0],
+  () => slots.find((s) => s.key === activeKey.value) ?? slots[0],
 )
+const targetLabel = computed(() => {
+  const s = activePlacement.value
+  return s.theme === 'both' ? s.group : `${s.group}・${s.tag}`
+})
 
 function assignLogo(logo: Logo) {
   const target = activePlacement.value
   target.logo = logo
-  target.on = true // 指定 LOGO 時自動開啟該版位，避免看不到
+  target.on = true // 指定 LOGO 時自動開啟該目標，避免看不到
 }
 
 const themes = [
@@ -312,7 +334,7 @@ const themes = [
 /* 版位卡片 */
 .slots {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 0.6rem;
   margin-bottom: 1.2rem;
 }
@@ -365,7 +387,7 @@ const themes = [
 .slot-info {
   display: flex;
   flex-direction: column;
-  gap: 0.1rem;
+  gap: 0.15rem;
   min-width: 0;
   flex: 1;
 }
@@ -374,6 +396,36 @@ const themes = [
   font-size: 0.85rem;
   font-weight: 700;
   color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.slot-tag {
+  font-style: normal;
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  line-height: 1.5;
+}
+
+.tag-dark {
+  background: rgba(140, 248, 216, 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(140, 248, 216, 0.3);
+}
+
+.tag-light {
+  background: rgba(125, 240, 255, 0.15);
+  color: var(--accent-strong);
+  border: 1px solid rgba(125, 240, 255, 0.3);
+}
+
+.tag-both {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
 }
 
 .slot-logo {
