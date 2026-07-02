@@ -3,23 +3,26 @@
     <header class="mk-head">
       <h1 class="mk-title">戰隊球衣・LOGO 示意圖</h1>
       <p class="mk-sub">
-        點選左側 LOGO，右側即時預覽在<strong>深底</strong>與<strong>淺底</strong>球衣上的樣子。
-        三個版位（胸前、左胸、球褲下方）可各自開關 —— 想看整套就全開，只留一個也行。
+        每個版位可放<strong>不同的 LOGO</strong>：先點下方要編輯的版位，再從左側挑一款套上去。
+        右側即時預覽<strong>深底</strong>與<strong>淺底</strong>球衣，版位也可各自開關。
       </p>
     </header>
 
     <div class="mk-layout">
       <!-- 左：LOGO 選擇 -->
       <aside class="picker">
-        <h2 class="picker-title">選擇 LOGO</h2>
+        <h2 class="picker-title">
+          選擇 LOGO
+          <span class="picker-target">套用到：{{ activePlacement.label }}</span>
+        </h2>
         <div class="logo-grid">
           <button
             v-for="logo in logos"
             :key="logo.file"
             class="logo-cell"
-            :class="{ active: selected.file === logo.file }"
+            :class="{ active: activePlacement.logo.file === logo.file }"
             type="button"
-            @click="selected = logo"
+            @click="assignLogo(logo)"
           >
             <span class="logo-thumb">
               <img :src="logoSrc(logo.file)" :alt="logo.label" loading="lazy" />
@@ -31,19 +34,27 @@
 
       <!-- 右：預覽 -->
       <section class="preview">
-        <div class="controls">
-          <span class="controls-label">顯示版位</span>
-          <div class="toggle-row">
-            <label
-              v-for="p in placements"
-              :key="p.key"
-              class="toggle"
-              :class="{ on: p.on }"
-            >
+        <div class="slots">
+          <button
+            v-for="p in placements"
+            :key="p.key"
+            class="slot"
+            :class="{ active: activeKey === p.key, off: !p.on }"
+            type="button"
+            @click="activeKey = p.key"
+          >
+            <span class="slot-thumb">
+              <img :src="logoSrc(p.logo.file)" :alt="p.logo.label" />
+            </span>
+            <span class="slot-info">
+              <span class="slot-name">{{ p.label }}</span>
+              <span class="slot-logo">{{ p.logo.label }}</span>
+            </span>
+            <label class="slot-toggle" @click.stop>
               <input type="checkbox" v-model="p.on" />
-              <span>{{ p.label }}</span>
+              <span>顯示</span>
             </label>
-          </div>
+          </button>
         </div>
 
         <div class="jerseys">
@@ -82,34 +93,32 @@
                 <rect x="62" y="206" width="136" height="5" :fill="theme.trim" opacity="0.85" rx="2" />
               </svg>
 
-              <!-- LOGO 版位疊層 -->
+              <!-- LOGO 版位疊層（各自使用自己的 LOGO） -->
               <div
-                v-if="show.chest"
+                v-if="chest.on"
                 class="patch chest"
                 :style="{ '--trim': theme.trim }"
               >
-                <img :src="logoSrc(selected.file)" :alt="selected.label" />
+                <img :src="logoSrc(chest.logo.file)" :alt="chest.logo.label" />
               </div>
               <div
-                v-if="show.leftChest"
+                v-if="leftChest.on"
                 class="patch badge left-chest"
                 :style="{ '--trim': theme.trim }"
               >
-                <img :src="logoSrc(selected.file)" :alt="selected.label" />
+                <img :src="logoSrc(leftChest.logo.file)" :alt="leftChest.logo.label" />
               </div>
               <div
-                v-if="show.shorts"
+                v-if="shorts.on"
                 class="patch badge shorts"
                 :style="{ '--trim': theme.trim }"
               >
-                <img :src="logoSrc(selected.file)" :alt="selected.label" />
+                <img :src="logoSrc(shorts.logo.file)" :alt="shorts.logo.label" />
               </div>
             </div>
             <span class="theme-label">{{ theme.label }}球衣</span>
           </div>
         </div>
-
-        <p class="current-name">目前 LOGO：<strong>{{ selected.label }}</strong></p>
       </section>
     </div>
   </div>
@@ -145,19 +154,30 @@ const logos: Logo[] = [
   { file: '貓咪哥吉拉簡易版本.png', label: '貓咪哥吉拉（簡易）' },
 ]
 
-const selected = ref<Logo>(logos[0])
+const byFile = (file: string) => logos.find((l) => l.file === file) as Logo
 
+// 每個版位各自記住自己的 LOGO，預設用不同款示範
 const placements = reactive([
-  { key: 'chest', label: '胸前大 LOGO', on: true },
-  { key: 'leftChest', label: '左胸徽章', on: true },
-  { key: 'shorts', label: '球褲下方', on: true },
+  { key: 'chest', label: '胸前大 LOGO', on: true, logo: byFile('雷電暴龍-精緻版.png') },
+  { key: 'leftChest', label: '左胸徽章', on: true, logo: byFile('劍龍.png') },
+  { key: 'shorts', label: '球褲下方', on: true, logo: byFile('星河柴犬.png') },
 ])
 
-const show = computed(() => ({
-  chest: placements.find((p) => p.key === 'chest')?.on ?? false,
-  leftChest: placements.find((p) => p.key === 'leftChest')?.on ?? false,
-  shorts: placements.find((p) => p.key === 'shorts')?.on ?? false,
-}))
+const chest = placements[0]
+const leftChest = placements[1]
+const shorts = placements[2]
+
+// 目前正在編輯的版位
+const activeKey = ref('chest')
+const activePlacement = computed(
+  () => placements.find((p) => p.key === activeKey.value) ?? placements[0],
+)
+
+function assignLogo(logo: Logo) {
+  const target = activePlacement.value
+  target.logo = logo
+  target.on = true // 指定 LOGO 時自動開啟該版位，避免看不到
+}
 
 const themes = [
   { key: 'dark', label: '深底', jersey: '#16223f', edge: '#0a1330', trim: '#8cf8d8' },
@@ -213,6 +233,15 @@ const themes = [
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.picker-target {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
 }
 
 .logo-grid {
@@ -280,48 +309,93 @@ const themes = [
   box-shadow: var(--shadow-soft);
 }
 
-.controls {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.7rem;
+/* 版位卡片 */
+.slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.6rem;
   margin-bottom: 1.2rem;
 }
 
-.controls-label {
-  font-weight: 700;
-  color: var(--text-primary);
-  font-size: 0.95rem;
-}
-
-.toggle-row {
+.slot {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.toggle {
-  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 999px;
+  gap: 0.6rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--radius-md);
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.03);
-  color: var(--text-muted);
-  font-size: 0.85rem;
-  font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+  text-align: left;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
 }
 
-.toggle.on {
+.slot:hover {
+  transform: translateY(-2px);
   border-color: var(--accent);
-  color: var(--text-primary);
-  background: rgba(140, 248, 216, 0.12);
 }
 
-.toggle input {
+.slot.active {
+  border-color: var(--accent);
+  background: linear-gradient(145deg, rgba(140, 248, 216, 0.16), rgba(125, 240, 255, 0.1));
+}
+
+.slot.off {
+  opacity: 0.55;
+}
+
+.slot-thumb {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 40%, #1b2744, #0a1122);
+  border: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+}
+
+.slot-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.slot-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.slot-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.slot-logo {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.slot-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.slot-toggle input {
   accent-color: var(--accent);
   cursor: pointer;
 }
@@ -417,18 +491,6 @@ const themes = [
   font-weight: 700;
   color: var(--text-primary);
   font-size: 0.95rem;
-}
-
-.current-name {
-  margin-top: 1.1rem;
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
-.current-name strong {
-  color: var(--accent);
-  font-weight: 700;
 }
 
 /* ---- 響應式 ---- */
