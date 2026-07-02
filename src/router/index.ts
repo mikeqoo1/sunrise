@@ -8,6 +8,7 @@ import TokyoStationView from "../views/TokyoStationView.vue";
 import ShoppingView from "../views/ShoppingView.vue";
 import LunchView from "../views/LunchView.vue";
 import JerseyView from "../views/JerseyVotePage.vue";
+import JerseyLogoMockupView from "../views/JerseyLogoMockupView.vue";
 import RandomPicker from '../views/RandomPicker.vue';
 import DesignView from '../views/DesignView.vue';
 import MrtView from '@/views/MrtView.vue';
@@ -74,6 +75,11 @@ const router = createRouter({
       path: "/jersey",
       name: "jersey",
       component: JerseyView,
+    },
+    {
+      path: "/jersey-logo",
+      name: "jerseyLogo",
+      component: JerseyLogoMockupView,
     },
     {
       path: '/random',
