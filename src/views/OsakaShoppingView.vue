@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from "vue";
+
 interface ShoppingItem {
   name: string;
   qty?: number;
@@ -18,37 +20,30 @@ interface PersonShopping {
   categories: ShoppingCategory[];
 }
 
+interface MetaItem {
+  label: string;
+  value: string;
+}
+
 const shoppingData: PersonShopping[] = [
   {
     name: "快樂龍",
     emoji: "🐉",
     categories: [
       {
-        category: "籃球用品",
+        category: "籃球服飾",
         icon: "🏀",
         items: [
-          { name: "Asics UNPRE ARS LOW 2 籃球鞋", note: "US 9.5" },
-          { name: "Asics GLIDE NOVA FF 3 籃球鞋", note: "US 10，備選" },
-          { name: "護膝", qty: 2 },
-          { name: "籃球襪", qty: 3, note: "中筒款" },
-          { name: "其他籃球配件", tbd: true },
+          { name: "AKTR 籃球服飾" },
+          { name: "Spalding 籃球服飾" },
         ],
       },
       {
-        category: "泳衣/泳褲",
+        category: "泳褲/泳鏡",
         icon: "🏊",
         items: [
-          { name: "arena 訓練款泳褲", note: "延續上次款式 TSM1025M，確認尺寸" },
-          { name: "泳鏡", note: "待補品牌", tbd: true },
-        ],
-      },
-      {
-        category: "大阪限定",
-        icon: "🏯",
-        items: [
-          { name: "環球影城寶可夢周邊", note: "皮卡丘/沼王系列" },
-          { name: "寶可夢中心 大阪DX店", note: "沼王、土王吊飾" },
-          { name: "恐龍/哥吉拉周邊", tbd: true },
+          { name: "arena 泳褲" },
+          { name: "arena 泳鏡" },
         ],
       },
     ],
@@ -58,29 +53,10 @@ const shoppingData: PersonShopping[] = [
     emoji: "👟",
     categories: [
       {
-        category: "潮流服飾",
-        icon: "🧥",
-        items: [
-          { name: "Aape / 猿人頭系列", note: "心齋橋 BAPE STORE" },
-          { name: "球鞋", note: "款式待挑", tbd: true },
-          { name: "潮流 T-shirt", qty: 3, tbd: true },
-          { name: "外套/帽T", tbd: true },
-        ],
-      },
-      {
         category: "籃球用品",
         icon: "🏀",
         items: [
-          { name: "Asics 籃球鞋", note: "款式/尺寸待補", tbd: true },
-          { name: "NBA 球衣", tbd: true },
-        ],
-      },
-      {
-        category: "大阪限定",
-        icon: "🏯",
-        items: [
-          { name: "環球影城周邊", tbd: true },
-          { name: "大阪限定零食伴手禮", tbd: true },
+          { name: "籃球襪" },
         ],
       },
     ],
@@ -90,30 +66,10 @@ const shoppingData: PersonShopping[] = [
     emoji: "🌸",
     categories: [
       {
-        category: "藥粧美妝",
-        icon: "💊",
-        items: [
-          { name: "Kate 唇膏", note: "延續上次購買" },
-          { name: "臉部防曬", tbd: true },
-          { name: "合力他命", qty: 2 },
-          { name: "EVE 止痛藥", qty: 2 },
-          { name: "Asahi MINTIA 薄荷糖大包裝", qty: 1 },
-          { name: "其他藥品", tbd: true },
-        ],
-      },
-      {
         category: "泳衣",
         icon: "🏊",
         items: [
-          { name: "arena 女款泳衣", note: "款式待挑", tbd: true },
-        ],
-      },
-      {
-        category: "大阪限定",
-        icon: "🏯",
-        items: [
-          { name: "寶可夢中心商品", tbd: true },
-          { name: "環球影城哈利波特周邊", tbd: true },
+          { name: "arena 女款泳衣" },
         ],
       },
     ],
@@ -126,106 +82,55 @@ const shoppingData: PersonShopping[] = [
         category: "藥粧",
         icon: "💊",
         items: [
-          { name: "合力他命", qty: 2 },
-          { name: "EVE 止痛藥", qty: 2 },
-          { name: "EVE 經痛藥", qty: 3 },
-          { name: "胃藥", qty: 2 },
-          { name: "代購品項", note: "待整理清單", tbd: true },
-        ],
-      },
-      {
-        category: "泳衣",
-        icon: "🏊",
-        items: [
-          { name: "arena 女款泳衣", note: "款式待挑", tbd: true },
-        ],
-      },
-      {
-        category: "運動鞋",
-        icon: "👟",
-        items: [
-          { name: "Asics 休閒鞋", note: "GT-2160 / GEL-KAYANO 系列擇一" },
-          { name: "Asics 拖鞋", qty: 1 },
-        ],
-      },
-      {
-        category: "大阪限定",
-        icon: "🏯",
-        items: [
-          { name: "環球影城任天堂周邊", tbd: true },
-          { name: "大阪限定伴手禮", tbd: true },
+          { name: "藥粧", note: "品項待補", tbd: true },
         ],
       },
     ],
   },
 ];
 
-const storeRecommendations = [
-  {
-    icon: "👟",
-    name: "ABC-MART 心齋橋店",
-    desc: "日本最大連鎖鞋店，Nike/Adidas/Asics 齊全，免稅對應",
-    area: "心齋橋",
-  },
-  {
-    icon: "🏃",
-    name: "Asics Store 心齋橋",
-    desc: "Asics 直營旗艦店，籃球/跑步/休閒全系列，可能有日本限定色",
-    area: "心齋橋",
-  },
-  {
-    icon: "🏋️",
-    name: "Sports Depo 大阪",
-    desc: "大型運動用品量販店，arena 泳裝、籃球用品一站購足",
-    area: "市區多店",
-  },
-  {
-    icon: "🐵",
-    name: "BAPE STORE 大阪",
-    desc: "Aape / A Bathing Ape 官方店舖，大阪限定款必逛",
-    area: "心齋橋/美國村",
-  },
-  {
-    icon: "⚡",
-    name: "寶可夢中心 大阪DX店",
-    desc: "西日本最大寶可夢中心，大阪限定商品超多",
-    area: "大丸梅田店 13F",
-  },
-  {
-    icon: "🎢",
-    name: "環球影城園區商店",
-    desc: "任天堂世界、哈利波特、寶可夢遊行限定周邊",
-    area: "USJ 園區內",
-  },
+const tips: string[] = [
+  "運動用品（AKTR／Spalding 籃球服飾、球襪）在難波なんばパークス Sports Depo 4F 一次購足",
+  "arena 泳褲/泳鏡/泳衣建議到梅田グランフロント大阪 的 arena shop 專賣店挑，款式最齊",
+  "日本免稅門檻：同一店家同日消費滿 ¥5,000（未稅）即可退稅，記得帶護照",
+  "嘎菲的藥粧建議在難波/心齋橋的大國、松本清、唐吉訶德比價，唐吉訶德 24 小時最彈性",
 ];
+
+const metaItems: MetaItem[] = [
+  { label: "出發日", value: "2026/10/10" },
+  { label: "成員", value: "快樂龍、大雄、R庭、嘎菲" },
+  { label: "採買日", value: "10/16 自由活動日（難波集中採買）" },
+];
+
+const hasContent = computed(
+  () => shoppingData.length > 0 || tips.length > 0,
+);
 </script>
 
 <template>
   <div class="osaka-shopping">
     <section class="hero-card">
-      <div class="pill">🛍️ 2026 大阪・購物攻略</div>
+      <div class="pill">🛍️ 2026 大阪・環球購物攻略</div>
       <h1>2026 大阪購物清單</h1>
       <p class="lede">
-        大阪之旅 10/10~10/17，四位成員的購物需求彙整。
-        標記「待補」的品項可以隨時更新！
+        大阪環球影城之旅，四位成員的購物需求彙整。
+        運動用品集中在難波なんばパークス、藥粧在難波/心齋橋，標記「待補」的品項可隨時更新！
       </p>
-      <div class="meta">
-        <div class="meta-item">
-          <span class="meta-label">出發日</span>
-          <span class="meta-value">2026/10/10</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">成員</span>
-          <span class="meta-value">快樂龍、大雄、R庭、嘎菲</span>
-        </div>
-        <div class="meta-item">
-          <span class="meta-label">採買日</span>
-          <span class="meta-value">10/16 自由活動日</span>
+      <div v-if="metaItems.length" class="meta">
+        <div v-for="m in metaItems" :key="m.label" class="meta-item">
+          <span class="meta-label">{{ m.label }}</span>
+          <span class="meta-value">{{ m.value }}</span>
         </div>
       </div>
     </section>
 
-    <section class="person-grid">
+    <section v-if="!hasContent" class="empty-state">
+      <span class="empty-emoji">🚧</span>
+      <p class="empty-title">內容調整中</p>
+      <p class="empty-text">購物清單正在重新規劃，稍後再回來看看吧！</p>
+    </section>
+
+    <section v-if="shoppingData.length" class="person-grid">
       <article
         v-for="person in shoppingData"
         :key="person.name"
@@ -260,29 +165,19 @@ const storeRecommendations = [
       </article>
     </section>
 
-    <section class="stores-section">
-      <h2 class="section-title">推薦店家</h2>
-      <p class="section-desc">大阪運動用品 &amp; 限定商品推薦購買地點</p>
-      <div class="store-grid">
-        <div v-for="store in storeRecommendations" :key="store.name" class="store-card">
-          <span class="store-icon">{{ store.icon }}</span>
-          <div class="store-info">
-            <h3>{{ store.name }}</h3>
-            <p class="store-desc">{{ store.desc }}</p>
-            <span class="store-area">📍 {{ store.area }}</span>
-          </div>
-        </div>
+    <RouterLink class="stores-link" to="/2026food">
+      <span class="stores-link-icon">🛍️</span>
+      <div class="stores-link-text">
+        <span class="stores-link-title">店家位置與必逛地圖</span>
+        <span class="stores-link-desc">Sports Depo・arena shop・藥粧等店家已整理到「美食 &amp; 必逛」</span>
       </div>
-    </section>
+      <span class="stores-link-arrow">前往 →</span>
+    </RouterLink>
 
-    <section class="tips-card">
+    <section v-if="tips.length" class="tips-card">
       <h2>購物小提醒</h2>
       <ul class="tips-list">
-        <li>日本免稅門檻：同一店家同日消費滿 ¥5,000（未稅）即可退稅</li>
-        <li>心齋橋筋商店街有大量運動用品店，建議安排半天集中採買</li>
-        <li>環球影城周邊建議入園當天買，園外商店選擇較少</li>
-        <li>寶可夢中心熱門商品容易缺貨，建議開店就去</li>
-        <li>arena 泳裝在 Sports Depo 通常比專櫃便宜</li>
+        <li v-for="tip in tips" :key="tip">{{ tip }}</li>
       </ul>
     </section>
   </div>
@@ -485,69 +380,55 @@ const storeRecommendations = [
   margin: 0;
 }
 
-/* Stores section */
-.stores-section {
-  padding: 1.4rem;
+/* Stores link */
+.stores-link {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.1rem 1.4rem;
   border-radius: var(--radius-lg);
   background: var(--surface);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-soft);
-}
-
-.section-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 0.2rem;
-}
-
-.section-desc {
-  color: var(--text-muted);
-  font-size: 0.92rem;
-  margin-bottom: 1rem;
-}
-
-.store-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 0.8rem;
-}
-
-.store-card {
-  display: flex;
-  gap: 0.8rem;
-  padding: 1rem;
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--text-primary);
   transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.store-card:hover {
+.stores-link:hover {
   transform: translateY(-2px);
   border-color: var(--accent);
 }
 
-.store-icon {
+.stores-link-icon {
   font-size: 1.8rem;
   flex-shrink: 0;
 }
 
-.store-info h3 {
+.stores-link-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.stores-link-title {
   font-weight: 700;
-  font-size: 0.95rem;
-  margin-bottom: 0.2rem;
+  font-size: 1rem;
 }
 
-.store-desc {
+.stores-link-desc {
   color: var(--text-muted);
-  font-size: 0.85rem;
-  margin-bottom: 0.3rem;
+  font-size: 0.88rem;
 }
 
-.store-area {
-  font-size: 0.8rem;
+.stores-link-arrow {
   color: var(--accent);
-  font-weight: 500;
+  font-weight: 700;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* Tips */
@@ -582,12 +463,37 @@ const storeRecommendations = [
   border-left: 3px solid var(--accent);
 }
 
+/* Empty state */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 3rem 1.4rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px dashed var(--border);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+.empty-emoji {
+  font-size: 2.6rem;
+}
+
+.empty-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.empty-text {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
 @media (max-width: 640px) {
   .person-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .store-grid {
     grid-template-columns: 1fr;
   }
 

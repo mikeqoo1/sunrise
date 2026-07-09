@@ -57,62 +57,13 @@ const prepTasks = [
   { title: "AKTR Sports Supply（已排入 Day 7 上午）", detail: "美國村旗艦店｜西心斎橋2-10-13｜8:30–20:00｜花園町搭四橋線 3 站直達四ツ橋，店內附 Sporty Coffee" },
 ];
 
-const meatLinks = [
-  {
-    label: "焼肉力丸 梅田東通り店 ⭐ 已預訂",
-    note: "吃到飽燒肉｜大阪市北區小松原町4-32 北大阪東通りビル3F｜東梅田站步行4分",
-    url: "https://tabelog.com/en/osaka/A2701/A270101/27139009/",
-  },
-  {
-    label: "Google Maps 位置",
-    note: "焼肉力丸 梅田東通り店 地圖標註",
-    url: "https://www.google.com/maps/search/%E7%84%BC%E8%82%89%E5%8A%9B%E4%B8%B8+%E6%A2%85%E7%94%B0%E6%9D%B1%E9%80%9A%E3%82%8A%E5%BA%97",
-  },
-];
-
-const aktrLinks = [
-  {
-    label: "AKTR Sports Supply 美國村店 ⭐ 恐龍指定",
-    note: "日本籃球潮流品牌旗艦店｜大阪市中央区西心斎橋2-10-13-101｜8:30–20:00｜店內 Sporty Coffee（芝加哥 Sawada Coffee 拉花世冠監修）",
-    url: "https://aktr.jp/en/pages/sports-supply",
-  },
-  {
-    label: "Sporty Coffee 介紹",
-    note: "與 Sawada Coffee／THE CUPS 合作｜店內現場拉花、季節限定豆，球鞋控買累了補咖啡因",
-    url: "https://aktr.jp/en/collections/sporty-coffee/sporty-aac",
-  },
-  {
-    label: "Google Maps 位置",
-    note: "AKTR Sports Supply Amemura 地圖標註",
-    url: "https://www.google.com/maps/search/AKTR+Sports+Supply+%E7%BE%8E%E5%9C%8B%E6%9D%91",
-  },
-];
-
-const tonkatsuLinks = [
-  {
-    label: "epais 阪神梅田店（エペ）⭐ 嘎菲指定",
-    note: "北新地米其林必比登姊妹店｜大阪市北區梅田1-13-13 阪神梅田本店 B2F 阪神バル横丁｜花園町站搭四橋線直達西梅田 10 分，下車地下通道接阪神百貨 B2，全程不出地面",
-    url: "https://tabelog.com/en/osaka/A2701/A270101/27125466/",
-  },
-  {
-    label: "阪神百貨官方介紹",
-    note: "B2 阪神バル横丁グルメゾーン｜營業時間以阪神百貨為準｜可單點豬排、和牛、シャトーブリアン",
-    url: "https://www.hanshin-dept.jp/hshonten/restaurantguide/gourmetzone/gourmetzone02.html",
-  },
-  {
-    label: "Google Maps 位置",
-    note: "epais 阪神梅田店 地圖標註",
-    url: "https://www.google.com/maps/search/epais+%E9%98%AA%E7%A5%9E%E6%A2%85%E7%94%B0%E5%BA%97",
-  },
-];
-
 const quickLinks = [
   { label: "2026 詳細手冊", desc: "每日圖文與票券連結", to: "/2026travel/detail" },
+  { label: "🍽️ 美食 & 必逛", desc: "餐廳＋運動/泳裝/藥粧必逛店家", to: "/2026food" },
   { label: "行前清單", desc: "打包/證件/藥品", to: "/travellist" },
   { label: "大阪購物清單", desc: "籃球/泳衣/潮流/藥粧清單", to: "/2026shopping" },
-  { label: "住宿比較", desc: "最後 2 選 1 Airbnb 票選", to: "/2026hotel" },
+  { label: "住宿比較", desc: "已選定 日居・影 ECHO｜周邊指南", to: "/2026hotel" },
   { label: "2025 東京手冊", desc: "延續格式參考", to: "/2025travel" },
-  { label: "任天堂搶票倒數", desc: "倒數計時與訂票資訊", to: "/nintendo-ticket" },
 ];
 </script>
 
@@ -127,6 +78,8 @@ const quickLinks = [
       </p>
       <div class="cta-row">
         <RouterLink class="btn primary" to="/2026travel/detail">查看詳細手冊</RouterLink>
+        <RouterLink class="btn ghost" to="/2026shopping">大阪購物清單</RouterLink>
+        <RouterLink class="btn ghost" to="/2026food">美食 &amp; 必逛</RouterLink>
         <RouterLink class="btn ghost" to="/travellist">行前打包清單</RouterLink>
       </div>
       <div class="meta">
@@ -204,91 +157,11 @@ const quickLinks = [
           </div>
         </header>
         <div class="resource-grid">
-          <RouterLink v-for="link in quickLinks" :key="link.to" class="resource-card" :to="link.to">
+          <RouterLink v-for="link in quickLinks" :key="link.label" class="resource-card" :to="link.to">
             <div class="resource-title">{{ link.label }}</div>
             <p class="resource-desc">{{ link.desc }}</p>
             <span class="arrow">開啟</span>
           </RouterLink>
-        </div>
-      </article>
-
-      <article class="card meat">
-        <header class="card-head">
-          <div>
-            <p class="eyebrow">大阪肉肉</p>
-            <h2>焼肉力丸（已預訂）</h2>
-          </div>
-        </header>
-        <div class="resource-grid">
-          <a
-            v-for="link in meatLinks"
-            :key="link.url"
-            class="resource-card"
-            :href="link.url"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div class="resource-title">{{ link.label }}</div>
-            <p class="resource-desc">{{ link.note }}</p>
-            <span class="arrow">前往 →</span>
-          </a>
-        </div>
-      </article>
-
-      <article class="card meat">
-        <header class="card-head">
-          <div>
-            <p class="eyebrow">恐龍指定・籃球 + 咖啡</p>
-            <h2>AKTR Sports Supply（美國村）</h2>
-          </div>
-        </header>
-        <p class="meat-blurb">
-          日本籃球潮流品牌旗艦店，店內附設 SPORTY COFFEE（芝加哥 Sawada Coffee 拉花世界冠軍監修）。
-          住宿在花園町，搭<strong>四橋線一條線到底，3 站直達四ツ橋（約 6 分）</strong>，
-          5 號出口走 3 分到店，買完還可以順遊心齋橋筋／道頓堀。
-          <br />行程動線：上午 AKTR → 心齋橋逛街 → <strong>四ツ橋搭四橋線 4 站 10 分到西梅田</strong> → 午餐 epais 阪神梅田 → 阪神/阪急百貨採買。
-        </p>
-        <div class="resource-grid">
-          <a
-            v-for="link in aktrLinks"
-            :key="link.url"
-            class="resource-card"
-            :href="link.url"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div class="resource-title">{{ link.label }}</div>
-            <p class="resource-desc">{{ link.note }}</p>
-            <span class="arrow">前往 →</span>
-          </a>
-        </div>
-      </article>
-
-      <article class="card meat">
-        <header class="card-head">
-          <div>
-            <p class="eyebrow">嘎菲指定・厚切豬排</p>
-            <h2>epais 阪神梅田店（エペ）</h2>
-          </div>
-        </header>
-        <p class="meat-blurb">
-          北新地米其林必比登姊妹店搬到阪神百貨地下美食街，主打嚴選品牌豬厚切豬排與單點和牛料理。
-          住宿在花園町，搭<strong>四橋線一站直達西梅田（約 10 分）</strong>，下車走地下通道接阪神百貨 B2，
-          全程不用出地面，是三家分店中最近、最不耗體力的一間。
-        </p>
-        <div class="resource-grid">
-          <a
-            v-for="link in tonkatsuLinks"
-            :key="link.url"
-            class="resource-card"
-            :href="link.url"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div class="resource-title">{{ link.label }}</div>
-            <p class="resource-desc">{{ link.note }}</p>
-            <span class="arrow">前往 →</span>
-          </a>
         </div>
       </article>
     </section>
@@ -522,17 +395,6 @@ const quickLinks = [
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 0.7rem;
-}
-
-.meat-blurb {
-  color: var(--text-muted);
-  line-height: 1.6;
-  margin: -0.2rem 0 0.8rem;
-  font-size: 0.95rem;
-}
-
-.meat-blurb strong {
-  color: var(--text-primary);
 }
 
 .resource-card {

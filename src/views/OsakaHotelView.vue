@@ -48,25 +48,6 @@ const listings: Listing[] = [
     url: 'https://www.airbnb.com.tw/rooms/1624285200618600616',
     estPrice: '約 NT$ 35,000 / 7 晚',
   },
-  {
-    id: '1597546007884684618',
-    name: '松Inn｜天下茶屋6分｜花園町站直達難波/梅田',
-    area: '西成區（天下茶屋／花園町）',
-    rating: 5.0,
-    reviews: 6,
-    bedrooms: 3,
-    beds: 4,
-    bathrooms: '2',
-    maxGuests: 8,
-    image:
-      'https://a0.muscache.com/im/pictures/hosting/Hosting-1597546007884684618/original/9cfd1d3f-4232-4371-b965-f4d687f83a4d.jpeg?im_w=720',
-    desc: '三層獨棟新一戶建，88 ㎡，3 臥室 4 床雙衛浴。南海線天下茶屋站步行 6 分（直達關西機場 25 分），地鐵四橋線花園町站 7 分，距難波 5 分鐘、梅田 15 分鐘。住宅區內鬧中取靜，超市、藥妝、便利商店齊全。',
-    highlights: ['直達關西機場 25 分', '南海線+地鐵雙站', '一樓長輩房', '88 ㎡ 三層獨棟'],
-    lat: 34.64071,
-    lng: 135.49588,
-    url: 'https://www.airbnb.com.tw/rooms/1597546007884684618',
-    estPrice: '約 NT$ 35,000 / 7 晚',
-  },
 ]
 
 const nearbySpots: NearbySpot[] = [
