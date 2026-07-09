@@ -114,9 +114,6 @@ const ticketLinks = [
   { label: "Express Pass 購買", url: "https://www.usj.co.jp/ticket/" },
   { label: "任天堂博物館預約", url: "https://museum.nintendo.com/" },
   { label: "關西機場交通", url: "https://www.kansai-airport.or.jp/access/" },
-  { label: "焼肉力丸 梅田東通り店（已預訂）", url: "https://tabelog.com/en/osaka/A2701/A270101/27139009/" },
-  { label: "epais 阪神梅田店（豬排・嘎菲指定）", url: "https://tabelog.com/en/osaka/A2701/A270101/27125466/" },
-  { label: "AKTR Sports Supply 美國村（籃球・恐龍指定）", url: "https://aktr.jp/en/pages/sports-supply" },
 ];
 </script>
 
