@@ -48,13 +48,7 @@ const travelDays = [
 ];
 
 const prepTasks = [
-  { title: "環球門票與快速通關", detail: "預購 Express Pass、任天堂世界入場預約" },
-  { title: "任天堂博物館門票", detail: "官網抽選制，需提前確認開放月份與登記" },
-  { title: "交通票券", detail: "關西周遊券 vs ICOCA；關空到市區南海/JR 路線" },
-  { title: "住宿選擇", detail: "環球影城周邊一晚 + 難波/心齋橋市區住宿" },
-  { title: "餐廳預約", detail: "相撲火鍋、燒肉、蟹道樂或壽司需事先預約；epais 阪神梅田店通常排隊，平日提早到 B2 較佳" },
-  { title: "哥吉拉御守採買", detail: "確認大阪哥吉拉御守販售地點與庫存，數量限制要早點去" },
-  { title: "AKTR Sports Supply（已排入 Day 7 上午）", detail: "美國村旗艦店｜西心斎橋2-10-13｜8:30–20:00｜花園町搭四橋線 3 站直達四ツ橋，店內附 Sporty Coffee" },
+  { title: "環球票", detail: "確認 USJ 門票、Express Pass 與任天堂世界入場方式" },
 ];
 
 const quickLinks = [
@@ -146,7 +140,7 @@ const quickLinks = [
             </div>
           </li>
         </ul>
-        <p class="hint">有新的靈感或票券連結，就在這裡繼續補充。</p>
+        <p class="hint">交通票券已買關西樂享周遊券，目前只剩環球票要買。</p>
       </article>
 
       <article class="card links">
