@@ -19,6 +19,7 @@ import VietnamDaigouView from '@/views/VietnamDaigouView.vue';
 import OsakaShoppingView from '@/views/OsakaShoppingView.vue';
 import OsakaFoodView from '@/views/OsakaFoodView.vue';
 import OsakaHotelView from '@/views/OsakaHotelView.vue';
+import OsakaKansaiPassView from '@/views/OsakaKansaiPassView.vue';
 
 const router = createRouter({
   history: createWebHashHistory(), // 這裡改掉
@@ -130,6 +131,11 @@ const router = createRouter({
       path: "/2026hotel",
       name: "osakaHotel",
       component: OsakaHotelView,
+    },
+    {
+      path: "/2026kansai-pass",
+      name: "osakaKansaiPass",
+      component: OsakaKansaiPassView,
     },
   ],
 });
