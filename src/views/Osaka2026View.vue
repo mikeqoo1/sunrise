@@ -37,13 +37,13 @@ const attractions = [
 ];
 
 const travelDays = [
-  { date: "10/10(六)", title: "飛機✈️＋Outlet", detail: "抵達大阪後安排 outlet 採買" },
+  { date: "10/10(六)", title: "飛機✈️＋臨空城Outlet", detail: "抵達大阪後直奔臨空城 Outlet 採買" },
   { date: "10/11(日)", title: "梅田＋哥吉拉御守", detail: "梅田逛街，順路安排哥吉拉御守" },
-  { date: "10/12(一)", title: "想一下", detail: "保留彈性，之後再補行程" },
-  { date: "10/13(二)", title: "任天堂＋京都或宇治", detail: "任天堂行程，搭配京都或宇治" },
-  { date: "10/14(三)", title: "想一下", detail: "保留彈性，之後再補行程" },
+  { date: "10/12(一)", title: "任天堂博物館", detail: "看狀況決定要不要順遊宇治" },
+  { date: "10/13(二)", title: "京都", detail: "嵐山或下鴨神社擇一" },
+  { date: "10/14(三)", title: "待排", detail: "保留彈性，之後再補行程" },
   { date: "10/15(四)", title: "環球影城", detail: "日本環球影城一日行程" },
-  { date: "10/16(五)", title: "可能通天閣那邊，輕鬆一點", detail: "走通天閣、新世界一帶，節奏放輕鬆" },
+  { date: "10/16(五)", title: "待排", detail: "保留彈性，之後再補行程" },
   { date: "10/17(六)", title: "回家✈️", detail: "整理行李，搭機回台灣" },
 ];
 
