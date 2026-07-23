@@ -3,8 +3,8 @@ import { RouterLink } from "vue-router";
 
 const tripInfo = {
   title: "2026 大阪之旅",
-  dates: "2026/10/10 ~ 2026/10/17",
-  duration: "8 天 7 夜",
+  dates: "2026/10/10 ~ 2026/10/19",
+  duration: "10 天 9 夜",
   members: ["快樂龍", "大雄", "R庭", "嘎菲"],
 };
 
@@ -44,7 +44,9 @@ const travelDays = [
   { date: "10/14(三)", title: "待排", detail: "保留彈性，之後再補行程" },
   { date: "10/15(四)", title: "環球影城", detail: "日本環球影城一日行程" },
   { date: "10/16(五)", title: "待排", detail: "保留彈性，之後再補行程" },
-  { date: "10/17(六)", title: "回家✈️", detail: "整理行李，搭機回台灣" },
+  { date: "10/17(六)", title: "待排", detail: "保留彈性，之後再補行程" },
+  { date: "10/18(日)", title: "待排", detail: "保留彈性，之後再補行程" },
+  { date: "10/19(一)", title: "回家✈️", detail: "星宇 JX821 13:25 起飛，整理行李搭機回台灣" },
 ];
 
 const prepTasks = [
@@ -69,7 +71,7 @@ const quickLinks = [
       <h1>{{ tripInfo.title }}</h1>
       <p class="lede">
         快樂龍 2026 年度旅行！這次前進大阪，鎖定環球影城寶可夢遊行、京都任天堂博物館，
-        再用一碗相撲火鍋補滿元氣。四個人、八天七夜，一起出發吧！
+        再用一碗相撲火鍋補滿元氣。四個人、十天九夜，一起出發吧！
       </p>
       <div class="cta-row">
         <RouterLink class="btn primary" to="/2026travel/detail">查看詳細手冊</RouterLink>
