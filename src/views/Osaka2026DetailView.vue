@@ -3,7 +3,7 @@ import { RouterLink } from "vue-router";
 
 const tripHeader = {
   title: "2026 大阪之旅 — 詳細手冊",
-  dates: "2026/10/10(六) ~ 2026/10/17(六)",
+  dates: "2026/10/10(六) ~ 2026/10/19(一)",
   members: "快樂龍、大雄、R庭、嘎菲",
 };
 
@@ -89,12 +89,22 @@ const itinerary = [
   },
   {
     date: "10/17(六)",
-    title: "Day 8 — 返台",
+    title: "Day 8 — 待排（彈性日）",
+    items: ["保留彈性，之後再補行程"],
+  },
+  {
+    date: "10/18(日)",
+    title: "Day 9 — 待排（彈性日）",
+    items: ["保留彈性，之後再補行程"],
+  },
+  {
+    date: "10/19(一)",
+    title: "Day 10 — 返台",
     items: [
       "上午：收拾行李、退房",
       "交通：住宿 → 南海電鐵 / JR → 關西機場",
       "機場：退稅、托運確認、登機前最後購物",
-      "航班：星宇航空 JX821 KIX → TPE",
+      "航班：星宇航空 JX821 KIX T1 13:25 → TPE T1 15:20",
       "備註：注意托運重量限制，液體需托運",
     ],
   },
@@ -102,7 +112,7 @@ const itinerary = [
 
 const essentialInfo = [
   { label: "航班（去程）", value: "2026/10/10（六）台灣虎航 IT710 TPE → KIX" },
-  { label: "航班（回程）", value: "2026/10/17（六）星宇航空 JX821 KIX → TPE" },
+  { label: "航班（回程）", value: "2026/10/19（一）星宇航空 JX821 KIX T1 13:25 → TPE T1 15:20" },
   { label: "住宿", value: "心齋橋/難波區域（地址待填）" },
   { label: "票券", value: "USJ 門票、Express Pass、任天堂世界預約、任天堂博物館抽選、ICOCA" },
   { label: "APP", value: "USJ 官方、Google Maps、NAVITIME、Klook/KKday 票券檔" },
