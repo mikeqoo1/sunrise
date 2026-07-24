@@ -20,6 +20,7 @@ import OsakaShoppingView from '@/views/OsakaShoppingView.vue';
 import OsakaFoodView from '@/views/OsakaFoodView.vue';
 import OsakaHotelView from '@/views/OsakaHotelView.vue';
 import OsakaKansaiPassView from '@/views/OsakaKansaiPassView.vue';
+import OsakaHiddenGemsView from '@/views/OsakaHiddenGemsView.vue';
 
 const router = createRouter({
   history: createWebHashHistory(), // 這裡改掉
@@ -136,6 +137,11 @@ const router = createRouter({
       path: "/2026kansai-pass",
       name: "osakaKansaiPass",
       component: OsakaKansaiPassView,
+    },
+    {
+      path: "/2026hidden-gems",
+      name: "osakaHiddenGems",
+      component: OsakaHiddenGemsView,
     },
   ],
 });

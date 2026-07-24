@@ -56,6 +56,7 @@ const quickLinks = [
   { label: "🍽️ 美食 & 必逛", desc: "餐廳＋運動/泳裝/藥粧必逛店家", to: "/2026food" },
   { label: "行前清單", desc: "打包/證件/藥品", to: "/travellist" },
   { label: "關西樂享周遊券", desc: "使用方式與現場核銷提醒", to: "/2026kansai-pass" },
+  { label: "🗺️ 在地人景點", desc: "深度旅遊・非觀光客路線", to: "/2026hidden-gems" },
   { label: "大阪購物清單", desc: "籃球/泳衣/潮流/藥粧清單", to: "/2026shopping" },
   { label: "住宿比較", desc: "已選定 日居・影 ECHO｜周邊指南", to: "/2026hotel" },
   { label: "2025 東京手冊", desc: "延續格式參考", to: "/2025travel" },
