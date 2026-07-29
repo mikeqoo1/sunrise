@@ -26,10 +26,10 @@ jobs:
 
     steps:
       - name: 檢出程式碼
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: 設定 Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: 22
           cache: npm
