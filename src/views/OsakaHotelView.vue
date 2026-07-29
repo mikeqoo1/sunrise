@@ -26,9 +26,33 @@ interface NearbySpot {
   category: 'shopping' | 'food' | 'drugstore' | 'convenience' | 'transit'
 }
 
-const selectedId = '1624285200618600616'
+const selectedId = '1381483396373717320'
 
 const listings: Listing[] = [
+  {
+    id: '1381483396373717320',
+    name: '大阪市中心獨棟3層110㎡｜玉川站4分｜梅田4分｜道頓堀・難波直通',
+    area: '福島區玉川（千日前線「玉川」站）',
+    rating: 5.0,
+    reviews: 29,
+    bedrooms: 4,
+    beds: 7,
+    bathrooms: '1 淋浴・2 馬桶',
+    maxGuests: 10,
+    image:
+      'https://a0.muscache.com/im/pictures/miso/Hosting-1381483396373717320/original/bcad4057-997d-44a5-ba60-4e5bb3d48c00.jpeg?im_w=720',
+    desc: '福島區玉川的三層獨棟包棟民宿，110㎡。地鐵千日前線玉川站步行 4 分，直達難波・道頓堀 8 分；走 7 分到 JR 東西線海老江站，2 站進梅田。超讚房東 Koyuki，掛「超讚房源」標章。洗衣機＋烘衣機齊備，適合 9 晚長住。',
+    highlights: [
+      '110㎡ 三層獨棟',
+      '洗衣機＋烘衣機',
+      '千日前線直達難波 8 分',
+      '淀川花火左岸會場步行 15 分',
+    ],
+    lat: 34.692,
+    lng: 135.4736,
+    url: 'https://www.airbnb.com.tw/rooms/1381483396373717320',
+    estPrice: '約 NT$ 51,000 / 9 晚（每人約 12,750）',
+  },
   {
     id: '1624285200618600616',
     name: '日居・影 ECHO｜花園町站4分｜2026 全新裝潢／附車位',
@@ -37,109 +61,95 @@ const listings: Listing[] = [
     reviews: 3,
     bedrooms: 4,
     beds: 6,
-    bathrooms: '2',
+    bathrooms: '1 淋浴・2 馬桶',
     maxGuests: 12,
     image:
       'https://a0.muscache.com/im/pictures/hosting/Hosting-1624285200618600616/original/a8023a25-81ee-43c8-a281-b25b8a04f751.jpeg?im_w=720',
-    desc: '2026 全新登場的三層獨棟包棟民宿，日系簡約 × 微北歐質感，全面採用日本製床墊。地鐵四橋線花園町站步行 4 分、南海線天下茶屋站可達，直達心齋橋、梅田，附 1 個停車位。',
-    highlights: ['2026 全新裝潢', '日本製床墊', '附停車位 1 個', '4 房 6 床／可睡 12 人'],
+    desc: '2026 全新登場的三層獨棟包棟民宿，日系簡約 × 微北歐質感，全面採用日本製床墊。地鐵四橋線花園町站步行 4 分、南海線天下茶屋站可達，直達心齋橋、梅田，附 1 個停車位。進出關西機場最快，但 USJ 與淀川花火都要多轉一趟。',
+    highlights: ['2026 全新裝潢', '日本製床墊', '附停車位 1 個', '天下茶屋轉南海進機場最快'],
     lat: 34.6417,
     lng: 135.497,
     url: 'https://www.airbnb.com.tw/rooms/1624285200618600616',
-    estPrice: '約 NT$ 35,000 / 7 晚',
+    estPrice: '約 NT$ 35,000 / 7 晚（舊報價）',
   },
 ]
 
 const nearbySpots: NearbySpot[] = [
   {
-    icon: '🛒',
-    name: 'Super Tamade 花園店',
-    note: '大阪激安代表超市，24 小時營業，蔬菜生肉熟食飲料一應俱全',
-    walk: '步行 1 分',
-    category: 'shopping',
-  },
-  {
-    icon: '🏪',
-    name: 'Daily Kana-art Izumiya 花園店',
-    note: '中型超市，店內含大創百元店＋ cocokara fine 藥妝，一次購足',
-    walk: '步行 2 分',
-    category: 'shopping',
+    icon: '🏬',
+    name: 'Lawson 玉川三丁目店',
+    note: '最近的便利商店，玉川站 5 號出口方向',
+    walk: '步行 3 分',
+    category: 'convenience',
   },
   {
     icon: '💊',
-    name: 'Daikoku Drug 花園町駅前店',
-    note: '大阪本土最強藥妝連鎖，藥品、保養品、食品雜貨全都有',
-    walk: '步行 2 分',
+    name: 'ハピネス薬局 玉川店',
+    note: '距站 163 公尺的處方藥局，臨時要買常備藥最近；觀光藥妝建議到野田阪神',
+    walk: '步行 3 分',
     category: 'drugstore',
   },
   {
-    icon: '🏬',
-    name: 'FamilyMart 花園町店',
-    note: '最近的便利商店，24 小時',
-    walk: '步行 1 分',
-    category: 'convenience',
-  },
-  {
-    icon: '🏬',
-    name: 'Lawson 花園北2丁目店',
-    note: '24 小時，離住宿另一方向',
-    walk: '步行 3 分',
-    category: 'convenience',
-  },
-  {
-    icon: '🏮',
-    name: '鶴見橋商店街',
-    note: '昭和復古有蓋商店街全長約 1 公里，老肉舖、魚店、立吞み小酒館，大阪庶民街景代表',
-    walk: '步行 3〜5 分',
+    icon: '🛒',
+    name: '阪急 OASIS 福島玉川店',
+    note: '阪急系超市，生鮮熟食水準高，晚餐想自己煮或買便當都靠這間',
+    walk: '步行 5 分內',
     category: 'shopping',
-  },
-  {
-    icon: '🍢',
-    name: 'ひげ勝（Hige Katsu）',
-    note: '創業 40 年串炸老舖，每串 90 日圓起，西成在地人愛店，常客滿需早到',
-    walk: '步行 3 分',
-    category: 'food',
-  },
-  {
-    icon: '🍜',
-    name: '鶴見橋商店街 立吞み小酒館',
-    note: '商店街內多間站著喝的小居酒屋，啤酒 350〜500 日圓，串燒關東煮即叫即上',
-    walk: '步行 5 分',
-    category: 'food',
   },
   {
     icon: '🛍️',
-    name: '業務超市 天下茶屋站前店',
-    note: '量販型食材超市，大容量冷凍食品、調味料超划算，適合補貨',
-    walk: '步行 12 分',
+    name: 'AEON STYLE 野田阪神（WISTE）',
+    note: '直結阪神野田站的大型商場：1F 食品 8:00–24:00、2F 日用品化妝品＋AEON 藥局、3F 服飾＋大創、4F 美食廣場',
+    walk: '電車 1 站 2 分／步行 12 分',
     category: 'shopping',
   },
   {
-    icon: '🚇',
-    name: '難波（Namba）',
-    note: '地鐵四橋線直達 2 站，下車即是道頓堀、心齋橋商圈',
-    walk: '電車 3〜4 分',
+    icon: '🐟',
+    name: '大阪市中央批發市場',
+    note: '大阪的築地，場內外食堂群。「中央市場食堂」7:00–14:00（週日休），鮪魚丼與海鮮定食是在地價',
+    walk: '步行 8 分',
+    category: 'food',
+  },
+  {
+    icon: '🍺',
+    name: '福島橫丁・地獄谷',
+    note: '在地人景點頁的酒場橫丁重點，高架橋下個性居酒屋＋約 20 間微型酒吧，傍晚 6 點後才有味道',
+    walk: '步行 12〜15 分',
+    category: 'food',
+  },
+  {
+    icon: '🎆',
+    name: '淀川花火 左岸（梅田）會場',
+    note: '10/17(六) 19:00–20:00 施放。三十萬人散場不用擠電車，走回來就好',
+    walk: '步行 15〜18 分',
     category: 'transit',
   },
   {
     icon: '🚇',
-    name: '心齋橋 / 美國村',
-    note: '四橋線至難波再換乘御堂筋線 1 站，或步行往北約 20 分',
-    walk: '電車 10〜15 分',
+    name: '難波・道頓堀・心齋橋',
+    note: '千日前線玉川站直達難波 4 站，不用轉車，宵夜回程也順',
+    walk: '電車 8 分',
     category: 'transit',
   },
   {
-    icon: '🗼',
-    name: '通天閣（新世界）',
-    note: '沿鶴見橋商店街方向步行可到，大阪庶民名所',
-    walk: '步行 20〜25 分',
+    icon: '🚇',
+    name: '梅田（大阪站）',
+    note: '走到 JR 東西線海老江站，2 站到北新地；JR 大阪站接新快速去京都 29 分',
+    walk: '步行 7 分＋電車 4 分',
+    category: 'transit',
+  },
+  {
+    icon: '🎢',
+    name: 'USJ（環球影城）',
+    note: '玉川不在 JR 環狀線上，需 2〜3 次轉乘。10/15 開園日記得多留 10 分鐘',
+    walk: '電車 30〜35 分',
     category: 'transit',
   },
   {
     icon: '✈️',
-    name: '天下茶屋駅（南海電鐵）',
-    note: '步行或地鐵可達，南海線直達關西機場約 25 分',
-    walk: '步行 15〜20 分',
+    name: '關西機場',
+    note: '千日前線到難波 8 分，轉南海空港急行約 45 分／ラピート 38 分，1 次轉乘',
+    walk: '電車 60 分',
     category: 'transit',
   },
 ]
@@ -162,7 +172,7 @@ const spotsByCategory = categoryOrder.map((cat) => ({
 
 const tripConfig = {
   checkIn: '2026-10-10',
-  checkOut: '2026-10-17',
+  checkOut: '2026-10-19',
   adults: 4,
   get nights() {
     const a = new Date(this.checkIn + 'T00:00:00')
@@ -203,9 +213,10 @@ function formatDate(dateStr: string): string {
   <div class="hotel-page">
     <section class="hero-card">
       <div class="pill confirmed">✓ 住宿已確定</div>
-      <h1>日居・影 ECHO</h1>
+      <h1>玉川 獨棟 110㎡</h1>
       <p class="lede">
-        票選結果出爐！選定花園町的全新裝潢整棟包棟民宿「日居・影 ECHO」。入住
+        改選福島區玉川的三層獨棟包棟民宿（110㎡）。福島區把梅田、京都、淀川花火三條動線同時拉近，
+        花火左岸會場步行 15 分就到。入住
         {{ formatDate(tripConfig.checkIn) }} ~ {{ formatDate(tripConfig.checkOut) }}（{{ tripConfig.nights }} 晚），{{ tripConfig.adults }} 人同行。
       </p>
       <div class="meta">
@@ -251,7 +262,7 @@ function formatDate(dateStr: string): string {
           <div class="listing-specs">
             <span>{{ listing.bedrooms }} 臥</span>
             <span>{{ listing.beds }} 床</span>
-            <span>{{ listing.bathrooms }} 衛</span>
+            <span>{{ listing.bathrooms }}</span>
             <span>{{ listing.maxGuests }} 人</span>
           </div>
           <div class="price-pill" :class="{ selected: listing.id === selectedId }">{{ listing.estPrice }}</div>
@@ -283,10 +294,10 @@ function formatDate(dateStr: string): string {
     <section class="nearby-section">
       <div class="nearby-header">
         <h2>住宿周邊指南</h2>
-        <p class="nearby-sub">花園町駅 4 分鐘步行圈內的實用店家與交通資訊</p>
+        <p class="nearby-sub">玉川駅 4 分鐘步行圈內的實用店家與交通資訊</p>
         <a
           class="map-area-link"
-          href="https://www.google.com/maps/search/%E8%8A%B1%E5%9C%92%E7%94%BA%E9%A7%85+%E5%91%A8%E8%BE%BA/@34.6417,135.497,15z"
+          href="https://www.google.com/maps/search/%E7%8E%89%E5%B7%9D%E9%A7%85+%E5%91%A8%E8%BE%BA/@34.692,135.4736,15z"
           target="_blank"
           rel="noopener"
         >在地圖上查看整區 →</a>
