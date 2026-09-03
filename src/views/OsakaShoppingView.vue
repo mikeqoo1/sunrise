@@ -25,6 +25,13 @@ interface MetaItem {
   value: string;
 }
 
+interface ShoppingRoute {
+  date: string;
+  area: string;
+  summary: string;
+  stops: string[];
+}
+
 const shoppingData: PersonShopping[] = [
   {
     name: "快樂龍",
@@ -72,6 +79,16 @@ const shoppingData: PersonShopping[] = [
           { name: "arena 女款泳衣" },
         ],
       },
+      {
+        category: "工裝衣服",
+        icon: "🧥",
+        items: [
+          {
+            name: "WORKMAN Colors 工裝風機能衣服",
+            note: "Namba CITY 南館 2F，可和 Sports Depo 排同一天",
+          },
+        ],
+      },
     ],
   },
   {
@@ -85,12 +102,24 @@ const shoppingData: PersonShopping[] = [
           { name: "藥粧", note: "品項待補", tbd: true },
         ],
       },
+      {
+        category: "工裝衣服",
+        icon: "🧥",
+        items: [
+          {
+            name: "WORKMAN Colors 工裝風機能衣服",
+            note: "Namba CITY 南館 2F，參考 LINE TODAY 那篇",
+          },
+        ],
+      },
     ],
   },
 ];
 
 const tips: string[] = [
-  "運動用品（AKTR／Spalding 籃球服飾、球襪）在難波なんばパークス Sports Depo 4F 一次購足",
+  "Alpen OSAKA 與 Sports Depo 同屬 Alpen Group，但不是同一間店；旗艦店品類與規模更完整，Sports Depo 適合難波日順路補貨",
+  "運動用品以梅田 Alpen OSAKA 為主逛，AKTR／Spalding 籃球服飾與球襪可再到難波 Sports Depo 4F 比價補齊",
+  "R庭、嘎菲的工裝風機能衣服到 Namba CITY 南館 2F 的 WORKMAN Colors 看，可和 Sports Depo 排同一段難波採買",
   "arena 泳褲/泳鏡/泳衣建議到梅田グランフロント大阪 的 arena shop 專賣店挑，款式最齊",
   "日本免稅門檻：同一店家同日消費滿 ¥5,000（未稅）即可退稅，記得帶護照",
   "嘎菲的藥粧建議在難波/心齋橋的大國、松本清、唐吉訶德比價，唐吉訶德 24 小時最彈性",
@@ -99,7 +128,34 @@ const tips: string[] = [
 const metaItems: MetaItem[] = [
   { label: "出發日", value: "2026/10/10" },
   { label: "成員", value: "快樂龍、大雄、R庭、嘎菲" },
-  { label: "採買日", value: "10/16 自由活動日（難波集中採買）" },
+  { label: "採買日", value: "10/11 梅田旗艦店＋10/16 難波集中採買" },
+];
+
+const shoppingRoutes: ShoppingRoute[] = [
+  {
+    date: "10/11（日）",
+    area: "梅田旗艦店路線",
+    summary: "由西往東走，不必在大阪站兩側來回；Alpen OSAKA 是當天主站。",
+    stops: [
+      "11:00｜阪神梅田 B2 epais 吃午餐",
+      "12:15｜Grand Front Osaka 南館 4F arena shop（約 45～60 分）",
+      "13:30｜穿過大阪站前往 Alpen OSAKA（預留 2～3 小時）",
+      "16:30 後｜阪急／HEP FIVE 一帶＋哥吉拉御守行程",
+    ],
+  },
+  {
+    date: "10/16（五）",
+    area: "難波一方向採買路線",
+    summary: "從美國村一路往南走到難波，買完可直接搭千日前線回玉川。",
+    stops: [
+      "10:00｜AKTR Sports Supply＋SPORTY COFFEE（美國村）",
+      "11:15｜心齋橋筋／道頓堀藥粧比價",
+      "12:30｜道頓堀或難波午餐",
+      "13:30｜なんばパークス 4F Sports Depo（約 1.5～2 小時）",
+      "15:30｜なんばCITY 南館 2F WORKMAN Colors",
+      "17:00 後｜難波補買、吃晚餐後回住宿",
+    ],
+  },
 ];
 
 const hasContent = computed(
@@ -114,7 +170,9 @@ const hasContent = computed(
       <h1>2026 大阪購物清單</h1>
       <p class="lede">
         大阪環球影城之旅，四位成員的購物需求彙整。
-        運動用品集中在難波なんばパークス、藥粧在難波/心齋橋，標記「待補」的品項可隨時更新！
+        運動用品以梅田 Alpen OSAKA 旗艦店為主、難波 Sports Depo 為補充，
+        R庭與嘎菲的工裝風機能衣服在 Namba CITY，
+        藥粧在難波/心齋橋，標記「待補」的品項可隨時更新！
       </p>
       <div v-if="metaItems.length" class="meta">
         <div v-for="m in metaItems" :key="m.label" class="meta-item">
@@ -169,10 +227,29 @@ const hasContent = computed(
       <span class="stores-link-icon">🛍️</span>
       <div class="stores-link-text">
         <span class="stores-link-title">店家位置與必逛地圖</span>
-        <span class="stores-link-desc">Sports Depo・arena shop・藥粧等店家已整理到「美食 &amp; 必逛」</span>
+        <span class="stores-link-desc">Alpen OSAKA・Sports Depo・WORKMAN Colors・arena shop 等店家已整理到「美食 &amp; 必逛」</span>
       </div>
       <span class="stores-link-arrow">前往 →</span>
     </RouterLink>
+
+    <section class="routes-section">
+      <div class="section-heading">
+        <p class="section-kicker">SHOPPING ROUTES</p>
+        <h2>建議逛街路線</h2>
+      </div>
+      <div class="route-grid">
+        <article v-for="route in shoppingRoutes" :key="route.date" class="route-card">
+          <div class="route-header">
+            <span class="route-date">{{ route.date }}</span>
+            <h3>{{ route.area }}</h3>
+          </div>
+          <p class="route-summary">{{ route.summary }}</p>
+          <ol class="route-stops">
+            <li v-for="stop in route.stops" :key="stop">{{ stop }}</li>
+          </ol>
+        </article>
+      </div>
+    </section>
 
     <section v-if="tips.length" class="tips-card">
       <h2>購物小提醒</h2>
@@ -431,6 +508,75 @@ const hasContent = computed(
   flex-shrink: 0;
 }
 
+/* Shopping routes */
+.routes-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.section-kicker {
+  margin: 0 0 0.2rem;
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.route-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.route-card {
+  padding: 1.2rem;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+}
+
+.route-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  margin-bottom: 0.55rem;
+}
+
+.route-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.route-date {
+  color: var(--accent);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.route-summary {
+  margin: 0 0 0.8rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.route-stops {
+  margin: 0;
+  padding-left: 1.3rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.route-stops li + li {
+  margin-top: 0.45rem;
+}
+
 /* Tips */
 .tips-card {
   padding: 1.4rem;
@@ -499,6 +645,16 @@ const hasContent = computed(
 
   .meta {
     grid-template-columns: 1fr;
+  }
+
+  .route-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .route-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.2rem;
   }
 }
 </style>

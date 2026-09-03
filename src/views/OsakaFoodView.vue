@@ -88,13 +88,61 @@ const shoppingSpots: Spot[] = [
     eyebrow: "運動用品・快樂龍/R庭/大雄",
     title: "Sports Depo なんばパークス店",
     blurb:
-      "綜合運動用品大型店，籃球服飾（AKTR／Spalding）、球襪、泳裝品項多，免稅對應。",
+      "Alpen Group 旗下的綜合運動用品店，籃球服飾（AKTR／Spalding）、球襪、泳裝品項多，免稅對應。它不是 Alpen OSAKA，但屬於同一集團；難波採買日順路補貨即可。",
     area: "なんばパークス 4F（直通難波站）",
     links: [
       {
         label: "Google Maps 位置",
         note: "スポーツデポ なんばパークス店",
         url: "https://www.google.com/maps/search/Sports+Depo+Namba+Parks",
+      },
+    ],
+  },
+  {
+    eyebrow: "關西首間旗艦店・快樂龍/R庭/大雄",
+    title: "Alpen OSAKA",
+    blurb:
+      "2026/8/7 開幕的 Alpen 關西首間旗艦店，從 B2F 到 4F 共 6 個樓層，整合運動、戶外與高爾夫用品。和 Sports Depo 同屬 Alpen Group，但規模與品類更完整；建議列為梅田主逛店，預留 2～3 小時。",
+    area: "YANMAR FLYING-Y BUILDING B2F～4F（阪急大阪梅田站前）",
+    links: [
+      {
+        label: "Alpen 官方店鋪頁",
+        note: "最新營業時間、服務與店鋪公告",
+        url: "https://store.alpen-group.jp/Form/RealShop/ShopDetail.aspx?rsid=5600",
+      },
+      {
+        label: "Alpen 官方旗艦店介紹",
+        note: "2026/8/7 開幕與各樓層特色",
+        url: "https://store.alpen-group.jp/Page/Feature/golf_260807_01.aspx",
+      },
+      {
+        label: "Google Maps 位置",
+        note: "Alpen OSAKA｜YANMAR FLYING-Y BUILDING",
+        url: "https://www.google.com/maps/search/Alpen+OSAKA+YANMAR+FLYING-Y+BUILDING",
+      },
+    ],
+  },
+  {
+    eyebrow: "工裝衣服・R庭/嘎菲",
+    title: "WORKMAN Colors Namba CITY Store",
+    blurb:
+      "WORKMAN 的機能服飾／戶外休閒線，適合 R庭、嘎菲看工裝風外套、機能褲、防潑水與防風單品。和 Sports Depo 同在難波商圈，可排自由活動日一起逛。",
+    area: "なんばCITY 南館 2F｜11:00–21:00（南海難波站旁）",
+    links: [
+      {
+        label: "WORKMAN 官方店鋪頁",
+        note: "地址、電話、營業時間與店鋪服務",
+        url: "https://www.workman.co.jp/store/%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%9E%E3%83%B3%E5%A5%B3%E5%AD%90%E3%81%AA%E3%82%93%E3%81%B0city%E5%BA%97",
+      },
+      {
+        label: "LINE TODAY 文章",
+        note: "R庭、嘎菲的工裝風衣服參考",
+        url: "https://today.line.me/tw/v3/article/5y1V0Ey",
+      },
+      {
+        label: "Google Maps 位置",
+        note: "Workman Colors なんばCITY店",
+        url: "https://www.google.com/maps/search/WORKMAN+Colors+Namba+CITY+Store",
       },
     ],
   },

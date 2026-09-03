@@ -47,12 +47,20 @@ const travelDays = [
     title: "飛機✈️＋臨空城 Outlet",
     detail: "台灣虎航 IT710 07:45 TPE → 11:30 KIX，抵達後前往臨空城 Outlet",
   },
-  { date: "10/11(日)", title: "梅田＋哥吉拉御守", detail: "梅田逛街，順路安排哥吉拉御守" },
+  {
+    date: "10/11(日)",
+    title: "梅田＋Alpen OSAKA＋哥吉拉御守",
+    detail: "arena shop → Alpen OSAKA 旗艦店，順路安排哥吉拉御守",
+  },
   { date: "10/12(一)", title: "任天堂博物館", detail: "看狀況決定要不要順遊宇治" },
   { date: "10/13(二)", title: "勝尾寺＋燒肉", detail: "白天前往勝尾寺，晚上跟阿嚕吃燒肉" },
   { date: "10/14(三)", title: "京都嵐山", detail: "京都嵐山一日行程" },
   { date: "10/15(四)", title: "環球影城", detail: "日本環球影城一日行程" },
-  { date: "10/16(五)", title: "待排", detail: "保留彈性，之後再補行程" },
+  {
+    date: "10/16(五)",
+    title: "難波・心齋橋集中採買",
+    detail: "AKTR → 藥粧 → Sports Depo → WORKMAN Colors",
+  },
   {
     date: "10/17(六)",
     title: "梅田＋淀川花火大會🎆",

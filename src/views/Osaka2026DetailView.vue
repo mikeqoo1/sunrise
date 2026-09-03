@@ -19,10 +19,13 @@ const itinerary = [
   },
   {
     date: "10/11(日)",
-    title: "Day 2 — 梅田＋哥吉拉御守",
+    title: "Day 2 — 梅田旗艦店＋哥吉拉御守",
     items: [
-      "梅田逛街與採買",
-      "順路安排哥吉拉御守",
+      "11:00：阪神梅田 B2 epais 吃午餐",
+      "12:15：Grand Front Osaka 南館 4F arena shop（快樂龍、R庭泳裝）",
+      "13:30：Alpen OSAKA 旗艦店，預留 2～3 小時",
+      "註記：Alpen OSAKA 與難波 Sports Depo 同屬 Alpen Group，但不是同一間店；旗艦店品類更完整",
+      "16:30 後：阪急／HEP FIVE 一帶逛街，順路安排哥吉拉御守",
     ],
   },
   {
@@ -59,8 +62,15 @@ const itinerary = [
   },
   {
     date: "10/16(五)",
-    title: "Day 7 — 待排（彈性日）",
-    items: ["保留彈性，之後再補行程"],
+    title: "Day 7 — 難波・心齋橋集中採買",
+    items: [
+      "10:00：AKTR Sports Supply＋SPORTY COFFEE（美國村）",
+      "11:15：沿心齋橋筋往南，途中比較藥粧價格",
+      "12:30：道頓堀或難波午餐",
+      "13:30：なんばパークス 4F Sports Depo，補齊籃球服飾、球襪與泳裝",
+      "15:30：なんばCITY 南館 2F WORKMAN Colors（R庭、嘎菲工裝風機能衣服）",
+      "17:00 後：難波補買、吃晚餐；搭千日前線回玉川",
+    ],
   },
   {
     date: "10/17(六)",
