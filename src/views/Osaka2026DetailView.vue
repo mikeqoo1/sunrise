@@ -62,14 +62,16 @@ const itinerary = [
   },
   {
     date: "10/16(五)",
-    title: "Day 7 — 難波・心齋橋集中採買",
+    title: "Day 7 — 難波・心齋橋＋堺北花田採買",
     items: [
       "10:00：AKTR Sports Supply＋SPORTY COFFEE（美國村）",
       "11:15：沿心齋橋筋往南，途中比較藥粧價格",
       "12:30：道頓堀或難波午餐",
       "13:30：なんばパークス 4F Sports Depo，補齊籃球服飾、球襪與泳裝",
-      "15:30：なんばCITY 南館 2F WORKMAN Colors（R庭、嘎菲工裝風機能衣服）",
-      "17:00 後：難波補買、吃晚餐；搭千日前線回玉川",
+      "15:30：なんばCITY 南館 2F Workman Colors（R庭看工裝風機能衣服）",
+      "16:30：難波站搭御堂筋線直達北花田站，從 2 號出口前往 AEON MALL",
+      "17:00：AEON MALL 堺北花田 2F Workman Colors（嘎菲指定店；預留 1～1.5 小時）",
+      "18:30 後：在 AEON MALL 吃晚餐或補買，再搭御堂筋線回市區",
     ],
   },
   {

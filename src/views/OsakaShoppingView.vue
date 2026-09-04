@@ -85,7 +85,7 @@ const shoppingData: PersonShopping[] = [
         items: [
           {
             name: "WORKMAN Colors 工裝風機能衣服",
-            note: "Namba CITY 南館 2F，可和 Sports Depo 排同一天",
+            note: "R庭：なんばCITY 南館 2F，可和 Sports Depo 排同一段",
           },
         ],
       },
@@ -108,7 +108,7 @@ const shoppingData: PersonShopping[] = [
         items: [
           {
             name: "WORKMAN Colors 工裝風機能衣服",
-            note: "Namba CITY 南館 2F，參考 LINE TODAY 那篇",
+            note: "嘎菲指定：AEON MALL 堺北花田 2F（北花田站 2 號出口）",
           },
         ],
       },
@@ -119,7 +119,8 @@ const shoppingData: PersonShopping[] = [
 const tips: string[] = [
   "Alpen OSAKA 與 Sports Depo 同屬 Alpen Group，但不是同一間店；旗艦店品類與規模更完整，Sports Depo 適合難波日順路補貨",
   "運動用品以梅田 Alpen OSAKA 為主逛，AKTR／Spalding 籃球服飾與球襪可再到難波 Sports Depo 4F 比價補齊",
-  "R庭、嘎菲的工裝風機能衣服到 Namba CITY 南館 2F 的 WORKMAN Colors 看，可和 Sports Depo 排同一段難波採買",
+  "R庭先逛なんばCITY 南館 2F；嘎菲指定的 Workman Colors 在 AEON MALL 堺北花田 2F，從難波搭御堂筋線直達北花田站",
+  "堺北花田店是男女、童裝與鞋都有的日常機能服店，不賣傳統工作服；營業 10:00～21:00，可線上取貨、刷卡與免費修改符合條件的褲長",
   "arena 泳褲/泳鏡/泳衣建議到梅田グランフロント大阪 的 arena shop 專賣店挑，款式最齊",
   "日本免稅門檻：同一店家同日消費滿 ¥5,000（未稅）即可退稅，記得帶護照",
   "嘎菲的藥粧建議在難波/心齋橋的大國、松本清、唐吉訶德比價，唐吉訶德 24 小時最彈性",
@@ -128,7 +129,7 @@ const tips: string[] = [
 const metaItems: MetaItem[] = [
   { label: "出發日", value: "2026/10/10" },
   { label: "成員", value: "快樂龍、大雄、R庭、嘎菲" },
-  { label: "採買日", value: "10/11 梅田旗艦店＋10/16 難波集中採買" },
+  { label: "採買日", value: "10/11 梅田旗艦店＋10/16 難波／堺北花田採買" },
 ];
 
 const shoppingRoutes: ShoppingRoute[] = [
@@ -145,15 +146,17 @@ const shoppingRoutes: ShoppingRoute[] = [
   },
   {
     date: "10/16（五）",
-    area: "難波一方向採買路線",
-    summary: "從美國村一路往南走到難波，買完可直接搭千日前線回玉川。",
+    area: "難波一路向南到堺北花田",
+    summary: "先步行逛完美國村到難波，再搭御堂筋線直達北花田；嘎菲指定店是當天最後主站。",
     stops: [
       "10:00｜AKTR Sports Supply＋SPORTY COFFEE（美國村）",
       "11:15｜心齋橋筋／道頓堀藥粧比價",
       "12:30｜道頓堀或難波午餐",
       "13:30｜なんばパークス 4F Sports Depo（約 1.5～2 小時）",
-      "15:30｜なんばCITY 南館 2F WORKMAN Colors",
-      "17:00 後｜難波補買、吃晚餐後回住宿",
+      "15:30｜なんばCITY 南館 2F Workman Colors（R庭）",
+      "16:30｜難波站搭御堂筋線直達北花田站，走 2 號出口",
+      "17:00｜AEON MALL 堺北花田 2F Workman Colors（嘎菲，約 1～1.5 小時）",
+      "18:30 後｜AEON MALL 晚餐／補買，再搭御堂筋線回市區",
     ],
   },
 ];
@@ -171,7 +174,7 @@ const hasContent = computed(
       <p class="lede">
         大阪環球影城之旅，四位成員的購物需求彙整。
         運動用品以梅田 Alpen OSAKA 旗艦店為主、難波 Sports Depo 為補充，
-        R庭與嘎菲的工裝風機能衣服在 Namba CITY，
+        R庭逛難波店、嘎菲前往指定的 AEON MALL 堺北花田店，
         藥粧在難波/心齋橋，標記「待補」的品項可隨時更新！
       </p>
       <div v-if="metaItems.length" class="meta">

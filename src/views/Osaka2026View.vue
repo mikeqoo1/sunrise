@@ -58,8 +58,8 @@ const travelDays = [
   { date: "10/15(四)", title: "環球影城", detail: "日本環球影城一日行程" },
   {
     date: "10/16(五)",
-    title: "難波・心齋橋集中採買",
-    detail: "AKTR → 藥粧 → Sports Depo → WORKMAN Colors",
+    title: "難波・心齋橋＋堺北花田採買",
+    detail: "AKTR → 藥粧 → Sports Depo → R庭逛難波店 → 嘎菲逛堺北花田店",
   },
   {
     date: "10/17(六)",

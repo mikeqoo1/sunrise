@@ -123,10 +123,10 @@ const shoppingSpots: Spot[] = [
     ],
   },
   {
-    eyebrow: "工裝衣服・R庭/嘎菲",
-    title: "WORKMAN Colors Namba CITY Store",
+    eyebrow: "工裝衣服・R庭",
+    title: "Workman Colors なんばCITY店",
     blurb:
-      "WORKMAN 的機能服飾／戶外休閒線，適合 R庭、嘎菲看工裝風外套、機能褲、防潑水與防風單品。和 Sports Depo 同在難波商圈，可排自由活動日一起逛。",
+      "R庭可在難波採買途中順逛，找機能外套、長褲與日常休閒服；和 Sports Depo 同在難波商圈。",
     area: "なんばCITY 南館 2F｜11:00–21:00（南海難波站旁）",
     links: [
       {
@@ -136,13 +136,37 @@ const shoppingSpots: Spot[] = [
       },
       {
         label: "LINE TODAY 文章",
-        note: "R庭、嘎菲的工裝風衣服參考",
+        note: "工裝風衣服參考",
         url: "https://today.line.me/tw/v3/article/5y1V0Ey",
       },
       {
         label: "Google Maps 位置",
         note: "Workman Colors なんばCITY店",
         url: "https://www.google.com/maps/search/WORKMAN+Colors+Namba+CITY+Store",
+      },
+    ],
+  },
+  {
+    eyebrow: "嘎菲指定・2026/4/17 新開幕",
+    title: "Workman Colors イオンモール堺北花田店",
+    blurb:
+      "主打兼顧設計與機能的「無敵日常服」，有 Men／Women／Unisex／Junior 與鞋類，適合找防風、防雨、保暖、透氣等日常機能單品。這是商場型 Colors 店，不販售傳統工作服；可線上取貨、禮品包裝、刷卡及免費修改符合條件的褲長。",
+    area: "大阪府堺市北區東浅香山町 4丁目1-12・AEON MALL 2F [236]｜10:00–21:00（御堂筋線北花田站 2 號出口即達）",
+    links: [
+      {
+        label: "WORKMAN 官方店鋪頁",
+        note: "地址、營業時間、品類與店鋪服務",
+        url: "https://www.workman.co.jp/store/workman-colors-%E3%82%A4%E3%82%AA%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%AB%E5%A0%BA%E5%8C%97%E8%8A%B1%E7%94%B0%E5%BA%97",
+      },
+      {
+        label: "AEON MALL 店鋪介紹",
+        note: "2F 店號 236、品牌特色與商場資訊",
+        url: "https://sakaikitahanada.aeonmall.jp/shop/2382a7b2-4a9b-47d2-bbe8-7283c79b47d6",
+      },
+      {
+        label: "Google Maps 位置",
+        note: "Workman Colors AEON MALL 堺北花田店",
+        url: "https://www.google.com/maps/search/?api=1&query=Workman+Colors+%E3%82%A4%E3%82%AA%E3%83%B3%E3%83%A2%E3%83%BC%E3%83%AB%E5%A0%BA%E5%8C%97%E8%8A%B1%E7%94%B0%E5%BA%97",
       },
     ],
   },
