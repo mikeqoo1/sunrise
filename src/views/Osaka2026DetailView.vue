@@ -111,6 +111,8 @@ const itinerarySource = [
 interface ScheduleItem {
   id: string;
   text: string;
+  note: string;
+  mapUrl: string;
 }
 
 interface ItineraryDay {
@@ -132,11 +134,14 @@ const createDefaultItinerary = (): ItineraryDay[] =>
     items: day.items.map((text, itemIndex) => ({
       id: `day-${dayIndex + 1}-item-${itemIndex + 1}`,
       text,
+      note: "",
+      mapUrl: "",
     })),
   }));
 
 const itinerary = ref<ItineraryDay[]>(createDefaultItinerary());
 const editingItemId = ref<string | null>(null);
+const expandedItemId = ref<string | null>(null);
 const editDraft = ref("");
 const saveStatus = ref("已儲存於此裝置");
 const draggingItemId = ref<string | null>(null);
@@ -176,13 +181,20 @@ const restoreItinerary = () => {
       const savedItems = stored[day.date];
       if (!Array.isArray(savedItems)) return day;
 
-      const validItems = savedItems.filter(
-        (item): item is ScheduleItem =>
+      const validItems = savedItems
+        .filter(
+          (item): item is Pick<ScheduleItem, "id" | "text"> & Partial<ScheduleItem> =>
           typeof item === "object" &&
           item !== null &&
           typeof (item as ScheduleItem).id === "string" &&
           typeof (item as ScheduleItem).text === "string",
-      );
+        )
+        .map((item) => ({
+          id: item.id,
+          text: item.text,
+          note: typeof item.note === "string" ? item.note : "",
+          mapUrl: typeof item.mapUrl === "string" ? item.mapUrl : "",
+        }));
       return { ...day, items: validItems };
     });
   } catch {
@@ -204,6 +216,31 @@ const cancelEditing = () => {
   editDraft.value = "";
 };
 
+const toggleItemDetails = (item: ScheduleItem) => {
+  if (editingItemId.value || draggingItemId.value) return;
+  expandedItemId.value = expandedItemId.value === item.id ? null : item.id;
+};
+
+const safeMapUrl = (value: string) => {
+  const url = value.trim();
+  if (!url) return "";
+
+  try {
+    const parsed = new URL(/^https?:\/\//i.test(url) ? url : `https://${url}`);
+    return parsed.protocol === "http:" || parsed.protocol === "https:" ? parsed.href : "";
+  } catch {
+    return "";
+  }
+};
+
+const mapSearchUrl = (text: string) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(text.replace(/^.*?：/, ""))}`;
+
+const saveItemDetails = () => {
+  persistItinerary();
+  saveStatus.value = "補充內容已儲存";
+};
+
 const saveEditing = (dayIndex: number, itemIndex: number) => {
   const text = editDraft.value.trim();
   if (!text) return;
@@ -214,7 +251,7 @@ const saveEditing = (dayIndex: number, itemIndex: number) => {
 };
 
 const addItem = (dayIndex: number) => {
-  const item = { id: createItemId(), text: "新增行程" };
+  const item = { id: createItemId(), text: "新增行程", note: "", mapUrl: "" };
   itinerary.value[dayIndex].items.push(item);
   persistItinerary();
   startEditing(item);
@@ -226,6 +263,7 @@ const removeItem = (dayIndex: number, itemIndex: number) => {
 
   itinerary.value[dayIndex].items.splice(itemIndex, 1);
   if (editingItemId.value === item.id) cancelEditing();
+  if (expandedItemId.value === item.id) expandedItemId.value = null;
   persistItinerary();
 };
 
@@ -235,6 +273,7 @@ const resetItinerary = () => {
   itinerary.value = createDefaultItinerary();
   localStorage.removeItem(STORAGE_KEY);
   cancelEditing();
+  expandedItemId.value = null;
   saveStatus.value = "已恢復原始行程";
 };
 
@@ -289,6 +328,7 @@ const startDragging = (event: PointerEvent, dayIndex: number, itemIndex: number)
 
   const item = itinerary.value[dayIndex].items[itemIndex];
   cancelEditing();
+  expandedItemId.value = null;
   draggingItemId.value = item.id;
   dragSourceDayIndex.value = dayIndex;
   dragSourceItemIndex.value = itemIndex;
@@ -484,7 +524,20 @@ const ticketLinks = [
                   <button type="button" class="mini-button" @click="cancelEditing">取消</button>
                 </div>
               </template>
-              <span v-else class="item-text" @dblclick="startEditing(item)">{{ item.text }}</span>
+              <button
+                v-else
+                class="item-summary"
+                type="button"
+                :aria-expanded="expandedItemId === item.id"
+                @click="toggleItemDetails(item)"
+              >
+                <span class="item-text">{{ item.text }}</span>
+                <span v-if="item.note || safeMapUrl(item.mapUrl)" class="detail-indicators" aria-label="已有補充內容">
+                  <span v-if="item.note" title="已有文字說明" aria-hidden="true">📝</span>
+                  <span v-if="safeMapUrl(item.mapUrl)" title="已有地圖" aria-hidden="true">📍</span>
+                </span>
+                <span class="expand-icon" aria-hidden="true">{{ expandedItemId === item.id ? "⌃" : "⌄" }}</span>
+              </button>
             </div>
 
             <div v-if="editingItemId !== item.id" class="item-actions">
@@ -498,6 +551,65 @@ const ticketLinks = [
               >
                 ×
               </button>
+            </div>
+
+            <div v-if="expandedItemId === item.id" class="item-details" @click.stop>
+              <div class="details-heading">
+                <div>
+                  <span class="details-eyebrow">行程補充</span>
+                  <strong>說明與地圖</strong>
+                </div>
+                <button
+                  class="close-details"
+                  type="button"
+                  aria-label="收合補充內容"
+                  @click="expandedItemId = null"
+                >
+                  ×
+                </button>
+              </div>
+
+              <label class="detail-field">
+                <span>文字說明</span>
+                <textarea
+                  v-model="item.note"
+                  rows="3"
+                  placeholder="例如：集合地點、預約資訊、必點餐點或其他提醒…"
+                />
+              </label>
+
+              <label class="detail-field">
+                <span>Google Maps 地圖連結</span>
+                <input
+                  v-model="item.mapUrl"
+                  type="url"
+                  inputmode="url"
+                  placeholder="貼上 maps.app.goo.gl 或 Google Maps 網址"
+                />
+              </label>
+
+              <div class="detail-footer">
+                <div class="map-actions">
+                  <a
+                    v-if="safeMapUrl(item.mapUrl)"
+                    class="map-link saved-map"
+                    :href="safeMapUrl(item.mapUrl)"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    開啟已存地圖 ↗
+                  </a>
+                  <a
+                    class="map-link"
+                    :href="mapSearchUrl(item.text)"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Google Maps 搜尋 ↗
+                  </a>
+                </div>
+                <button class="save-details-button" type="button" @click="saveItemDetails">儲存補充內容</button>
+              </div>
             </div>
           </li>
           <li v-if="day.items.length === 0" class="empty-day">把行程拖到這裡，或新增一個項目</li>
@@ -854,11 +966,43 @@ const ticketLinks = [
   min-width: 0;
 }
 
+.item-summary {
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
 .item-text {
   display: block;
   color: var(--text-muted);
   line-height: 1.5;
   overflow-wrap: anywhere;
+}
+
+.detail-indicators {
+  display: inline-flex;
+  gap: 0.18rem;
+  font-size: 0.78rem;
+}
+
+.expand-icon {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  color: var(--accent);
+  font-size: 1rem;
+  background: rgba(140, 248, 216, 0.08);
+  border-radius: 7px;
 }
 
 .item-actions {
@@ -907,6 +1051,126 @@ const ticketLinks = [
   border: 1px solid var(--accent);
   border-radius: 9px;
   outline: none;
+}
+
+.item-details {
+  grid-column: 2 / -1;
+  min-width: 0;
+  margin: 0.15rem 0 0.25rem;
+  padding: 0.85rem;
+  background:
+    linear-gradient(145deg, rgba(140, 248, 216, 0.065), rgba(125, 240, 255, 0.025)),
+    rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(140, 248, 216, 0.24);
+  border-radius: 11px;
+}
+
+.details-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.details-heading > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.details-heading strong {
+  font-weight: 700;
+}
+
+.details-eyebrow {
+  color: var(--accent);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.close-details {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  place-items: center;
+  padding: 0;
+  color: var(--text-muted);
+  font: inherit;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.detail-field {
+  display: grid;
+  gap: 0.3rem;
+  margin-top: 0.65rem;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.detail-field textarea,
+.detail-field input {
+  width: 100%;
+  padding: 0.58rem 0.65rem;
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  outline: none;
+}
+
+.detail-field textarea {
+  resize: vertical;
+}
+
+.detail-field textarea:focus,
+.detail-field input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(140, 248, 216, 0.08);
+}
+
+.detail-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-top: 0.75rem;
+}
+
+.map-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.map-link {
+  color: var(--text-muted);
+  font-size: 0.76rem;
+}
+
+.map-link:hover,
+.map-link.saved-map {
+  color: var(--accent);
+}
+
+.save-details-button {
+  flex: 0 0 auto;
+  padding: 0.48rem 0.72rem;
+  color: #071018;
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: var(--accent);
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 .edit-actions {
@@ -1060,6 +1324,21 @@ const ticketLinks = [
   .item-actions button {
     width: 32px;
     height: 32px;
+  }
+
+  .item-details {
+    grid-column: 1 / -1;
+    margin-top: 0.25rem;
+    padding: 0.75rem;
+  }
+
+  .detail-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .save-details-button {
+    min-height: 42px;
   }
 
   .drag-preview {
