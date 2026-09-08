@@ -1,6 +1,11 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import { RouterLink, RouterView } from "vue-router";
+import { useRoute } from "vue-router";
 import HelloWorld from "./components/HelloWorld.vue";
+
+const route = useRoute();
+const useCompactMobileShell = computed(() => route.path.startsWith("/2026"));
 
 const base = import.meta.env.BASE_URL;
 const assetUrl = (path: string) => `${base}${path.replace(/^\//, "")}`;
@@ -24,7 +29,7 @@ const navLinks = [
 </script>
 
 <template>
-  <div class="app-shell">
+  <div class="app-shell" :class="{ 'compact-mobile-shell': useCompactMobileShell }">
     <div class="ambient ambient-one" />
     <div class="ambient ambient-two" />
 
@@ -310,7 +315,7 @@ const navLinks = [
 /* Tablet / narrow: drop the sidebar to the top and lay nav out as a grid */
 @media (max-width: 900px) {
   .app-shell {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .sidebar {
@@ -337,6 +342,87 @@ const navLinks = [
 
   .info-card {
     width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    gap: 0.75rem;
+  }
+
+  .sidebar {
+    gap: 0.65rem;
+    padding: 0.8rem;
+    border-radius: 16px;
+  }
+
+  .brand {
+    padding: 0.1rem 0.15rem 0.65rem;
+  }
+
+  .logo-wrap {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+  }
+
+  .logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .side-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    margin-inline: -0.8rem;
+    padding: 0.05rem 0.8rem 0.35rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .side-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-card {
+    flex: 0 0 164px;
+    padding: 0.5rem;
+    scroll-snap-align: start;
+  }
+
+  .nav-card:hover {
+    transform: none;
+  }
+
+  .nav-icon-wrap {
+    width: 36px;
+    height: 36px;
+  }
+
+  .nav-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nav-label {
+    font-size: 0.86rem;
+  }
+
+  .nav-caption {
+    font-size: 0.72rem;
+  }
+
+  .hero,
+  .content-panel {
+    padding: 0.85rem;
+    border-radius: 16px;
+  }
+
+  .compact-mobile-shell .hero {
+    display: none;
   }
 }
 </style>

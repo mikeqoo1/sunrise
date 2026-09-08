@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onBeforeUnmount, ref } from "vue";
 import { RouterLink } from "vue-router";
 
 const tripInfo = {
@@ -89,6 +90,83 @@ const quickLinks = [
   { label: "住宿比較", desc: "已改選 玉川 獨棟 110㎡（福島區）｜周邊指南", to: "/2026hotel" },
   { label: "2025 東京手冊", desc: "延續格式參考", to: "/2025travel" },
 ];
+
+const itineraryTrack = ref<HTMLElement | null>(null);
+const activeDay = ref(0);
+const isDragging = ref(false);
+let scrollFrame = 0;
+let dragStartX = 0;
+let dragStartScrollLeft = 0;
+let activePointerId: number | null = null;
+
+const getDayCards = () => {
+  return Array.from(itineraryTrack.value?.querySelectorAll<HTMLElement>(".day-card") ?? []);
+};
+
+const updateActiveDay = () => {
+  const track = itineraryTrack.value;
+  const cards = getDayCards();
+  if (!track || cards.length === 0) return;
+
+  const trackCenter = track.scrollLeft + track.clientWidth / 2;
+  let closestIndex = 0;
+  let closestDistance = Number.POSITIVE_INFINITY;
+
+  cards.forEach((card, index) => {
+    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+    const distance = Math.abs(trackCenter - cardCenter);
+    if (distance < closestDistance) {
+      closestIndex = index;
+      closestDistance = distance;
+    }
+  });
+
+  activeDay.value = closestIndex;
+};
+
+const onItineraryScroll = () => {
+  window.cancelAnimationFrame(scrollFrame);
+  scrollFrame = window.requestAnimationFrame(updateActiveDay);
+};
+
+const scrollToDay = (index: number) => {
+  const cards = getDayCards();
+  const nextIndex = Math.min(Math.max(index, 0), cards.length - 1);
+  cards[nextIndex]?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+  activeDay.value = nextIndex;
+};
+
+const onDragStart = (event: PointerEvent) => {
+  const track = itineraryTrack.value;
+  if (!track || event.pointerType !== "mouse" || event.button !== 0) return;
+
+  activePointerId = event.pointerId;
+  dragStartX = event.clientX;
+  dragStartScrollLeft = track.scrollLeft;
+  isDragging.value = true;
+  track.setPointerCapture(event.pointerId);
+};
+
+const onDragMove = (event: PointerEvent) => {
+  const track = itineraryTrack.value;
+  if (!track || !isDragging.value || event.pointerId !== activePointerId) return;
+
+  event.preventDefault();
+  track.scrollLeft = dragStartScrollLeft - (event.clientX - dragStartX);
+};
+
+const onDragEnd = (event: PointerEvent) => {
+  const track = itineraryTrack.value;
+  if (!track || event.pointerId !== activePointerId) return;
+
+  if (track.hasPointerCapture(event.pointerId)) track.releasePointerCapture(event.pointerId);
+  isDragging.value = false;
+  activePointerId = null;
+  updateActiveDay();
+  scrollToDay(activeDay.value);
+};
+
+onBeforeUnmount(() => window.cancelAnimationFrame(scrollFrame));
 </script>
 
 <template>
@@ -123,7 +201,10 @@ const quickLinks = [
     </section>
 
     <section class="attractions">
-      <h2 class="section-title">重點行程</h2>
+      <div class="section-heading">
+        <h2 class="section-title">重點行程</h2>
+        <span class="swipe-hint">左右滑動查看更多 <span aria-hidden="true">↔</span></span>
+      </div>
       <div class="attraction-grid">
         <div v-for="item in attractions" :key="item.title" class="attraction-card">
           <span class="attraction-icon">{{ item.icon }}</span>
@@ -140,17 +221,93 @@ const quickLinks = [
             <p class="eyebrow">行程節奏</p>
             <h2>每日摘要</h2>
           </div>
-          <RouterLink class="link" to="/2026travel/detail">看詳細手冊 →</RouterLink>
-        </header>
-        <div class="timeline">
-          <div v-for="item in travelDays" :key="item.date" class="timeline-row">
-            <div class="date">{{ item.date }}</div>
-            <div class="dot" />
-            <div>
-              <p class="title">{{ item.title }}</p>
-              <p class="detail">{{ item.detail }}</p>
-            </div>
+          <div class="card-head-actions">
+            <span class="drag-hint"><span aria-hidden="true">↔</span> 滑動／拖拉卡片</span>
+            <RouterLink class="link" to="/2026travel/detail">看詳細手冊 →</RouterLink>
           </div>
+        </header>
+
+        <div class="day-picker" role="tablist" aria-label="選擇旅遊日期">
+          <button
+            v-for="(item, index) in travelDays"
+            :key="item.date"
+            class="day-chip"
+            :class="{ active: activeDay === index }"
+            type="button"
+            role="tab"
+            :aria-selected="activeDay === index"
+            :aria-controls="`travel-day-${index + 1}`"
+            @click="scrollToDay(index)"
+          >
+            <span>Day {{ index + 1 }}</span>
+            <small>{{ item.date.slice(0, 5) }}</small>
+          </button>
+        </div>
+
+        <div class="itinerary-wrap">
+          <button
+            class="carousel-button previous"
+            type="button"
+            aria-label="上一天"
+            :disabled="activeDay === 0"
+            @click="scrollToDay(activeDay - 1)"
+          >
+            ‹
+          </button>
+          <div
+            ref="itineraryTrack"
+            class="itinerary-track"
+            :class="{ dragging: isDragging }"
+            @scroll.passive="onItineraryScroll"
+            @pointerdown="onDragStart"
+            @pointermove="onDragMove"
+            @pointerup="onDragEnd"
+            @pointercancel="onDragEnd"
+          >
+            <article
+              v-for="(item, index) in travelDays"
+              :id="`travel-day-${index + 1}`"
+              :key="item.date"
+              class="day-card"
+              :class="{ active: activeDay === index }"
+              role="tabpanel"
+              :aria-label="`第 ${index + 1} 天，${item.date}`"
+            >
+              <div class="day-card-top">
+                <span class="day-number">Day {{ String(index + 1).padStart(2, "0") }}</span>
+                <span class="day-date">{{ item.date }}</span>
+              </div>
+              <div class="day-card-marker" aria-hidden="true">
+                <span>{{ index === travelDays.length - 1 ? "🏠" : "●" }}</span>
+              </div>
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.detail }}</p>
+            </article>
+          </div>
+          <button
+            class="carousel-button next"
+            type="button"
+            aria-label="下一天"
+            :disabled="activeDay === travelDays.length - 1"
+            @click="scrollToDay(activeDay + 1)"
+          >
+            ›
+          </button>
+        </div>
+
+        <div class="carousel-status" aria-live="polite">
+          <div class="progress-dots">
+            <button
+              v-for="(_, index) in travelDays"
+              :key="index"
+              type="button"
+              :class="{ active: activeDay === index }"
+              tabindex="-1"
+              :aria-label="`前往第 ${index + 1} 天`"
+              @click="scrollToDay(index)"
+            />
+          </div>
+          <span>{{ activeDay + 1 }} / {{ travelDays.length }}</span>
         </div>
       </article>
 
@@ -180,6 +337,7 @@ const quickLinks = [
             <h2>快速入口</h2>
           </div>
         </header>
+        <p class="mobile-swipe-label">左右滑動快速入口 <span aria-hidden="true">↔</span></p>
         <div class="resource-grid">
           <RouterLink v-for="link in quickLinks" :key="link.label" class="resource-card" :to="link.to">
             <div class="resource-title">{{ link.label }}</div>
@@ -292,7 +450,21 @@ const quickLinks = [
 /* Attractions section */
 .section-title {
   font-size: 1.3rem;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   margin-bottom: 0.8rem;
+}
+
+.swipe-hint,
+.mobile-swipe-label {
+  display: none;
+  color: var(--text-muted);
+  font-size: 0.78rem;
 }
 
 .attractions {
@@ -345,6 +517,11 @@ const quickLinks = [
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
+.days {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
 .card {
   padding: 1.2rem;
   border-radius: 18px;
@@ -361,6 +538,17 @@ const quickLinks = [
   margin-bottom: 0.8rem;
 }
 
+.card-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.drag-hint {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -374,29 +562,11 @@ const quickLinks = [
   font-size: 0.95rem;
 }
 
-.timeline {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-}
-
-.timeline-row {
-  display: grid;
-  grid-template-columns: 120px 16px 1fr;
-  align-items: start;
-  gap: 0.6rem;
-}
-
 .task-list li {
   display: grid;
   grid-template-columns: 16px 1fr;
   align-items: start;
   gap: 0.6rem;
-}
-
-.date {
-  font-weight: 700;
-  letter-spacing: 0.05em;
 }
 
 .dot {
@@ -405,6 +575,216 @@ const quickLinks = [
   border-radius: 50%;
   background: linear-gradient(145deg, #ff9966, #7df0ff);
   margin-top: 6px;
+}
+
+.day-picker {
+  display: flex;
+  gap: 0.45rem;
+  margin-bottom: 0.9rem;
+  padding: 0.15rem 0 0.35rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.day-picker::-webkit-scrollbar,
+.itinerary-track::-webkit-scrollbar,
+.attraction-grid::-webkit-scrollbar,
+.resource-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.day-chip {
+  display: grid;
+  flex: 0 0 auto;
+  gap: 0.05rem;
+  min-width: 74px;
+  padding: 0.45rem 0.7rem;
+  color: var(--text-muted);
+  font: inherit;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.day-chip span {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.day-chip small {
+  font-size: 0.72rem;
+}
+
+.day-chip:hover,
+.day-chip.active {
+  color: #071018;
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.itinerary-wrap {
+  position: relative;
+}
+
+.itinerary-track {
+  display: flex;
+  gap: 0.85rem;
+  padding: 0.2rem max(2.8rem, calc((100% - min(420px, 82%)) / 2)) 0.8rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  cursor: grab;
+  overscroll-behavior-inline: contain;
+  touch-action: auto;
+}
+
+.itinerary-track.dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.day-card {
+  position: relative;
+  flex: 0 0 min(420px, 82%);
+  min-height: 220px;
+  padding: 1.25rem;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(125, 240, 255, 0.16), transparent 32%),
+    linear-gradient(145deg, rgba(255, 153, 102, 0.08), rgba(255, 255, 255, 0.035));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  scroll-snap-align: center;
+  opacity: 0.58;
+  transform: scale(0.96);
+  transition: opacity 0.22s ease, transform 0.22s ease, border-color 0.22s ease;
+}
+
+.day-card.active {
+  border-color: rgba(140, 248, 216, 0.68);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.26);
+  opacity: 1;
+  transform: scale(1);
+}
+
+.day-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.day-number {
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.day-date {
+  padding: 0.22rem 0.55rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.day-card-marker {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 1.1rem 0 0.65rem;
+  color: var(--accent);
+  font-size: 0.72rem;
+}
+
+.day-card-marker::after {
+  width: 72px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  content: "";
+}
+
+.day-card h3 {
+  margin-bottom: 0.35rem;
+  font-size: clamp(1.08rem, 2vw, 1.3rem);
+  font-weight: 700;
+}
+
+.day-card p {
+  color: var(--text-muted);
+  font-size: 0.93rem;
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  padding: 0 0 3px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+  background: rgba(5, 7, 18, 0.82);
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.carousel-button.previous {
+  left: 0.35rem;
+}
+
+.carousel-button.next {
+  right: 0.35rem;
+}
+
+.carousel-button:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.carousel-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.progress-dots {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.progress-dots button {
+  width: 5px;
+  height: 5px;
+  padding: 0;
+  background: var(--border-strong);
+  border: 0;
+  border-radius: 999px;
+  transition: width 0.2s ease, background 0.2s ease;
+}
+
+.progress-dots button.active {
+  width: 18px;
+  background: var(--accent);
 }
 
 .title {
@@ -468,8 +848,126 @@ const quickLinks = [
 }
 
 @media (max-width: 640px) {
-  .timeline-row {
-    grid-template-columns: 96px 16px 1fr;
+  .osaka {
+    gap: 0.85rem;
+  }
+
+  .hero-card,
+  .attractions,
+  .card {
+    padding: 1rem;
+  }
+
+  .hero-card .lede {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .cta-row {
+    flex-wrap: nowrap;
+    margin-inline: -1rem;
+    padding: 0.15rem 1rem 0.55rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .cta-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .btn {
+    flex: 0 0 auto;
+  }
+
+  .meta {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .meta-item:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .section-heading {
+    margin-bottom: 0.55rem;
+  }
+
+  .swipe-hint,
+  .mobile-swipe-label {
+    display: block;
+  }
+
+  .attraction-grid,
+  .resource-grid {
+    display: flex;
+    gap: 0.7rem;
+    margin-inline: -1rem;
+    padding: 0.1rem 1rem 0.55rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .attraction-card {
+    flex: 0 0 84%;
+    scroll-snap-align: start;
+  }
+
+  .resource-card {
+    flex: 0 0 78%;
+    scroll-snap-align: start;
+  }
+
+  .card-head {
+    align-items: flex-start;
+  }
+
+  .card-head-actions {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 0.1rem;
+  }
+
+  .drag-hint {
+    font-size: 0.72rem;
+  }
+
+  .day-picker {
+    margin-inline: -1rem;
+    padding-inline: 1rem;
+  }
+
+  .itinerary-wrap {
+    margin-inline: -1rem;
+  }
+
+  .itinerary-track {
+    padding-inline: 8%;
+  }
+
+  .day-card {
+    flex-basis: 84%;
+    min-height: 230px;
+  }
+
+  .carousel-button {
+    display: none;
+  }
+
+  .mobile-swipe-label {
+    margin: -0.5rem 0 0.55rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .itinerary-track {
+    scroll-behavior: auto;
+  }
+
+  .day-card,
+  .day-chip {
+    transition: none;
   }
 }
 </style>

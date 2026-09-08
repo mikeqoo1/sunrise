@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import { RouterLink } from "vue-router";
 
 const tripHeader = {
@@ -7,7 +8,7 @@ const tripHeader = {
   members: "快樂龍、大雄、R庭、嘎菲",
 };
 
-const itinerary = [
+const itinerarySource = [
   {
     date: "10/10(六)",
     title: "Day 1 — 抵達大阪＋臨空城 Outlet",
@@ -107,6 +108,251 @@ const itinerary = [
   },
 ];
 
+interface ScheduleItem {
+  id: string;
+  text: string;
+}
+
+interface ItineraryDay {
+  date: string;
+  title: string;
+  items: ScheduleItem[];
+}
+
+interface DropTarget {
+  dayIndex: number;
+  itemIndex: number;
+}
+
+const STORAGE_KEY = "osaka-2026-detail-itinerary-v1";
+
+const createDefaultItinerary = (): ItineraryDay[] =>
+  itinerarySource.map((day, dayIndex) => ({
+    ...day,
+    items: day.items.map((text, itemIndex) => ({
+      id: `day-${dayIndex + 1}-item-${itemIndex + 1}`,
+      text,
+    })),
+  }));
+
+const itinerary = ref<ItineraryDay[]>(createDefaultItinerary());
+const editingItemId = ref<string | null>(null);
+const editDraft = ref("");
+const saveStatus = ref("已儲存於此裝置");
+const draggingItemId = ref<string | null>(null);
+const dragSourceDayIndex = ref(-1);
+const dragSourceItemIndex = ref(-1);
+const dropTarget = ref<DropTarget | null>(null);
+const dragPreviewText = ref("");
+const pointerX = ref(0);
+const pointerY = ref(0);
+let activeDragHandle: HTMLElement | null = null;
+let activePointerId: number | null = null;
+let autoScrollFrame = 0;
+let saveStatusTimer = 0;
+
+const createItemId = () =>
+  typeof crypto !== "undefined" && "randomUUID" in crypto
+    ? crypto.randomUUID()
+    : `item-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+
+const persistItinerary = () => {
+  const storedItems = Object.fromEntries(itinerary.value.map((day) => [day.date, day.items]));
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(storedItems));
+  saveStatus.value = "已自動儲存";
+  window.clearTimeout(saveStatusTimer);
+  saveStatusTimer = window.setTimeout(() => {
+    saveStatus.value = "已儲存於此裝置";
+  }, 1200);
+};
+
+const restoreItinerary = () => {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+
+    const stored = JSON.parse(raw) as Record<string, unknown>;
+    itinerary.value = createDefaultItinerary().map((day) => {
+      const savedItems = stored[day.date];
+      if (!Array.isArray(savedItems)) return day;
+
+      const validItems = savedItems.filter(
+        (item): item is ScheduleItem =>
+          typeof item === "object" &&
+          item !== null &&
+          typeof (item as ScheduleItem).id === "string" &&
+          typeof (item as ScheduleItem).text === "string",
+      );
+      return { ...day, items: validItems };
+    });
+  } catch {
+    saveStatus.value = "讀取舊資料失敗，已使用預設行程";
+  }
+};
+
+const startEditing = (item: ScheduleItem) => {
+  if (draggingItemId.value) return;
+  editingItemId.value = item.id;
+  editDraft.value = item.text;
+  void nextTick(() => {
+    document.querySelector<HTMLTextAreaElement>(`[data-editor-id="${item.id}"]`)?.focus();
+  });
+};
+
+const cancelEditing = () => {
+  editingItemId.value = null;
+  editDraft.value = "";
+};
+
+const saveEditing = (dayIndex: number, itemIndex: number) => {
+  const text = editDraft.value.trim();
+  if (!text) return;
+
+  itinerary.value[dayIndex].items[itemIndex].text = text;
+  cancelEditing();
+  persistItinerary();
+};
+
+const addItem = (dayIndex: number) => {
+  const item = { id: createItemId(), text: "新增行程" };
+  itinerary.value[dayIndex].items.push(item);
+  persistItinerary();
+  startEditing(item);
+};
+
+const removeItem = (dayIndex: number, itemIndex: number) => {
+  const item = itinerary.value[dayIndex].items[itemIndex];
+  if (!window.confirm(`確定要刪除「${item.text}」嗎？`)) return;
+
+  itinerary.value[dayIndex].items.splice(itemIndex, 1);
+  if (editingItemId.value === item.id) cancelEditing();
+  persistItinerary();
+};
+
+const resetItinerary = () => {
+  if (!window.confirm("確定要恢復原始行程嗎？目前在此裝置的編輯與排序都會被清除。")) return;
+
+  itinerary.value = createDefaultItinerary();
+  localStorage.removeItem(STORAGE_KEY);
+  cancelEditing();
+  saveStatus.value = "已恢復原始行程";
+};
+
+const isDropBefore = (dayIndex: number, itemIndex: number) =>
+  dropTarget.value?.dayIndex === dayIndex && dropTarget.value.itemIndex === itemIndex;
+
+const isDropAtEnd = (dayIndex: number, itemCount: number) =>
+  draggingItemId.value !== null &&
+  dropTarget.value?.dayIndex === dayIndex &&
+  dropTarget.value.itemIndex === itemCount;
+
+const updateDropTarget = (clientX: number, clientY: number) => {
+  const element = document.elementFromPoint(clientX, clientY) as HTMLElement | null;
+  const dayCard = element?.closest<HTMLElement>(".day-card[data-day-index]");
+  if (!dayCard) return;
+
+  const dayIndex = Number(dayCard.dataset.dayIndex);
+  const itemElements = Array.from(dayCard.querySelectorAll<HTMLElement>(".schedule-item"));
+  let itemIndex = itemElements.length;
+
+  for (let index = 0; index < itemElements.length; index += 1) {
+    const bounds = itemElements[index].getBoundingClientRect();
+    if (clientY < bounds.top + bounds.height / 2) {
+      itemIndex = index;
+      break;
+    }
+  }
+
+  dropTarget.value = { dayIndex, itemIndex };
+};
+
+const runAutoScroll = () => {
+  if (!draggingItemId.value) return;
+
+  const edgeSize = Math.min(130, window.innerHeight * 0.2);
+  let speed = 0;
+  if (pointerY.value < edgeSize) {
+    speed = -Math.ceil((edgeSize - pointerY.value) / 7);
+  } else if (pointerY.value > window.innerHeight - edgeSize) {
+    speed = Math.ceil((pointerY.value - (window.innerHeight - edgeSize)) / 7);
+  }
+
+  if (speed !== 0) {
+    window.scrollBy(0, speed);
+    updateDropTarget(pointerX.value, pointerY.value);
+  }
+  autoScrollFrame = window.requestAnimationFrame(runAutoScroll);
+};
+
+const startDragging = (event: PointerEvent, dayIndex: number, itemIndex: number) => {
+  if (event.pointerType === "mouse" && event.button !== 0) return;
+
+  const item = itinerary.value[dayIndex].items[itemIndex];
+  cancelEditing();
+  draggingItemId.value = item.id;
+  dragSourceDayIndex.value = dayIndex;
+  dragSourceItemIndex.value = itemIndex;
+  dropTarget.value = { dayIndex, itemIndex };
+  dragPreviewText.value = item.text;
+  pointerX.value = event.clientX;
+  pointerY.value = event.clientY;
+  activePointerId = event.pointerId;
+  activeDragHandle = event.currentTarget as HTMLElement;
+  activeDragHandle.setPointerCapture(event.pointerId);
+  window.cancelAnimationFrame(autoScrollFrame);
+  autoScrollFrame = window.requestAnimationFrame(runAutoScroll);
+};
+
+const moveDragging = (event: PointerEvent) => {
+  if (!draggingItemId.value || event.pointerId !== activePointerId) return;
+
+  event.preventDefault();
+  pointerX.value = event.clientX;
+  pointerY.value = event.clientY;
+  updateDropTarget(event.clientX, event.clientY);
+};
+
+const clearDragging = () => {
+  draggingItemId.value = null;
+  dragSourceDayIndex.value = -1;
+  dragSourceItemIndex.value = -1;
+  dropTarget.value = null;
+  dragPreviewText.value = "";
+  activeDragHandle = null;
+  activePointerId = null;
+  window.cancelAnimationFrame(autoScrollFrame);
+};
+
+const finishDragging = (event: PointerEvent) => {
+  if (!draggingItemId.value || event.pointerId !== activePointerId) return;
+
+  if (activeDragHandle?.hasPointerCapture(event.pointerId)) {
+    activeDragHandle.releasePointerCapture(event.pointerId);
+  }
+
+  const sourceDayIndex = dragSourceDayIndex.value;
+  const sourceItemIndex = dragSourceItemIndex.value;
+  const target = dropTarget.value;
+  if (!target) {
+    clearDragging();
+    return;
+  }
+
+  const sourceItems = itinerary.value[sourceDayIndex].items;
+  const [movedItem] = sourceItems.splice(sourceItemIndex, 1);
+  let insertIndex = target.itemIndex;
+  if (target.dayIndex === sourceDayIndex && insertIndex > sourceItemIndex) insertIndex -= 1;
+  itinerary.value[target.dayIndex].items.splice(insertIndex, 0, movedItem);
+  clearDragging();
+  persistItinerary();
+};
+
+onMounted(restoreItinerary);
+onBeforeUnmount(() => {
+  window.cancelAnimationFrame(autoScrollFrame);
+  window.clearTimeout(saveStatusTimer);
+});
+
 const essentialInfo = [
   { label: "航班（去程）", value: "2026/10/10（六）台灣虎航 IT710 07:45 TPE → 11:30 KIX" },
   { label: "航班（回程）", value: "2026/10/19（一）星宇航空 JX821 KIX T1 13:25 → TPE T1 15:20" },
@@ -170,20 +416,109 @@ const ticketLinks = [
     </section>
 
     <section class="itinerary">
-      <h2 class="section-title">每日行程</h2>
-      <article v-for="day in itinerary" :key="day.date" class="day-card">
+      <div class="itinerary-heading">
+        <div>
+          <h2 class="section-title">每日行程</h2>
+          <p class="itinerary-help">
+            <span aria-hidden="true">⠿</span> 按住把手拖曳排序或移到其他天，點鉛筆可修改內容
+          </p>
+        </div>
+        <div class="itinerary-tools">
+          <span class="save-status" aria-live="polite"><span aria-hidden="true">✓</span> {{ saveStatus }}</span>
+          <button class="reset-button" type="button" @click="resetItinerary">恢復原始行程</button>
+        </div>
+      </div>
+
+      <div class="itinerary-board">
+      <article
+        v-for="(day, dayIndex) in itinerary"
+        :key="day.date"
+        class="day-card"
+        :class="{ 'drop-target': dropTarget?.dayIndex === dayIndex }"
+        :data-day-index="dayIndex"
+      >
         <header class="day-header">
           <span class="day-date">{{ day.date }}</span>
           <h3>{{ day.title }}</h3>
         </header>
         <ul class="day-items">
-          <li v-for="(item, idx) in day.items" :key="idx">
-            <div class="dot" />
-            <span>{{ item }}</span>
+          <li
+            v-for="(item, itemIndex) in day.items"
+            :key="item.id"
+            class="schedule-item"
+            :class="{
+              'is-dragging': draggingItemId === item.id,
+              'drop-before': isDropBefore(dayIndex, itemIndex),
+            }"
+            :data-item-id="item.id"
+          >
+            <button
+              class="drag-handle"
+              type="button"
+              :aria-label="`拖曳行程：${item.text}`"
+              title="按住拖曳"
+              @pointerdown="startDragging($event, dayIndex, itemIndex)"
+              @pointermove="moveDragging"
+              @pointerup="finishDragging"
+              @pointercancel="finishDragging"
+            >
+              <span aria-hidden="true">⠿</span>
+            </button>
+
+            <div class="item-content">
+              <template v-if="editingItemId === item.id">
+                <textarea
+                  v-model="editDraft"
+                  class="item-editor"
+                  :data-editor-id="item.id"
+                  rows="2"
+                  aria-label="編輯行程內容"
+                  @keydown.esc="cancelEditing"
+                  @keydown.ctrl.enter="saveEditing(dayIndex, itemIndex)"
+                  @keydown.meta.enter="saveEditing(dayIndex, itemIndex)"
+                />
+                <div class="edit-actions">
+                  <button type="button" class="mini-button save" @click="saveEditing(dayIndex, itemIndex)">
+                    儲存
+                  </button>
+                  <button type="button" class="mini-button" @click="cancelEditing">取消</button>
+                </div>
+              </template>
+              <span v-else class="item-text" @dblclick="startEditing(item)">{{ item.text }}</span>
+            </div>
+
+            <div v-if="editingItemId !== item.id" class="item-actions">
+              <button type="button" aria-label="編輯行程" title="編輯" @click="startEditing(item)">✎</button>
+              <button
+                type="button"
+                class="delete"
+                aria-label="刪除行程"
+                title="刪除"
+                @click="removeItem(dayIndex, itemIndex)"
+              >
+                ×
+              </button>
+            </div>
           </li>
+          <li v-if="day.items.length === 0" class="empty-day">把行程拖到這裡，或新增一個項目</li>
+          <li v-if="isDropAtEnd(dayIndex, day.items.length)" class="drop-at-end" aria-hidden="true" />
         </ul>
+        <button class="add-item-button" type="button" @click="addItem(dayIndex)">
+          <span aria-hidden="true">＋</span> 新增行程
+        </button>
       </article>
+      </div>
     </section>
+
+    <div
+      v-if="draggingItemId"
+      class="drag-preview"
+      :style="{ left: `${pointerX + 14}px`, top: `${pointerY + 14}px` }"
+      aria-hidden="true"
+    >
+      <span>⠿</span>
+      {{ dragPreviewText }}
+    </div>
 
     <div class="bottom-nav">
       <RouterLink class="btn ghost" to="/2026travel">← 回到總覽</RouterLink>
@@ -348,12 +683,72 @@ const ticketLinks = [
   gap: 0.8rem;
 }
 
+.itinerary-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.itinerary-heading .section-title {
+  margin-bottom: 0.15rem;
+}
+
+.itinerary-help {
+  color: var(--text-muted);
+  font-size: 0.86rem;
+}
+
+.itinerary-tools {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.save-status {
+  color: var(--accent);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.reset-button,
+.add-item-button,
+.mini-button,
+.item-actions button,
+.drag-handle {
+  color: var(--text-primary);
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.reset-button {
+  padding: 0.42rem 0.68rem;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  border-radius: 9px;
+}
+
+.itinerary-board {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
 .day-card {
   padding: 1.2rem;
   border-radius: 18px;
   background: var(--surface);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-soft);
+  transition: border-color 0.16s ease, background 0.16s ease;
+}
+
+.day-card.drop-target {
+  background: rgba(140, 248, 216, 0.055);
+  border-color: rgba(140, 248, 216, 0.55);
 }
 
 .day-header {
@@ -385,27 +780,197 @@ const ticketLinks = [
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.45rem;
 }
 
-.day-items li {
+.schedule-item {
+  position: relative;
   display: grid;
-  grid-template-columns: 16px 1fr;
-  align-items: start;
-  gap: 0.6rem;
+  grid-template-columns: 34px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 46px;
+  padding: 0.45rem 0.5rem;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid transparent;
+  border-radius: 11px;
+  transition: opacity 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
-.day-items li span {
+.schedule-item:hover {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: var(--border);
+}
+
+.schedule-item.is-dragging {
+  opacity: 0.25;
+}
+
+.schedule-item.drop-before::before,
+.drop-at-end::before {
+  position: absolute;
+  right: 0.4rem;
+  left: 0.4rem;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 999px;
+  box-shadow: 0 0 14px rgba(140, 248, 216, 0.55);
+  content: "";
+}
+
+.schedule-item.drop-before::before {
+  top: -0.35rem;
+}
+
+.drop-at-end {
+  position: relative;
+  height: 5px;
+  list-style: none;
+}
+
+.drop-at-end::before {
+  top: 1px;
+}
+
+.drag-handle {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  padding: 0;
+  color: var(--accent);
+  font-size: 1.15rem;
+  border-radius: 9px;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+}
+
+.item-content {
+  min-width: 0;
+}
+
+.item-text {
+  display: block;
   color: var(--text-muted);
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #ff9966, #7df0ff);
-  margin-top: 7px;
+.item-actions {
+  display: flex;
+  gap: 0.3rem;
+  opacity: 0.48;
+  transition: opacity 0.15s ease;
+}
+
+.schedule-item:hover .item-actions,
+.item-actions:focus-within {
+  opacity: 1;
+}
+
+.item-actions button {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  padding: 0;
+  border-radius: 8px;
+}
+
+.item-actions button:hover,
+.drag-handle:hover,
+.add-item-button:hover,
+.reset-button:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.item-actions .delete:hover {
+  color: #ff9a9a;
+  border-color: rgba(255, 120, 120, 0.6);
+}
+
+.item-editor {
+  width: 100%;
+  min-height: 68px;
+  padding: 0.55rem 0.65rem;
+  resize: vertical;
+  color: var(--text-primary);
+  font: inherit;
+  line-height: 1.45;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--accent);
+  border-radius: 9px;
+  outline: none;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+}
+
+.mini-button {
+  padding: 0.32rem 0.65rem;
+  font-size: 0.78rem;
+  border-radius: 7px;
+}
+
+.mini-button.save {
+  color: #071018;
+  font-weight: 700;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.add-item-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.75rem;
+  padding: 0.48rem 0.75rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  border-style: dashed;
+  border-radius: 9px;
+}
+
+.empty-day {
+  padding: 1rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+}
+
+.drag-preview {
+  position: fixed;
+  z-index: 1000;
+  width: min(320px, calc(100vw - 2rem));
+  max-height: 88px;
+  padding: 0.7rem 0.8rem;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 0.84rem;
+  line-height: 1.4;
+  background: rgba(16, 23, 38, 0.96);
+  border: 1px solid var(--accent);
+  border-radius: 11px;
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.48);
+  opacity: 0.94;
+  pointer-events: none;
+  transform: rotate(1deg);
+}
+
+.drag-preview span {
+  margin-right: 0.35rem;
+  color: var(--accent);
 }
 
 /* Bottom navigation */
@@ -436,10 +1001,69 @@ const ticketLinks = [
 }
 
 @media (max-width: 640px) {
+  .detail {
+    gap: 0.85rem;
+  }
+
+  .hero-card,
+  .info-section,
+  .day-card {
+    padding: 1rem;
+  }
+
+  .meta {
+    grid-template-columns: 1fr;
+  }
+
   .day-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.4rem;
+  }
+
+  .itinerary-heading {
+    align-items: flex-start;
+  }
+
+  .itinerary-tools {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+  }
+
+  .itinerary-help {
+    max-width: 220px;
+    font-size: 0.76rem;
+  }
+
+  .save-status,
+  .reset-button {
+    font-size: 0.7rem;
+  }
+
+  .schedule-item {
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    margin-inline: -0.35rem;
+    padding: 0.5rem 0.35rem;
+  }
+
+  .drag-handle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .item-actions {
+    flex-direction: column;
+    opacity: 0.82;
+  }
+
+  .item-actions button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .drag-preview {
+    transform: translate(-35%, -115%) rotate(1deg);
   }
 }
 </style>

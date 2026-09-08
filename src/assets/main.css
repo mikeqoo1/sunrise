@@ -17,3 +17,9 @@ a {
 a:hover {
   color: var(--accent);
 }
+
+@media (max-width: 640px) {
+  #app {
+    padding: 0.75rem;
+  }
+}
