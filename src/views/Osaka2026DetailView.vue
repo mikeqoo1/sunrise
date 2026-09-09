@@ -8,6 +8,9 @@ const tripHeader = {
   members: "快樂龍、大雄、R庭、嘎菲",
 };
 
+const FIREWORKS_OFFICIAL_URL = "https://www.yodohanabi.com/faq.html";
+const FIREWORKS_DAY = "10/17(六)";
+
 const itinerarySource = [
   {
     date: "10/10(六)",
@@ -82,12 +85,12 @@ const itinerarySource = [
       "白天：梅田逛街、補伴手禮與藥妝",
       "15:00 前：回住處放東西休息 — 花火日下午開始人潮與交通管制，早點回來",
       "16:00：先到阪急 OASIS 玉川店或 Lawson 買好食物飲料，會場周邊一定大排長龍",
-      "17:00：左岸「梅田會場」開場，從住處步行 15～18 分過去（從梅田走要 25 分，我們近很多）",
+      "⚠️ 重要更正：官方標示梅田側左岸河川敷全面禁止進入，原訂「左岸梅田會場」不可前往；觀覽會場與票券需改排",
       "19:00～20:00：第 38 回なにわ淀川花火大会施放",
-      "20:00 後：步行 15 分回住處，或轉去福島橫丁・地獄谷喝一杯（週六最熱鬧）",
-      "🎫 票券：左岸梅田會場只有「パイプ椅子席（自由席）」，前售 大人 ¥4,500／兒童 ¥2,500（3 歲～小學），附廁所與賣店，入場後自由選位。當日不販售",
-      "⚠️ 今年左岸因高速公路施工，免費觀覽區大幅縮小，強烈建議買付費席，不要賭免費區",
-      "🚇 動線備註：三十萬人散場不用擠電車，走回玉川就好 — 這是改住福島區最大的好處。會場無停車場",
+      "20:00 後：離場路線需待觀覽會場確定後重排；不可再以左岸步行回玉川為前提",
+      "🎫 票券：原規劃的左岸梅田會場自由席資訊作廢，請只依官方最新「協賛觀覽席」售票頁與會場圖購票",
+      "⚠️ 左岸不是免費區縮小，而是梅田側河川敷全面禁止進入；請勿前往或在附近占位",
+      "🚇 動線備註：改以右岸（十三側）等官方開放會場重新規劃，最寄站與散場交通需另行確認",
     ],
   },
   {
@@ -164,6 +167,29 @@ const defaultMapUrlFor = (itemId: string) => {
   return query ? googleMapsSearchUrl(query) : "";
 };
 
+const legacyFireworksTextUpdates: Record<string, { from: string; to: string }> = {
+  "day-8-item-4": {
+    from: "17:00：左岸「梅田會場」開場，從住處步行 15～18 分過去（從梅田走要 25 分，我們近很多）",
+    to: itinerarySource[7].items[3],
+  },
+  "day-8-item-6": {
+    from: "20:00 後：步行 15 分回住處，或轉去福島橫丁・地獄谷喝一杯（週六最熱鬧）",
+    to: itinerarySource[7].items[5],
+  },
+  "day-8-item-7": {
+    from: "🎫 票券：左岸梅田會場只有「パイプ椅子席（自由席）」，前售 大人 ¥4,500／兒童 ¥2,500（3 歲～小學），附廁所與賣店，入場後自由選位。當日不販售",
+    to: itinerarySource[7].items[6],
+  },
+  "day-8-item-8": {
+    from: "⚠️ 今年左岸因高速公路施工，免費觀覽區大幅縮小，強烈建議買付費席，不要賭免費區",
+    to: itinerarySource[7].items[7],
+  },
+  "day-8-item-9": {
+    from: "🚇 動線備註：三十萬人散場不用擠電車，走回玉川就好 — 這是改住福島區最大的好處。會場無停車場",
+    to: itinerarySource[7].items[8],
+  },
+};
+
 const createDefaultItinerary = (): ItineraryDay[] =>
   itinerarySource.map((day, dayIndex) => ({
     ...day,
@@ -225,15 +251,18 @@ const restoreItinerary = () => {
           typeof (item as ScheduleItem).id === "string" &&
           typeof (item as ScheduleItem).text === "string",
         )
-        .map((item) => ({
-          id: item.id,
-          text: item.text,
-          note: typeof item.note === "string" ? item.note : "",
-          mapUrl:
-            typeof item.mapUrl === "string" && item.mapUrl.trim()
-              ? item.mapUrl
-              : defaultMapUrlFor(item.id),
-        }));
+        .map((item) => {
+          const safetyUpdate = legacyFireworksTextUpdates[item.id];
+          return {
+            id: item.id,
+            text: safetyUpdate?.from === item.text ? safetyUpdate.to : item.text,
+            note: typeof item.note === "string" ? item.note : "",
+            mapUrl:
+              typeof item.mapUrl === "string" && item.mapUrl.trim()
+                ? item.mapUrl
+                : defaultMapUrlFor(item.id),
+          };
+        });
       return { ...day, items: validItems };
     });
   } catch {
@@ -466,6 +495,21 @@ const ticketLinks = [
       </div>
     </section>
 
+    <section id="fireworks-warning" class="critical-alert" role="alert">
+      <div class="critical-alert-icon" aria-hidden="true">⚠️</div>
+      <div class="critical-alert-copy">
+        <p class="critical-alert-eyebrow">10/17 行程重要更正</p>
+        <h2>梅田側左岸河川敷全面禁止進入</h2>
+        <p>
+          花火大會官方 FAQ 目前明確標示：因高速道路施工，淀川左岸（梅田側河川敷）全面禁止進入。
+          原訂「左岸梅田會場」、左岸自由席與步行回玉川的規劃均不可沿用，請改依官方最新會場圖與售票資訊重新安排。
+        </p>
+      </div>
+      <a :href="FIREWORKS_OFFICIAL_URL" target="_blank" rel="noopener noreferrer" class="critical-alert-link">
+        查看官方公告 ↗
+      </a>
+    </section>
+
     <section class="info-section">
       <h2 class="section-title">行前資訊</h2>
       <div class="info-grid">
@@ -512,13 +556,20 @@ const ticketLinks = [
         v-for="(day, dayIndex) in itinerary"
         :key="day.date"
         class="day-card"
-        :class="{ 'drop-target': dropTarget?.dayIndex === dayIndex }"
+        :class="{
+          'drop-target': dropTarget?.dayIndex === dayIndex,
+          'has-official-alert': day.date === FIREWORKS_DAY,
+        }"
         :data-day-index="dayIndex"
       >
         <header class="day-header">
           <span class="day-date">{{ day.date }}</span>
           <h3>{{ day.title }}</h3>
         </header>
+        <a v-if="day.date === FIREWORKS_DAY" class="day-alert-link" href="#fireworks-warning">
+          <span aria-hidden="true">⚠️</span>
+          此日原左岸行程已作廢，請先查看上方官方警示
+        </a>
         <ul class="day-items">
           <li
             v-for="(item, itemIndex) in day.items"
@@ -725,6 +776,66 @@ const ticketLinks = [
   margin: 0.4rem 0 0;
 }
 
+.critical-alert {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.2rem;
+  background:
+    radial-gradient(circle at 0 0, rgba(255, 177, 66, 0.2), transparent 42%),
+    rgba(255, 105, 90, 0.09);
+  border: 1px solid rgba(255, 150, 95, 0.58);
+  border-radius: 18px;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.24);
+}
+
+.critical-alert-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  font-size: 1.45rem;
+  background: rgba(255, 177, 66, 0.13);
+  border: 1px solid rgba(255, 177, 66, 0.32);
+  border-radius: 14px;
+}
+
+.critical-alert-copy h2 {
+  margin: 0.08rem 0 0.25rem;
+  color: #ffd8b6;
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.critical-alert-copy p:last-child {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.critical-alert-eyebrow {
+  color: #ffb142;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.critical-alert-link {
+  padding: 0.52rem 0.7rem;
+  color: #ffd8b6;
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  border: 1px solid rgba(255, 177, 66, 0.36);
+  border-radius: 9px;
+}
+
+.critical-alert-link:hover {
+  color: #fff;
+  border-color: #ffb142;
+}
+
 .meta {
   margin-top: 1rem;
   display: grid;
@@ -899,6 +1010,23 @@ const ticketLinks = [
 .day-card.drop-target {
   background: rgba(140, 248, 216, 0.055);
   border-color: rgba(140, 248, 216, 0.55);
+}
+
+.day-card.has-official-alert {
+  border-color: rgba(255, 150, 95, 0.5);
+}
+
+.day-alert-link {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: -0.15rem 0 0.75rem;
+  padding: 0.55rem 0.65rem;
+  color: #ffd8b6;
+  font-size: 0.8rem;
+  background: rgba(255, 105, 90, 0.08);
+  border: 1px solid rgba(255, 150, 95, 0.26);
+  border-radius: 9px;
 }
 
 .day-header {
@@ -1308,6 +1436,7 @@ const ticketLinks = [
   }
 
   .hero-card,
+  .critical-alert,
   .info-section,
   .day-card {
     padding: 1rem;
@@ -1315,6 +1444,32 @@ const ticketLinks = [
 
   .meta {
     grid-template-columns: 1fr;
+  }
+
+  .critical-alert {
+    grid-template-columns: 40px minmax(0, 1fr);
+    align-items: start;
+    gap: 0.7rem;
+  }
+
+  .critical-alert-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.15rem;
+    border-radius: 11px;
+  }
+
+  .critical-alert-copy h2 {
+    font-size: 1rem;
+  }
+
+  .critical-alert-copy p:last-child {
+    font-size: 0.8rem;
+  }
+
+  .critical-alert-link {
+    grid-column: 2;
+    justify-self: start;
   }
 
   .day-header {
