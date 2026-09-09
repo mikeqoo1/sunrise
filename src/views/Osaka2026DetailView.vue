@@ -128,6 +128,42 @@ interface DropTarget {
 
 const STORAGE_KEY = "osaka-2026-detail-itinerary-v1";
 
+const googleMapsSearchUrl = (query: string) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+
+const defaultMapQueries: Record<string, string> = {
+  "day-1-item-1": "關西國際機場 第1航廈",
+  "day-1-item-2": "りんくうプレミアム・アウトレット 大阪府泉佐野市りんくう往来南3-28",
+  "day-2-item-1": "epais 阪神梅田本店 B2 大阪市北区梅田1-13-13",
+  "day-2-item-2": "arena shop 大阪 グランフロント大阪 南館4階 大阪市北区大深町4-20",
+  "day-2-item-3": "Alpen OSAKA 大阪市北区茶屋町1-32 YANMAR FLYING-Y BUILDING",
+  "day-2-item-5": "HEP FIVE 大阪市北区角田町5-15",
+  "day-3-item-1": "ニンテンドーミュージアム 京都府宇治市小倉町神楽田56",
+  "day-3-item-2": "宇治駅 京都",
+  "day-4-item-1": "勝尾寺 大阪府箕面市勝尾寺",
+  "day-5-item-1": "渡月橋 京都市右京区嵯峨中ノ島町",
+  "day-5-item-2": "竹林の小径 京都 嵐山",
+  "day-6-item-1": "ユニバーサル・スタジオ・ジャパン 大阪市此花区桜島2-1-33",
+  "day-6-item-2": "ユニバーサル・スタジオ・ジャパン 大阪市此花区桜島2-1-33",
+  "day-7-item-1": "AKTR Sports Supply AMEMURA 大阪市中央区西心斎橋2-10-13-101",
+  "day-7-item-2": "心斎橋筋商店街 大阪",
+  "day-7-item-3": "道頓堀 大阪",
+  "day-7-item-4": "スポーツデポ なんばパークス店 大阪市浪速区難波中2-10-70 4階",
+  "day-7-item-5": "Workman Colors なんばCITY店 大阪市中央区難波5-1-60 南館2階",
+  "day-7-item-6": "イオンモール堺北花田 大阪府堺市北区東浅香山町4-1-12",
+  "day-7-item-7": "Workman Colors イオンモール堺北花田店 大阪府堺市北区東浅香山町4-1-12 2階",
+  "day-7-item-8": "イオンモール堺北花田 大阪府堺市北区東浅香山町4-1-12",
+  "day-8-item-3": "阪急オアシス 福島玉川店 大阪市福島区玉川4-11-8",
+  "day-10-item-2": "關西國際機場 第1航廈",
+  "day-10-item-3": "關西國際機場 第1航廈",
+  "day-10-item-4": "關西國際機場 第1航廈",
+};
+
+const defaultMapUrlFor = (itemId: string) => {
+  const query = defaultMapQueries[itemId];
+  return query ? googleMapsSearchUrl(query) : "";
+};
+
 const createDefaultItinerary = (): ItineraryDay[] =>
   itinerarySource.map((day, dayIndex) => ({
     ...day,
@@ -135,7 +171,7 @@ const createDefaultItinerary = (): ItineraryDay[] =>
       id: `day-${dayIndex + 1}-item-${itemIndex + 1}`,
       text,
       note: "",
-      mapUrl: "",
+      mapUrl: defaultMapUrlFor(`day-${dayIndex + 1}-item-${itemIndex + 1}`),
     })),
   }));
 
@@ -193,7 +229,10 @@ const restoreItinerary = () => {
           id: item.id,
           text: item.text,
           note: typeof item.note === "string" ? item.note : "",
-          mapUrl: typeof item.mapUrl === "string" ? item.mapUrl : "",
+          mapUrl:
+            typeof item.mapUrl === "string" && item.mapUrl.trim()
+              ? item.mapUrl
+              : defaultMapUrlFor(item.id),
         }));
       return { ...day, items: validItems };
     });
@@ -233,8 +272,7 @@ const safeMapUrl = (value: string) => {
   }
 };
 
-const mapSearchUrl = (text: string) =>
-  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(text.replace(/^.*?：/, ""))}`;
+const mapSearchUrl = (text: string) => googleMapsSearchUrl(text.replace(/^.*?：/, ""));
 
 const saveItemDetails = () => {
   persistItinerary();
