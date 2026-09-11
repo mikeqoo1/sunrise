@@ -129,5 +129,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# 阿爾宙斯
+# Arceus: nested runtime copies ignored; root .arceus/ tracks changes/ + config.json
+# (its runtime state is handled by .arceus/.gitignore)
 .arceus/
+!/.arceus/

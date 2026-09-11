@@ -1,0 +1,9 @@
+{
+  "verification": {
+    "typecheck": "npm run type-check",
+    "lint": "npm run lint",
+    "test": "npm run test:unit",
+    "build": "npm run build"
+  },
+  "maxRetries": 3
+}
