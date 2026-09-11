@@ -13,6 +13,8 @@ const pics: Pic[] = [
     { src: p('快樂龍v3.jpeg'), name: '快樂龍v3' },
     { src: p('快樂龍v3(深)球衣.jpeg'), name: '快樂龍v3(深)球衣' },
     { src: p('快樂龍v3(深)球褲.jpeg'), name: '快樂龍v3(深)球褲' },
+    { src: p('四代-快樂龍球衣(深).jpeg'), name: '四代-快樂龍球衣(深)' },
+    { src: p('四代-快樂龍球衣(淺).jpeg'), name: '四代-快樂龍球衣(淺)' },
 ];
 </script>
 
