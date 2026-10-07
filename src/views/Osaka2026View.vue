@@ -2,6 +2,8 @@
 import { onBeforeUnmount, ref } from "vue";
 import { RouterLink } from "vue-router";
 
+const COLLAB_NOTE_URL = "https://hackmd.io/@JPtrivial/Sk1JZjLuMx";
+
 const tripInfo = {
   title: "2026 大阪之旅",
   dates: "2026/10/10 ~ 2026/10/19",
@@ -17,13 +19,13 @@ const attractions = [
   },
   {
     icon: "🎮",
-    title: "任天堂博物館",
-    desc: "京都宇治的任天堂博物館，從紅白機到 Switch 的完整歷史，互動展區體驗經典遊戲的幕後開發。",
+    title: "宇治＋任天堂博物館",
+    desc: "從京阪宇治沿宇治川、平等院與表參道單向散步，再前往任天堂博物館 13:00～13:30 入場。",
   },
   {
     icon: "🏯",
-    title: "勝尾寺",
-    desc: "前往箕面的勝尾寺走走，看看滿山達摩與秋日山景，晚上再和阿嚕一起吃燒肉。",
+    title: "勝尾寺＋箕面",
+    desc: "前往箕面的勝尾寺看滿山達摩；體力許可再接箕面瀑布，下坡走往阪急箕面站。",
   },
   {
     icon: "🦖",
@@ -33,12 +35,17 @@ const attractions = [
   {
     icon: "🎆",
     title: "淀川花火大會",
-    desc: "第 38 回なにわ淀川花火大会破例從 8 月移到 10/17(六)，正好撞上我們的彈性日。住福島區走 15 分就到左岸會場，散場不用擠電車。",
+    desc: "10/17 白天先逛難波，晚上看第 38 回なにわ淀川花火大会。左岸河川敷禁止進入，需依官方開放會場重排動線。",
   },
   {
     icon: "🎋",
-    title: "京都嵐山",
-    desc: "安排京都嵐山一日行程，漫步竹林、渡月橋與周邊街區。",
+    title: "京都寶可夢＋嵐山",
+    desc: "先找阿嚕想要的寶可夢徽章，再安排嵐山竹林、渡月橋；下雨則改走新京極與寺町京極。",
+  },
+  {
+    icon: "⚓",
+    title: "神戶一日遊",
+    desc: "10/18 前往神戶三宮與北野異人館街，晚餐以神戶牛為候選，餐廳仍待確認。",
   },
 ];
 
@@ -50,33 +57,37 @@ const travelDays = [
   },
   {
     date: "10/11(日)",
-    title: "梅田＋Alpen OSAKA＋哥吉拉御守",
-    detail: "arena shop → Alpen OSAKA 旗艦店，順路安排哥吉拉御守",
+    title: "梅田商場一日遊＋哥吉拉御守",
+    detail: "GRAND GREEN／GRAND FRONT → Alpen OSAKA → 哥吉拉御守 → 梅田藍天大廈",
   },
-  { date: "10/12(一)", title: "任天堂博物館", detail: "看狀況決定要不要順遊宇治" },
-  { date: "10/13(二)", title: "勝尾寺＋燒肉", detail: "白天前往勝尾寺，晚上跟阿嚕吃燒肉" },
-  { date: "10/14(三)", title: "京都嵐山", detail: "京都嵐山一日行程" },
-  { date: "10/15(四)", title: "環球影城", detail: "日本環球影城一日行程" },
+  { date: "10/12(一)", title: "宇治＋任天堂博物館", detail: "宇治單向散步，博物館 13:00～13:30 入場" },
+  { date: "10/13(二)", title: "INDIGENA＋中崎町＋但馬屋", detail: "上午保留彈性，14:00 逛中崎町，晚上跟阿嚕聚餐" },
+  { date: "10/14(三)", title: "京都寶可夢＋嵐山", detail: "找寶可夢徽章、逛嵐山；雨備為新京極＋寺町京極" },
+  { date: "10/15(四)", title: "環球影城", detail: "萬聖節寶可夢遊行＋超級任天堂世界" },
   {
     date: "10/16(五)",
-    title: "難波・心齋橋＋堺北花田採買",
-    detail: "AKTR → 藥粧 → Sports Depo → R庭逛難波店 → 嘎菲逛堺北花田店",
+    title: "勝尾寺＋箕面",
+    detail: "達摩、箕面瀑布；晚間好市多／心齋橋待大家確認",
   },
   {
     date: "10/17(六)",
-    title: "梅田＋淀川花火大會🎆",
-    detail: "白天逛梅田，晚上欣賞第 38 回なにわ淀川花火大會",
+    title: "難波＋淀川花火大會🎆",
+    detail: "白天難波採買，提早前往官方開放的右岸會場",
   },
-  { date: "10/18(日)", title: "待排", detail: "保留彈性，之後再補行程" },
-  { date: "10/19(一)", title: "回家✈️", detail: "星宇航空 JX821 13:25 自關西機場起飛" },
+  { date: "10/18(日)", title: "神戶一日遊", detail: "神戶三宮＋北野異人館街，晚餐候選神戶牛" },
+  { date: "10/19(一)", title: "回家✈️", detail: "10:30 抵達機場，星宇 JX821 13:25 起飛" },
 ];
 
 const prepTasks = [
   { title: "環球票", detail: "確認 USJ 門票、Express Pass 與任天堂世界入場方式" },
   {
-    title: "淀川花火票 — 8/1(六) 10:00 開賣",
+    title: "淀川花火票與右岸動線",
     detail:
-      "左岸梅田會場自由席 大人 ¥4,500／兒童 ¥2,500，4 人約 ¥18,000。只有官網賣，無電話預約、當日不販售",
+      "左岸梅田側河川敷全面禁止進入；只依官方最新協賛觀覽席、會場圖與交通管制資訊購票",
+  },
+  {
+    title: "任天堂博物館",
+    detail: "確認抽選／購票完成，入場時段為 10/12 13:00～13:30",
   },
 ];
 
@@ -180,6 +191,7 @@ onBeforeUnmount(() => window.cancelAnimationFrame(scrollFrame));
       </p>
       <div class="cta-row">
         <RouterLink class="btn primary" to="/2026travel/detail">查看詳細手冊</RouterLink>
+        <a class="btn ghost" :href="COLLAB_NOTE_URL" target="_blank" rel="noopener noreferrer">阿庭 × 嘎菲共編筆記 ↗</a>
         <RouterLink class="btn ghost" to="/2026shopping">大阪購物清單</RouterLink>
         <RouterLink class="btn ghost" to="/2026food">美食 &amp; 必逛</RouterLink>
         <RouterLink class="btn ghost" to="/travellist">行前打包清單</RouterLink>
@@ -339,6 +351,11 @@ onBeforeUnmount(() => window.cancelAnimationFrame(scrollFrame));
         </header>
         <p class="mobile-swipe-label">左右滑動快速入口 <span aria-hidden="true">↔</span></p>
         <div class="resource-grid">
+          <a class="resource-card source-card" :href="COLLAB_NOTE_URL" target="_blank" rel="noopener noreferrer">
+            <div class="resource-title">📝 阿庭 × 嘎菲共編筆記</div>
+            <p class="resource-desc">原始 HackMD 行程、圖片與交通研究</p>
+            <span class="arrow">開啟原稿 ↗</span>
+          </a>
           <RouterLink v-for="link in quickLinks" :key="link.label" class="resource-card" :to="link.to">
             <div class="resource-title">{{ link.label }}</div>
             <p class="resource-desc">{{ link.desc }}</p>
@@ -814,6 +831,13 @@ onBeforeUnmount(() => window.cancelAnimationFrame(scrollFrame));
 .resource-card:hover {
   transform: translateY(-3px);
   border-color: var(--accent);
+}
+
+.source-card {
+  background:
+    radial-gradient(circle at 100% 0, rgba(125, 240, 255, 0.16), transparent 46%),
+    rgba(125, 240, 255, 0.05);
+  border-color: rgba(125, 240, 255, 0.3);
 }
 
 .resource-title {

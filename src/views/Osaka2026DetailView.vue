@@ -10,6 +10,7 @@ const tripHeader = {
 
 const FIREWORKS_OFFICIAL_URL = "https://www.yodohanabi.com/faq.html";
 const FIREWORKS_DAY = "10/17(六)";
+const COLLAB_NOTE_URL = "https://hackmd.io/@JPtrivial/Sk1JZjLuMx";
 
 const itinerarySource = [
   {
@@ -18,42 +19,53 @@ const itinerarySource = [
     items: [
       "航班：台灣虎航 IT710，07:45 TPE → 11:30 KIX",
       "抵達後：前往臨空城 Outlet 採買",
-      "採買結束後：前往住宿、辦理入住",
+      "晚餐候選：Dining One Karubi 燒肉吃到飽／Tenkichi 天丼",
+      "16:00 後：前往住宿、辦理入住",
     ],
   },
   {
     date: "10/11(日)",
-    title: "Day 2 — 梅田旗艦店＋哥吉拉御守",
+    title: "Day 2 — 梅田商場一日遊＋哥吉拉御守",
     items: [
-      "11:00：阪神梅田 B2 epais 吃午餐",
-      "12:15：Grand Front Osaka 南館 4F arena shop（快樂龍、R庭泳裝）",
-      "13:30：Alpen OSAKA 旗艦店，預留 2～3 小時",
-      "註記：Alpen OSAKA 與難波 Sports Depo 同屬 Alpen Group，但不是同一間店；旗艦店品類更完整",
-      "16:30 後：阪急／HEP FIVE 一帶逛街，順路安排哥吉拉御守",
+      "午餐：螃蟹料理（餐廳待確認）；備選為 KITTE 大阪壽喜燒商業午餐",
+      "GRAND GREEN OSAKA＋GRAND FRONT OSAKA 逛街",
+      "Grand Front Osaka 南館 4F arena shop（快樂龍、R庭泳裝）",
+      "Alpen OSAKA 旗艦店，運動／戶外用品樓層完整，建議預留 2～3 小時",
+      "綱敷天神社御旅社：週六、日 13:00～17:00 販售哥吉拉御守",
+      "梅田藍天大廈：日落約 17:00～17:45，週末建議提早入場（需與御守時間一起排順序）",
     ],
   },
   {
     date: "10/12(一)",
-    title: "Day 3 — 任天堂博物館",
+    title: "Day 3 — 宇治散步＋任天堂博物館",
     items: [
-      "前往京都宇治的任天堂博物館（需提前抽選預約）",
-      "看當天時間與體力，決定是否順遊宇治",
+      "日本國定假日（體育之日）：JR 野田 → 京橋 → 中書島 → 京阪宇治",
+      "宇治單向散步：京阪宇治 → 宇治川 → 平等院庭園 → 表參道 → JR 宇治",
+      "JR 宇治 → JR 小倉後步行約 600 公尺；也可配合時刻改搭 64 號公車",
+      "任天堂博物館 13:00～13:30 入場（需提前抽選／預約）",
+      "若還有時間與體力，回程可到京都車站拍照、吃晚餐",
     ],
   },
   {
     date: "10/13(二)",
-    title: "Day 4 — 勝尾寺＋阿嚕燒肉聚餐",
+    title: "Day 4 — INDIGENA＋中崎町＋阿嚕聚餐",
     items: [
-      "白天：前往勝尾寺",
-      "晚上：跟阿嚕一起吃燒肉",
+      "09:00～10:00：Bread, Espresso and Sakaisuji Club 早餐",
+      "10:15～12:00：可替換區（大阪交易所／北濱中之島散步／梅田商場／咖啡店休息）",
+      "INDIGENA：店家與停留時段待確認",
+      "14:00～17:00：中崎町散步、逛小店",
+      "17:00 後：回東梅田，和阿嚕到但馬屋吃燒肉",
     ],
   },
   {
     date: "10/14(三)",
-    title: "Day 5 — 京都嵐山",
+    title: "Day 5 — 京都寶可夢＋嵐山",
     items: [
-      "京都嵐山一日行程",
-      "竹林、渡月橋與周邊街區可依當天狀況安排",
+      "京都寶可夢中心：阿嚕想找徽章，先確認當日庫存與營業時間",
+      "京都市區候選：御金神社、新風館（與嵐山動線需再縮減）",
+      "嵐山：竹林、渡月橋與周邊街區；當地也是湯豆腐發源地之一",
+      "用餐方向：豬排；若在嵐山也可改吃湯豆腐",
+      "雨備：新京極＋寺町京極商店街",
     ],
   },
   {
@@ -61,30 +73,27 @@ const itinerarySource = [
     title: "Day 6 — 環球影城",
     items: [
       "日本環球影城一日行程",
-      "確認寶可夢遊行、超級任天堂世界與 Express Pass 時段",
+      "寶可夢萬聖節遊行筆記時段：13:00 開始、約 40 分鐘（出發前再查官方當日時間）",
+      "確認超級任天堂世界與 Express Pass 入場時段",
     ],
   },
   {
     date: "10/16(五)",
-    title: "Day 7 — 難波・心齋橋＋堺北花田採買",
+    title: "Day 7 — 勝尾寺＋箕面（晚間待決定）",
     items: [
-      "10:00：AKTR Sports Supply＋SPORTY COFFEE（美國村）",
-      "11:15：沿心齋橋筋往南，途中比較藥粧價格",
-      "12:30：道頓堀或難波午餐",
-      "13:30：なんばパークス 4F Sports Depo，補齊籃球服飾、球襪與泳裝",
-      "15:30：なんばCITY 南館 2F Workman Colors（R庭看工裝風機能衣服）",
-      "16:30：難波站搭御堂筋線直達北花田站，從 2 號出口前往 AEON MALL",
-      "17:00：AEON MALL 堺北花田 2F Workman Colors（嘎菲指定店；預留 1～1.5 小時）",
-      "18:30 後：在 AEON MALL 吃晚餐或補買，再搭御堂筋線回市區",
+      "前往箕面萱野，轉搭 30 號巴士（8 號月台）或 4 人分攤計程車前往勝尾寺",
+      "勝尾寺：看滿山達摩；箕面萱野至寺院沿路餐飲少，先安排用餐",
+      "體力許可可搭計程車至箕面瀑布附近，再沿下坡景點走往阪急箕面站",
+      "⚠️ 共編筆記摘要寫『好市多』、細節標題寫『心齋橋』，晚間行程先保留待大家確認",
     ],
   },
   {
     date: "10/17(六)",
-    title: "Day 8 — 梅田＋淀川花火大會 🎆",
+    title: "Day 8 — 難波採買＋淀川花火大會 🎆",
     items: [
-      "白天：梅田逛街、補伴手禮與藥妝",
-      "15:00 前：回住處放東西休息 — 花火日下午開始人潮與交通管制，早點回來",
-      "16:00：先到阪急 OASIS 玉川店或 Lawson 買好食物飲料，會場周邊一定大排長龍",
+      "上午～中午：難波／心齋橋逛街；AKTR、Sports Depo、Workman Colors 與藥粧依優先度挑選",
+      "午餐後提早結束採買、回住宿放東西；花火日下午開始有人潮與交通管制",
+      "出發前先買好食物飲料，並確認當日風向、官方會場圖與進場動線",
       "⚠️ 重要更正：官方標示梅田側左岸河川敷全面禁止進入，原訂「左岸梅田會場」不可前往；觀覽會場與票券需改排",
       "19:00～20:00：第 38 回なにわ淀川花火大会施放",
       "20:00 後：離場路線需待觀覽會場確定後重排；不可再以左岸步行回玉川為前提",
@@ -95,15 +104,19 @@ const itinerarySource = [
   },
   {
     date: "10/18(日)",
-    title: "Day 9 — 待排（彈性日）",
-    items: ["保留彈性，之後再補行程"],
+    title: "Day 9 — 神戶一日遊",
+    items: [
+      "神戶三宮逛街、散步",
+      "北野異人館街：依開館時間挑想看的館，不必每館都進",
+      "用餐候選：神戶牛（餐廳與預約待確認）",
+    ],
   },
   {
     date: "10/19(一)",
     title: "Day 10 — 返台",
     items: [
       "上午：收拾行李、退房",
-      "交通：住宿 → 南海電鐵 / JR → 關西機場",
+      "目標 10:30 抵達關西機場；住宿出發時間待交通方式確認後回推",
       "機場：退稅、托運確認、登機前最後購物",
       "航班：星宇航空 JX821 KIX T1 13:25 → TPE T1 15:20",
       "備註：注意托運重量限制，液體需托運",
@@ -129,7 +142,7 @@ interface DropTarget {
   itemIndex: number;
 }
 
-const STORAGE_KEY = "osaka-2026-detail-itinerary-v1";
+const STORAGE_KEY = "osaka-2026-detail-itinerary-v2";
 
 const googleMapsSearchUrl = (query: string) =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
@@ -137,26 +150,28 @@ const googleMapsSearchUrl = (query: string) =>
 const defaultMapQueries: Record<string, string> = {
   "day-1-item-1": "關西國際機場 第1航廈",
   "day-1-item-2": "りんくうプレミアム・アウトレット 大阪府泉佐野市りんくう往来南3-28",
-  "day-2-item-1": "epais 阪神梅田本店 B2 大阪市北区梅田1-13-13",
-  "day-2-item-2": "arena shop 大阪 グランフロント大阪 南館4階 大阪市北区大深町4-20",
-  "day-2-item-3": "Alpen OSAKA 大阪市北区茶屋町1-32 YANMAR FLYING-Y BUILDING",
-  "day-2-item-5": "HEP FIVE 大阪市北区角田町5-15",
-  "day-3-item-1": "ニンテンドーミュージアム 京都府宇治市小倉町神楽田56",
-  "day-3-item-2": "宇治駅 京都",
-  "day-4-item-1": "勝尾寺 大阪府箕面市勝尾寺",
-  "day-5-item-1": "渡月橋 京都市右京区嵯峨中ノ島町",
-  "day-5-item-2": "竹林の小径 京都 嵐山",
+  "day-2-item-2": "グラングリーン大阪 大深町",
+  "day-2-item-3": "arena shop 大阪 グランフロント大阪 南館4階 大阪市北区大深町4-20",
+  "day-2-item-4": "Alpen OSAKA 大阪市北区茶屋町1-32 YANMAR FLYING-Y BUILDING",
+  "day-2-item-5": "綱敷天神社御旅社 大阪市北区茶屋町12-5",
+  "day-2-item-6": "梅田スカイビル 空中庭園展望台",
+  "day-3-item-2": "平等院 京都府宇治市宇治蓮華116",
+  "day-3-item-4": "ニンテンドーミュージアム 京都府宇治市小倉町神楽田56",
+  "day-4-item-1": "パンとエスプレッソと堺筋倶楽部",
+  "day-4-item-4": "中崎町 大阪",
+  "day-4-item-5": "但馬屋 イーマ 東梅田",
+  "day-5-item-1": "ポケモンセンターキョウト",
+  "day-5-item-2": "御金神社 京都 新風館",
+  "day-5-item-3": "渡月橋 京都市右京区嵯峨中ノ島町",
+  "day-5-item-5": "新京極商店街 寺町京極商店街 京都",
   "day-6-item-1": "ユニバーサル・スタジオ・ジャパン 大阪市此花区桜島2-1-33",
   "day-6-item-2": "ユニバーサル・スタジオ・ジャパン 大阪市此花区桜島2-1-33",
-  "day-7-item-1": "AKTR Sports Supply AMEMURA 大阪市中央区西心斎橋2-10-13-101",
-  "day-7-item-2": "心斎橋筋商店街 大阪",
-  "day-7-item-3": "道頓堀 大阪",
-  "day-7-item-4": "スポーツデポ なんばパークス店 大阪市浪速区難波中2-10-70 4階",
-  "day-7-item-5": "Workman Colors なんばCITY店 大阪市中央区難波5-1-60 南館2階",
-  "day-7-item-6": "イオンモール堺北花田 大阪府堺市北区東浅香山町4-1-12",
-  "day-7-item-7": "Workman Colors イオンモール堺北花田店 大阪府堺市北区東浅香山町4-1-12 2階",
-  "day-7-item-8": "イオンモール堺北花田 大阪府堺市北区東浅香山町4-1-12",
-  "day-8-item-3": "阪急オアシス 福島玉川店 大阪市福島区玉川4-11-8",
+  "day-7-item-1": "箕面萱野駅",
+  "day-7-item-2": "勝尾寺 大阪府箕面市勝尾寺",
+  "day-7-item-3": "箕面大滝 大阪府箕面市箕面公園",
+  "day-8-item-1": "なんばパークス 大阪",
+  "day-9-item-1": "神戸三宮駅",
+  "day-9-item-2": "北野異人館街 神戸",
   "day-10-item-2": "關西國際機場 第1航廈",
   "day-10-item-3": "關西國際機場 第1航廈",
   "day-10-item-4": "關西國際機場 第1航廈",
@@ -463,7 +478,7 @@ onBeforeUnmount(() => {
 const essentialInfo = [
   { label: "航班（去程）", value: "2026/10/10（六）台灣虎航 IT710 07:45 TPE → 11:30 KIX" },
   { label: "航班（回程）", value: "2026/10/19（一）星宇航空 JX821 KIX T1 13:25 → TPE T1 15:20" },
-  { label: "住宿", value: "心齋橋/難波區域（地址待填）" },
+  { label: "住宿", value: "玉川站步行約 4 分的獨棟住宿（10/10 16:00 入住）" },
   { label: "票券", value: "USJ 門票、Express Pass、任天堂世界預約、任天堂博物館抽選、ICOCA" },
   { label: "APP", value: "USJ 官方、Google Maps、NAVITIME、Klook/KKday 票券檔" },
   { label: "行李提醒", value: "行動電源、藥品、雨具、舒適步行鞋" },
@@ -474,6 +489,11 @@ const ticketLinks = [
   { label: "Express Pass 購買", url: "https://www.usj.co.jp/ticket/" },
   { label: "任天堂博物館預約", url: "https://museum.nintendo.com/" },
   { label: "關西機場交通", url: "https://www.kansai-airport.or.jp/access/" },
+  { label: "大阪 Metro 路線圖", url: "https://subway.osakametro.co.jp/tw/guide/routemap.php" },
+  {
+    label: "勝尾寺 30 號巴士時刻",
+    url: "https://japantravel.navitime.com/zh-tw/area/jp/depArrTimeList/00348506/00152123/00037701?direction=down",
+  },
 ];
 </script>
 
@@ -493,6 +513,16 @@ const ticketLinks = [
           <span class="meta-value">{{ tripHeader.members }}</span>
         </div>
       </div>
+    </section>
+
+    <section class="source-note" aria-labelledby="source-note-title">
+      <div class="source-note-icon" aria-hidden="true">📝</div>
+      <div>
+        <p class="source-note-eyebrow">本次更新來源</p>
+        <h2 id="source-note-title">阿庭 × 嘎菲共編行程</h2>
+        <p>已把宇治散步、中崎町、勝尾寺調整、難波花火日與神戶一日遊整併進手冊；原稿保留完整圖片與路線研究。</p>
+      </div>
+      <a :href="COLLAB_NOTE_URL" target="_blank" rel="noopener noreferrer">開啟 HackMD 原稿 ↗</a>
     </section>
 
     <section id="fireworks-warning" class="critical-alert" role="alert">
@@ -774,6 +804,64 @@ const ticketLinks = [
 .hero-card h1 {
   font-size: clamp(1.4rem, 2.5vw, 2rem);
   margin: 0.4rem 0 0;
+}
+
+.source-note {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.2rem;
+  background:
+    radial-gradient(circle at 0 0, rgba(125, 240, 255, 0.16), transparent 44%),
+    rgba(125, 240, 255, 0.055);
+  border: 1px solid rgba(125, 240, 255, 0.28);
+  border-radius: 18px;
+  box-shadow: var(--shadow-soft);
+}
+
+.source-note-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  font-size: 1.4rem;
+  background: rgba(125, 240, 255, 0.1);
+  border: 1px solid rgba(125, 240, 255, 0.24);
+  border-radius: 14px;
+}
+
+.source-note h2 {
+  margin: 0.08rem 0 0.2rem;
+  font-size: 1.08rem;
+}
+
+.source-note p:last-child {
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  line-height: 1.5;
+}
+
+.source-note-eyebrow {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.source-note a {
+  padding: 0.52rem 0.7rem;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  white-space: nowrap;
+  border: 1px solid rgba(125, 240, 255, 0.3);
+  border-radius: 9px;
+}
+
+.source-note a:hover {
+  color: #fff;
+  border-color: var(--accent);
 }
 
 .critical-alert {
@@ -1436,6 +1524,7 @@ const ticketLinks = [
   }
 
   .hero-card,
+  .source-note,
   .critical-alert,
   .info-section,
   .day-card {
@@ -1450,6 +1539,28 @@ const ticketLinks = [
     grid-template-columns: 40px minmax(0, 1fr);
     align-items: start;
     gap: 0.7rem;
+  }
+
+  .source-note {
+    grid-template-columns: 40px minmax(0, 1fr);
+    align-items: start;
+    gap: 0.7rem;
+  }
+
+  .source-note-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.15rem;
+    border-radius: 11px;
+  }
+
+  .source-note p:last-child {
+    font-size: 0.8rem;
+  }
+
+  .source-note a {
+    grid-column: 2;
+    justify-self: start;
   }
 
   .critical-alert-icon {
