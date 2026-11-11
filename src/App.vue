@@ -16,9 +16,10 @@ const navLinks = [
   { to: "/", label: "首頁", caption: "互動展示", icon: assetUrl("太空龍.png") },
   { to: "/about", label: "關於我", caption: "恐龍檔案", icon: assetUrl("頭套恐龍.png") },
   { to: "/lunch", label: "中午吃飯", caption: "抽籤選店", icon: assetUrl("卡比獸.png") },
-  { to: "/happy", label: "快樂龍戰隊", caption: "球衣與隊伍", icon: assetUrl("去背_球褲logo.png") },
+  // 快樂龍戰隊、球衣 LOGO 示意暫時隱藏（功能保留）。如需恢復，取消註解即可；路由 /happy、/jersey-logo 仍保留。
+  // { to: "/happy", label: "快樂龍戰隊", caption: "球衣與隊伍", icon: assetUrl("去背_球褲logo.png") },
   { to: "/design", label: "設計的球衣", caption: "創意草稿", icon: assetUrl("design/Happy_3_CS6.png") },
-  { to: "/jersey-logo", label: "球衣 LOGO 示意", caption: "深/淺・版位預覽", icon: assetUrl("HAPPY_v2/星河柴犬.png") },
+  // { to: "/jersey-logo", label: "球衣 LOGO 示意", caption: "深/淺・版位預覽", icon: assetUrl("HAPPY_v2/星河柴犬.png") },
   { to: "/random", label: "先發人員", caption: "隨機挑選", icon: assetUrl("happy/呆呆吉拉王.png") },
   { to: "/mrt", label: "出趣玩", caption: "捷運出行", icon: assetUrl("design/Happy_1_CS6.png") },
   { to: "/2025travel", label: "2025 東京旅遊", caption: "年度手冊", icon: assetUrl("72小時票.png") },
